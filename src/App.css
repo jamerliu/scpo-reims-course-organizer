@@ -145,6 +145,23 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--navy-light);
 }
 .tab.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+.tab-badge { background: var(--green); color: white; border-radius: 10px; font-size: 0.65rem; padding: 1px 5px; margin-left: 5px; }
+
+.subtabs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.subtab {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: var(--navy-light);
+}
+.subtab.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+
+.section-panel { padding-top: 8px; }
+.section-panel-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 0.8rem; }
+.section-count { color: var(--muted); }
+.section-note { color: var(--terracotta); font-size: 0.75rem; font-style: italic; }
 
 .browser-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
 .browser-toolbar select { margin-left: 6px; padding: 4px; }

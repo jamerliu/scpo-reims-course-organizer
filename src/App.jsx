@@ -52,9 +52,6 @@ export default function App() {
     return coursesData.filter((c) => groups.includes(c.group) || c.group === 'LANGUE');
   }, [program]);
 
-  const nonLanguageCourses = useMemo(() => courses.filter((c) => c.group !== 'LANGUE'), [courses]);
-  const languageCourses = useMemo(() => courses.filter((c) => c.group === 'LANGUE'), [courses]);
-
   const addedIdSet = useMemo(() => new Set(addedIds), [addedIds]);
   const addedCourses = useMemo(() => addedIds.map((id) => byId.get(id)).filter(Boolean), [addedIds]);
 
@@ -116,15 +113,8 @@ export default function App() {
       <div className="build-layout">
         <div className="left-col">
           <CourseBrowser
-            courses={nonLanguageCourses}
-            languageProfile={languageProfile}
-            addedIds={addedIdSet}
-            onAdd={addCourse}
-            onRemove={removeCourse}
-          />
-          <h2 className="section-title">Languages</h2>
-          <CourseBrowser
-            courses={languageCourses}
+            courses={courses}
+            profile={REQUIREMENTS[program.programKey]}
             languageProfile={languageProfile}
             addedIds={addedIdSet}
             onAdd={addCourse}
