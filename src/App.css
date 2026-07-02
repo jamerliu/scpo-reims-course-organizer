@@ -281,3 +281,23 @@ tr.added-row { background: rgba(46, 125, 79, 0.08); }
 .top-bar-floating { position: absolute; top: 20px; right: 24px; }
 .screen.center-screen { position: relative; }
 
+
+/* ---------- quadruplette sync ---------- */
+.quad-badge {
+  display: inline-block;
+  margin-left: 6px;
+  background: var(--navy-light);
+  color: var(--cream);
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  border-radius: 10px;
+  vertical-align: middle;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.02em;
+}
+.quad-sync-note {
+  font-size: 0.74rem;
+  color: var(--navy-light);
+  font-style: italic;
+  margin-left: auto;
+}

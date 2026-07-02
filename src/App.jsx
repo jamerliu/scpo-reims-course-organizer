@@ -33,6 +33,19 @@ function autoLectures(programKey) {
   return Array.from(toAdd);
 }
 
+// For 1A_NA: all quadruplette courses share group numbers 1-19 across
+// ADRO 17A00, AHIS 17A00, ASPO 17A00, BHUM 17A00.
+// Adding any one auto-adds all 3 siblings with the same quadGroup number.
+const QUAD_CODES = new Set(['ADRO 17A00', 'AHIS 17A00', 'ASPO 17A00', 'BHUM 17A00']);
+
+function getQuadSiblings(courseId) {
+  const c = byId.get(courseId);
+  if (!c || c.group !== '1A_NA' || !c.quadGroup || !QUAD_CODES.has(c.codeMatiere)) return [];
+  return coursesData.filter(
+    (s) => s.group === '1A_NA' && s.quadGroup === c.quadGroup && QUAD_CODES.has(s.codeMatiere) && s.id !== courseId
+  ).map((s) => s.id);
+}
+
 function LangToggle() {
   const { lang, setLang } = useLang();
   return (
@@ -79,10 +92,17 @@ export default function App() {
   }
 
   function addCourse(id) {
-    setAddedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    const siblings = getQuadSiblings(id);
+    setAddedIds((prev) => {
+      const set = new Set(prev);
+      set.add(id);
+      siblings.forEach((s) => set.add(s));
+      return Array.from(set);
+    });
   }
   function removeCourse(id) {
-    setAddedIds((prev) => prev.filter((x) => x !== id));
+    const siblings = getQuadSiblings(id);
+    setAddedIds((prev) => prev.filter((x) => x !== id && !siblings.includes(x)));
   }
 
   async function handleExport() {

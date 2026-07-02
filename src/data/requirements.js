@@ -49,8 +49,9 @@ const req_1A_NA = {
       ],
     },
     {
-      id: 'poltheory', label: 'Political Theory (Classical Texts)', kind: 'mandatory', note: 'Conference-only this year (unconfirmed) [CORRECTED]',
+      id: 'poltheory', label: 'Political Theory (Classical Texts)', kind: 'mandatory', note: 'Campus Minor lecture confirmed on schedule [CORRECTED]',
       items: [
+        { label: 'Lecture (CAMPUS MINOR)', autoAdd: true, match: withCode(['AHUM 17A00'], lecture) },
         { label: 'Quadruplette conference', match: withCode(['BHUM 17A00'], conference) },
       ],
     },

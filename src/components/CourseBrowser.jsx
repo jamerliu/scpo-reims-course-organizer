@@ -113,13 +113,17 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
         <tbody>
           {sorted.map((c) => {
             const added = addedIds.has(c.id);
+            const isQuad = c.quadGroup != null && c.group === '1A_NA';
+            const rowTitle = isQuad
+              ? `${formatSchedule(c)} — Groupe ${c.quadGroup} · Adding this auto-syncs all 4 Quadruplette disciplines for group ${c.quadGroup}`
+              : formatSchedule(c);
             return (
               <tr
                 key={c.id}
                 draggable
                 onDragStart={(e) => e.dataTransfer.setData('text/course-id', c.id)}
                 className={added ? 'added-row' : ''}
-                title={formatSchedule(c)}
+                title={rowTitle}
               >
                 <td>
                   <button
@@ -130,7 +134,14 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
                   </button>
                 </td>
                 {columns.map((col) => (
-                  <td key={col.key}>{c[col.key] ?? ''}</td>
+                  <td key={col.key}>
+                    {c[col.key] ?? ''}
+                    {col.key === 'title' && isQuad && (
+                      <span className="quad-badge" title={`Quadruplette group ${c.quadGroup} — syncs all 4 disciplines`}>
+                        G{c.quadGroup}
+                      </span>
+                    )}
+                  </td>
                 ))}
               </tr>
             );
@@ -155,6 +166,8 @@ function SectionPanel({ section, addedIds, onAdd, onRemove }) {
 
   const addedCount = section.courses.filter((c) => addedIds.has(c.id)).length;
 
+  const isQuadSection = section.courses.some((c) => c.quadGroup != null && c.group === '1A_NA');
+
   return (
     <div className="section-panel">
       <div className="section-panel-header">
@@ -162,6 +175,9 @@ function SectionPanel({ section, addedIds, onAdd, onRemove }) {
           {addedCount > 0 ? t('added', { n: addedCount }) : t('coursesCount', { n: section.courses.length, plural: section.courses.length !== 1 ? 's' : '' })}
         </span>
         {section.note && <span className="section-note">{section.note}</span>}
+        {isQuadSection && (
+          <span className="quad-sync-note">⟳ Selecting any group auto-syncs all 4 Quadruplette disciplines</span>
+        )}
       </div>
 
       {section.subsections && (
