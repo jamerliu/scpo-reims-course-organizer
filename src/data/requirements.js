@@ -314,6 +314,19 @@ export const REQUIREMENTS = {
   '2A_AFRICA_EN': req_2A_AFRICA_EN,
 };
 
+// Exported so the 2A majeure/mineure selection screen can list options
+export const MAJEURE_OPTIONS = {
+  '2A_NA':       majeureOptionsNA,
+  '2A_AFRICA_EN': majeureOptionsNA,
+  '2A_AFRICA_FR': majeureOptionsAfricaFR,
+};
+
+export const MINEURE_OPTIONS = {
+  '2A_NA':        mineureOptions('ADRO 27A00'),
+  '2A_AFRICA_EN': mineureOptions('ADRO 27A00'),
+  '2A_AFRICA_FR': mineureOptions('ADRO 27F00'),
+};
+
 // Language requirement is handled separately (see LanguageEligibility) since it
 // depends on the student's current French/English levels, not just program/grade.
 export const LANGUAGE_RULES = {

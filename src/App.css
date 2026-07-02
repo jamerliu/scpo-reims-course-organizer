@@ -427,3 +427,13 @@ tr.added-row { background: rgba(46, 125, 79, 0.08); }
 
 /* make calendar blocks show pointer cursor */
 .course-block { cursor: pointer; }
+
+/* ---------- majeure/mineure select ---------- */
+.option-col { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.option-card.selected {
+  border-left-color: var(--green);
+  background: rgba(46, 125, 79, 0.06);
+  box-shadow: 0 2px 8px rgba(46, 125, 79, 0.15);
+}
+.option-card-title { display: block; font-weight: 600; margin-bottom: 4px; }
+.option-card-items { display: block; font-size: 0.78rem; color: var(--muted); }

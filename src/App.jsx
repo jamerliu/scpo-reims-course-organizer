@@ -1,9 +1,10 @@
 import { useMemo, useRef, useState } from 'react';
 import coursesData from './data/courses.json';
-import { REQUIREMENTS } from './data/requirements';
+import { REQUIREMENTS, MAJEURE_OPTIONS, MINEURE_OPTIONS } from './data/requirements';
 import { PROGRAM_COURSE_GROUPS } from './data/programMap';
 import { useLang } from './i18n/LangContext';
 import ProgramGradeSelect from './components/ProgramGradeSelect';
+import MajeureMineurSelect from './components/MajeureMineurSelect';
 import LanguageStep from './components/LanguageStep';
 import CourseBrowser from './components/CourseBrowser';
 import CalendarView from './components/CalendarView';
@@ -14,12 +15,14 @@ import './App.css';
 
 const byId = new Map(coursesData.map((c) => [c.id, c]));
 
-function autoLectures(programKey) {
+function autoLectures(programKey, majeureMineure) {
   const profile = REQUIREMENTS[programKey];
   if (!profile) return [];
   const groups = PROGRAM_COURSE_GROUPS[programKey] || [];
   const pool = coursesData.filter((c) => groups.includes(c.group));
   const toAdd = new Set();
+
+  // For 1A: auto-add from mandatory categories only
   profile.categories.forEach((cat) => {
     if (cat.kind === 'mandatory') {
       cat.items.forEach((item) => {
@@ -30,6 +33,28 @@ function autoLectures(programKey) {
       });
     }
   });
+
+  // For 2A: also auto-add from the chosen majeure and mineure options
+  if (majeureMineure) {
+    const { majeure, mineure } = majeureMineure;
+
+    const majeureOpts = MAJEURE_OPTIONS[programKey] || [];
+    const mineureOpts = MINEURE_OPTIONS[programKey] || [];
+
+    const majeureOpt = majeureOpts.find((o) => o.label === majeure);
+    const mineureOpt = mineureOpts.find((o) => o.label === mineure);
+
+    [majeureOpt, mineureOpt].forEach((opt) => {
+      if (!opt) return;
+      opt.items.forEach((item) => {
+        if (item.autoAdd) {
+          const match = pool.find((c) => item.match(c));
+          if (match) toAdd.add(match.id);
+        }
+      });
+    });
+  }
+
   return Array.from(toAdd);
 }
 
@@ -61,8 +86,9 @@ function LangToggle() {
 
 export default function App() {
   const { t } = useLang();
-  const [step, setStep] = useState('select');
+  const [step, setStep] = useState('select'); // select | majeure | language | build
   const [program, setProgram] = useState(null);
+  const [majeureMineure, setMajeureMineure] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
   const [addedIds, setAddedIds] = useState([]);
   const [exporting, setExporting] = useState(false);
@@ -82,12 +108,23 @@ export default function App() {
 
   function handleProgramSelect(sel) {
     setProgram(sel);
+    setMajeureMineure(null);
+    // 2A programs need majeure/mineure selection first
+    if (sel.grade === '2A') {
+      setStep('majeure');
+    } else {
+      setStep('language');
+    }
+  }
+
+  function handleMajeureMineurSelect(sel) {
+    setMajeureMineure(sel);
     setStep('language');
   }
 
   function handleLanguageContinue(langProfile) {
     setLanguageProfile(langProfile);
-    setAddedIds(autoLectures(program.programKey));
+    setAddedIds(autoLectures(program.programKey, majeureMineure));
     setStep('build');
   }
 
@@ -124,6 +161,17 @@ export default function App() {
     return <ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} />;
   }
 
+  if (step === 'majeure') {
+    return (
+      <MajeureMineurSelect
+        programKey={program.programKey}
+        onSelect={handleMajeureMineurSelect}
+        onBack={() => setStep('select')}
+        langToggle={<LangToggle />}
+      />
+    );
+  }
+
   if (step === 'language') {
     return (
       <LanguageStep
@@ -144,6 +192,11 @@ export default function App() {
         <div className="header-actions">
           <LangToggle />
           <button onClick={() => setStep('select')}>{t('changeProgram')}</button>
+          {program?.grade === '2A' && (
+            <button onClick={() => setStep('majeure')}>
+              {t('languageSettings') === 'Language settings' ? 'Change Majeure/Mineure' : 'Changer Majeure/Mineure'}
+            </button>
+          )}
           <button onClick={() => setStep('language')}>{t('languageSettings')}</button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}
