@@ -1,40 +1,31 @@
+import { useState } from 'react';
 import { useLang } from '../i18n/LangContext';
-import { formatSchedule } from '../utils/schedule';
+import { CourseListModal } from './Modal';
 
 export default function AddedList({ addedCourses, onRemove }) {
   const { t } = useLang();
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="added-list" id="list-export-target">
-      <h3>{t('selectedCourses', { n: addedCourses.length })}</h3>
-      {addedCourses.length === 0 && <p className="hint">{t('addHint')}</p>}
-      <table>
-        <thead>
-          <tr>
-            <th>{t('colTitle')}</th>
-            <th>{t('colDiscipline')}</th>
-            <th>{t('colUp')}</th>
-            <th>{t('colCode')}</th>
-            <th>{t('colSchedule')}</th>
-            <th>{t('colEns1')}</th>
-            <th>{t('colEns2')}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {addedCourses.map((c) => (
-            <tr key={c.id}>
-              <td>{c.title}</td>
-              <td>{c.discipline || c.majeure || '—'}</td>
-              <td>{c.up}</td>
-              <td>{c.codeMatiere}</td>
-              <td>{formatSchedule(c)}</td>
-              <td>{c.teacher1 || ''}</td>
-              <td>{c.teacher2 || ''}</td>
-              <td><button className="remove-link" onClick={() => onRemove(c.id)}>{t('remove')}</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      {/* Compact trigger — sits below the calendar */}
+      <div className="added-list-trigger" id="list-export-target">
+        <button className="course-list-btn" onClick={() => setOpen(true)}>
+          <span className="course-list-btn-icon">☰</span>
+          {t('selectedCourses', { n: addedCourses.length })}
+          {addedCourses.length > 0 && (
+            <span className="course-list-btn-hint">— click to view full details</span>
+          )}
+        </button>
+      </div>
+
+      {open && (
+        <CourseListModal
+          addedCourses={addedCourses}
+          onClose={() => setOpen(false)}
+          onRemove={onRemove}
+        />
+      )}
+    </>
   );
 }
