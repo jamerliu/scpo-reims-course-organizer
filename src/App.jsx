@@ -10,7 +10,9 @@ import CourseBrowser from './components/CourseBrowser';
 import CalendarView from './components/CalendarView';
 import RequirementSidebar from './components/RequirementSidebar';
 import AddedList from './components/AddedList';
+import LoadModal from './components/LoadModal';
 import { exportReport } from './utils/exportPdf';
+import { buildSaveData, downloadSave } from './utils/saveLoad';
 import './App.css';
 
 const byId = new Map(coursesData.map((c) => [c.id, c]));
@@ -104,6 +106,7 @@ export default function App() {
   const [addedIds, setAddedIds] = useState([]);
   const [starredIds, setStarredIds] = useState([]);
   const [exporting, setExporting] = useState(false);
+  const [showLoad, setShowLoad] = useState(false);
 
   const calendarRef     = useRef(null);
   const listRef         = useRef(null);
@@ -161,6 +164,30 @@ export default function App() {
     );
   }
 
+  function handleSave() {
+    const data = buildSaveData({
+      program,
+      majeureMineure,
+      languageProfile,
+      addedIds,
+      starredIds,
+      coursesById: byId,
+    });
+    const slug = program?.programKey?.toLowerCase().replace(/_/g, '-') || 'schedule';
+    const date = new Date().toISOString().slice(0, 10);
+    downloadSave(data, `course-plan-${slug}-${date}.json`);
+  }
+
+  function handleRestore(result) {
+    // Restore full program/language/course state from validated save data
+    setProgram(result.program);
+    setMajeureMineure(result.majeureMineure);
+    setLanguageProfile(result.languageProfile);
+    setAddedIds(result.safeAddedIds);
+    setStarredIds(result.safeStarredIds);
+    setStep('build');
+  }
+
   async function handleExport() {
     setExporting(true);
     try {
@@ -181,7 +208,13 @@ export default function App() {
   }
 
   if (step === 'select') {
-    return <><ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} /><Watermark /></>;
+    return (
+      <>
+        <ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} onLoad={() => setShowLoad(true)} />
+        {showLoad && <LoadModal onClose={() => setShowLoad(false)} onRestore={handleRestore} />}
+        <Watermark />
+      </>
+    );
   }
 
   if (step === 'majeure') {
@@ -223,15 +256,23 @@ export default function App() {
           <button onClick={() => setStep('select')}>{t('changeProgram')}</button>
           {program?.grade === '2A' && (
             <button onClick={() => setStep('majeure')}>
-              {t('languageSettings') === 'Language settings' ? 'Change Majeure/Mineure' : 'Changer Majeure/Mineure'}
+              {lang === 'fr' ? 'Changer Majeure/Mineure' : 'Change Majeure/Mineure'}
             </button>
           )}
           <button onClick={() => setStep('language')}>{t('languageSettings')}</button>
+          <button className="save-btn" onClick={handleSave} title={lang === 'fr' ? 'Sauvegarder l\'emploi du temps' : 'Save schedule to file'}>
+            {lang === 'fr' ? '💾 Sauvegarder' : '💾 Save'}
+          </button>
+          <button className="load-btn" onClick={() => setShowLoad(true)} title={lang === 'fr' ? 'Charger un emploi du temps' : 'Load a saved schedule'}>
+            {lang === 'fr' ? '📂 Charger' : '📂 Load'}
+          </button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}
           </button>
         </div>
       </header>
+
+      {showLoad && <LoadModal onClose={() => setShowLoad(false)} onRestore={handleRestore} />}
 
       <div className="build-layout">
         <div className="left-col">

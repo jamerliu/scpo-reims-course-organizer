@@ -1,8 +1,8 @@
 import { useLang } from '../i18n/LangContext';
 import { GRADE_PROGRAMS } from '../data/programMap';
 
-export default function ProgramGradeSelect({ onSelect, langToggle }) {
-  const { t } = useLang();
+export default function ProgramGradeSelect({ onSelect, langToggle, onLoad }) {
+  const { t, lang } = useLang();
 
   return (
     <div className="screen center-screen">
@@ -26,6 +26,12 @@ export default function ProgramGradeSelect({ onSelect, langToggle }) {
           </div>
         </div>
       ))}
+
+      <div className="load-from-file-row">
+        <button className="load-file-btn" onClick={onLoad}>
+          📂 {lang === 'fr' ? 'Charger un emploi du temps sauvegardé' : 'Load a saved schedule'}
+        </button>
+      </div>
     </div>
   );
 }
