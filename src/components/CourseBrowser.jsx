@@ -78,7 +78,7 @@ function buildSections(profile, allCourses) {
   return sections;
 }
 
-function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
+function CourseTable({ courses, addedIds, starredIds, onAdd, onRemove, onStar, columns }) {
   const [sortKey, setSortKey] = useState('title');
   const [sortDir, setSortDir] = useState('asc');
   const { t } = useLang();
@@ -103,6 +103,7 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
         <thead>
           <tr>
             <th></th>
+            <th></th>
             {columns.map((col) => (
               <th key={col.key} className="sortable" onClick={() => toggleSort(col.key)}>
                 {col.label}{sortKey === col.key ? (sortDir === 'asc' ? ' ▲' : ' ▼') : ''}
@@ -112,8 +113,9 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
         </thead>
         <tbody>
           {sorted.map((c) => {
-            const added = addedIds.has(c.id);
-            const isQuad = c.quadGroup != null && c.group === '1A_NA';
+            const added   = addedIds.has(c.id);
+            const starred = starredIds?.has(c.id);
+            const isQuad  = c.quadGroup != null && c.group === '1A_NA';
             const rowTitle = isQuad
               ? `${formatSchedule(c)} — Groupe ${c.quadGroup} · Adding this auto-syncs all 4 Quadruplette disciplines for group ${c.quadGroup}`
               : formatSchedule(c);
@@ -122,7 +124,7 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
                 key={c.id}
                 draggable
                 onDragStart={(e) => e.dataTransfer.setData('text/course-id', c.id)}
-                className={added ? 'added-row' : ''}
+                className={[added ? 'added-row' : '', starred ? 'starred-row' : ''].filter(Boolean).join(' ')}
                 title={rowTitle}
               >
                 <td>
@@ -131,6 +133,15 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
                     onClick={() => added ? onRemove(c.id) : onAdd(c.id)}
                   >
                     {added ? '✓' : '+'}
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className={starred ? 'star-btn starred' : 'star-btn'}
+                    onClick={() => onStar(c.id)}
+                    title={starred ? 'Remove from favourites' : 'Add to favourites'}
+                  >
+                    {starred ? '★' : '☆'}
                   </button>
                 </td>
                 {columns.map((col) => (
@@ -152,7 +163,7 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
   );
 }
 
-function SectionPanel({ section, addedIds, onAdd, onRemove }) {
+function SectionPanel({ section, addedIds, starredIds, onAdd, onRemove, onStar }) {
   const { t } = useLang();
   const cols = getColumns(t, false);
   const [activeSub, setActiveSub] = useState(null);
@@ -165,7 +176,6 @@ function SectionPanel({ section, addedIds, onAdd, onRemove }) {
   }, [section, activeSub]);
 
   const addedCount = section.courses.filter((c) => addedIds.has(c.id)).length;
-
   const isQuadSection = section.courses.some((c) => c.quadGroup != null && c.group === '1A_NA');
 
   return (
@@ -200,12 +210,20 @@ function SectionPanel({ section, addedIds, onAdd, onRemove }) {
         </div>
       )}
 
-      <CourseTable courses={displayCourses} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} columns={cols} />
+      <CourseTable
+        courses={displayCourses}
+        addedIds={addedIds}
+        starredIds={starredIds}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        onStar={onStar}
+        columns={cols}
+      />
     </div>
   );
 }
 
-function LanguagePanel({ languageCourses, languageProfile, addedIds, onAdd, onRemove }) {
+function LanguagePanel({ languageCourses, languageProfile, addedIds, starredIds, onAdd, onRemove, onStar }) {
   const { t } = useLang();
   const cols = getColumns(t, true);
 
@@ -238,22 +256,69 @@ function LanguagePanel({ languageCourses, languageProfile, addedIds, onAdd, onRe
         </label>
         <span className="count">{filtered.length} {t('language').toLowerCase()}</span>
       </div>
-      <CourseTable courses={filtered} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} columns={cols} />
+      <CourseTable courses={filtered} addedIds={addedIds} starredIds={starredIds} onAdd={onAdd} onRemove={onRemove} onStar={onStar} columns={cols} />
     </div>
   );
 }
 
-export default function CourseBrowser({ courses, languageProfile, profile, addedIds, onAdd, onRemove }) {
-  const { t } = useLang();
+function FavouritesPanel({ allCourses, starredIds, addedIds, onAdd, onRemove, onStar }) {
+  const { t, lang } = useLang();
+  const cols = getColumns(t, false);
+
+  const favourites = useMemo(() =>
+    allCourses.filter((c) => starredIds.has(c.id)).map(withDisplayFields),
+    [allCourses, starredIds]
+  );
+
+  const emptyMsg = lang === 'fr'
+    ? 'Aucun cours favori. Cliquez sur ☆ sur n\'importe quel cours pour l\'ajouter ici.'
+    : 'No favourites yet. Click ☆ on any course to save it here.';
+
+  return (
+    <div className="section-panel">
+      <div className="section-panel-header">
+        <span className="section-count">
+          {favourites.length > 0
+            ? `${favourites.length} ${lang === 'fr' ? 'favori(s)' : 'favourite' + (favourites.length !== 1 ? 's' : '')}`
+            : (lang === 'fr' ? 'Aucun favori' : 'No favourites')}
+        </span>
+        {favourites.length > 0 && (
+          <span className="section-note">
+            {lang === 'fr' ? 'Cliquez sur ★ pour retirer des favoris' : 'Click ★ to remove from favourites'}
+          </span>
+        )}
+      </div>
+      {favourites.length === 0
+        ? <p className="empty-row fav-empty">{emptyMsg}</p>
+        : <CourseTable
+            courses={favourites}
+            addedIds={addedIds}
+            starredIds={starredIds}
+            onAdd={onAdd}
+            onRemove={onRemove}
+            onStar={onStar}
+            columns={cols}
+          />
+      }
+    </div>
+  );
+}
+
+export default function CourseBrowser({ courses, languageProfile, profile, addedIds, starredIds, onAdd, onRemove, onStar }) {
+  const { t, lang } = useLang();
   const nonLangCourses = useMemo(() => courses.filter((c) => c.group !== 'LANGUE'), [courses]);
   const langCourses    = useMemo(() => courses.filter((c) => c.group === 'LANGUE'),  [courses]);
 
   const sections = useMemo(() => buildSections(profile, nonLangCourses), [profile, nonLangCourses]);
 
+  const favLabel = lang === 'fr' ? '★ Favoris' : '★ Favourites';
+  const favCount = courses.filter((c) => starredIds?.has(c.id)).length;
+
   const allTabs = useMemo(() => [
+    { id: '__favourites__', label: favLabel },
     ...sections.map((s) => ({ id: s.id, label: s.label })),
     { id: '__languages__', label: t('languagesTab') },
-  ], [sections, t]);
+  ], [sections, t, favLabel]);
 
   const [activeTab, setActiveTab] = useState(sections[0]?.id || '__languages__');
   const currentTabId = allTabs.some((tab) => tab.id === activeTab) ? activeTab : allTabs[0]?.id;
@@ -265,6 +330,7 @@ export default function CourseBrowser({ courses, languageProfile, profile, added
         {allTabs.map((tab) => {
           const sec = sections.find((s) => s.id === tab.id);
           const addedInSection = sec ? sec.courses.filter((c) => addedIds.has(c.id)).length : 0;
+          const isFav = tab.id === '__favourites__';
           return (
             <button
               key={tab.id}
@@ -272,22 +338,41 @@ export default function CourseBrowser({ courses, languageProfile, profile, added
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
-              {addedInSection > 0 && <span className="tab-badge">{addedInSection}</span>}
+              {isFav && favCount > 0 && <span className="tab-badge fav-badge">{favCount}</span>}
+              {!isFav && addedInSection > 0 && <span className="tab-badge">{addedInSection}</span>}
             </button>
           );
         })}
       </div>
 
-      {currentTabId === '__languages__' ? (
+      {currentTabId === '__favourites__' ? (
+        <FavouritesPanel
+          allCourses={courses}
+          starredIds={starredIds}
+          addedIds={addedIds}
+          onAdd={onAdd}
+          onRemove={onRemove}
+          onStar={onStar}
+        />
+      ) : currentTabId === '__languages__' ? (
         <LanguagePanel
           languageCourses={langCourses}
           languageProfile={languageProfile}
           addedIds={addedIds}
+          starredIds={starredIds}
           onAdd={onAdd}
           onRemove={onRemove}
+          onStar={onStar}
         />
       ) : activeSection ? (
-        <SectionPanel section={activeSection} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} />
+        <SectionPanel
+          section={activeSection}
+          addedIds={addedIds}
+          starredIds={starredIds}
+          onAdd={onAdd}
+          onRemove={onRemove}
+          onStar={onStar}
+        />
       ) : (
         <p className="empty-row">{t('noCourses')}</p>
       )}

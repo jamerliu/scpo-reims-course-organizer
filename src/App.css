@@ -751,3 +751,37 @@ tr:hover td { background: rgba(163,177,198,0.12); }
 @media (max-width: 1100px) {
   .build-layout { grid-template-columns: 1fr; overflow-y: auto; }
 }
+
+/* ---------- favourites / star ---------- */
+.star-btn {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: box-shadow var(--transition), color var(--transition), transform var(--transition);
+}
+.star-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); color: #e0a020; }
+.star-btn:active { box-shadow: var(--shadow-in-sm); }
+.star-btn.starred {
+  color: #e0a020;
+  box-shadow: var(--shadow-in-sm);
+}
+
+tr.starred-row { background: rgba(224,160,32,0.06); }
+tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
+
+.tab-badge.fav-badge {
+  background: #e0a020;
+  box-shadow: 2px 2px 4px rgba(224,160,32,0.3);
+}
+
+.fav-empty {
+  padding: 32px 20px;
+  line-height: 1.6;
+  font-size: 0.85rem;
+}

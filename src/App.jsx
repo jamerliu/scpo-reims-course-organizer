@@ -102,6 +102,7 @@ export default function App() {
   const [majeureMineure, setMajeureMineure] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
   const [addedIds, setAddedIds] = useState([]);
+  const [starredIds, setStarredIds] = useState([]);
   const [exporting, setExporting] = useState(false);
 
   const calendarRef     = useRef(null);
@@ -115,6 +116,7 @@ export default function App() {
   }, [program]);
 
   const addedIdSet   = useMemo(() => new Set(addedIds), [addedIds]);
+  const starredIdSet = useMemo(() => new Set(starredIds), [starredIds]);
   const addedCourses = useMemo(() => addedIds.map((id) => byId.get(id)).filter(Boolean), [addedIds]);
 
   function handleProgramSelect(sel) {
@@ -151,6 +153,12 @@ export default function App() {
   function removeCourse(id) {
     const siblings = getQuadSiblings(id);
     setAddedIds((prev) => prev.filter((x) => x !== id && !siblings.includes(x)));
+  }
+
+  function toggleStar(id) {
+    setStarredIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
   }
 
   async function handleExport() {
@@ -232,8 +240,10 @@ export default function App() {
             profile={REQUIREMENTS[program.programKey]}
             languageProfile={languageProfile}
             addedIds={addedIdSet}
+            starredIds={starredIdSet}
             onAdd={addCourse}
             onRemove={removeCourse}
+            onStar={toggleStar}
           />
         </div>
 
