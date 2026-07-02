@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLang } from '../i18n/LangContext';
 import { formatSchedule } from '../utils/schedule';
+import { ConfoscopeTag, NoRatingTag } from './Modal';
 
 function getColumns(t, isLang) {
   if (isLang) return [
@@ -15,6 +16,7 @@ function getColumns(t, isLang) {
     { key: 'time2',       label: t('colHoraire2') },
     { key: 'teacher1',    label: t('colEns1') },
     { key: 'teacher2',    label: t('colEns2') },
+    { key: '_rating',     label: 'Confoscope' },
   ];
   return [
     { key: 'title',       label: t('colTitle') },
@@ -28,6 +30,7 @@ function getColumns(t, isLang) {
     { key: 'time2',       label: t('colHoraire2') },
     { key: 'teacher1',    label: t('colEns1') },
     { key: 'teacher2',    label: t('colEns2') },
+    { key: '_rating',     label: 'Confoscope' },
   ];
 }
 
@@ -146,12 +149,19 @@ function CourseTable({ courses, addedIds, starredIds, onAdd, onRemove, onStar, c
                 </td>
                 {columns.map((col) => (
                   <td key={col.key}>
-                    {c[col.key] ?? ''}
-                    {col.key === 'title' && isQuad && (
-                      <span className="quad-badge" title={`Quadruplette group ${c.quadGroup} — syncs all 4 disciplines`}>
-                        G{c.quadGroup}
-                      </span>
-                    )}
+                    {col.key === '_rating'
+                      ? (c.confoscope1 != null
+                          ? <ConfoscopeTag score={c.confoscope1} />
+                          : <NoRatingTag />)
+                      : <>
+                          {c[col.key] ?? ''}
+                          {col.key === 'title' && isQuad && (
+                            <span className="quad-badge" title={`Quadruplette group ${c.quadGroup} — syncs all 4 disciplines`}>
+                              G{c.quadGroup}
+                            </span>
+                          )}
+                        </>
+                    }
                   </td>
                 ))}
               </tr>

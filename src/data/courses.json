@@ -27,7 +27,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.4,
+  "confoscope2": null
  },
  {
   "id": "c2",
@@ -57,7 +59,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c3",
@@ -81,7 +85,9 @@
   ],
   "quadGroup": 1,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c4",
@@ -105,7 +111,9 @@
   ],
   "quadGroup": 2,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.9,
+  "confoscope2": null
  },
  {
   "id": "c5",
@@ -129,7 +137,9 @@
   ],
   "quadGroup": 3,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.9,
+  "confoscope2": null
  },
  {
   "id": "c6",
@@ -153,7 +163,9 @@
   ],
   "quadGroup": 4,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.2,
+  "confoscope2": null
  },
  {
   "id": "c7",
@@ -177,7 +189,9 @@
   ],
   "quadGroup": 5,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.2,
+  "confoscope2": null
  },
  {
   "id": "c8",
@@ -201,7 +215,9 @@
   ],
   "quadGroup": 6,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c9",
@@ -225,7 +241,9 @@
   ],
   "quadGroup": 7,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c10",
@@ -249,7 +267,9 @@
   ],
   "quadGroup": 8,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c11",
@@ -273,7 +293,9 @@
   ],
   "quadGroup": 9,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c12",
@@ -297,7 +319,9 @@
   ],
   "quadGroup": 10,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c13",
@@ -321,7 +345,9 @@
   ],
   "quadGroup": 11,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c14",
@@ -345,7 +371,9 @@
   ],
   "quadGroup": 12,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c15",
@@ -369,7 +397,9 @@
   ],
   "quadGroup": 13,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c16",
@@ -393,7 +423,9 @@
   ],
   "quadGroup": 14,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.9,
+  "confoscope2": null
  },
  {
   "id": "c17",
@@ -417,7 +449,9 @@
   ],
   "quadGroup": 15,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c18",
@@ -441,7 +475,9 @@
   ],
   "quadGroup": 16,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c19",
@@ -465,7 +501,9 @@
   ],
   "quadGroup": 17,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c20",
@@ -489,7 +527,9 @@
   ],
   "quadGroup": 18,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c21",
@@ -513,7 +553,9 @@
   ],
   "quadGroup": 19,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c22",
@@ -537,7 +579,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c23",
@@ -561,7 +605,9 @@
   ],
   "quadGroup": 1,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c24",
@@ -585,7 +631,9 @@
   ],
   "quadGroup": 2,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c25",
@@ -609,7 +657,9 @@
   ],
   "quadGroup": 3,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.9,
+  "confoscope2": null
  },
  {
   "id": "c26",
@@ -633,7 +683,9 @@
   ],
   "quadGroup": 4,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c27",
@@ -657,7 +709,9 @@
   ],
   "quadGroup": 5,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c28",
@@ -681,7 +735,9 @@
   ],
   "quadGroup": 6,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c29",
@@ -705,7 +761,9 @@
   ],
   "quadGroup": 7,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c30",
@@ -729,7 +787,9 @@
   ],
   "quadGroup": 8,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.9,
+  "confoscope2": null
  },
  {
   "id": "c31",
@@ -753,7 +813,9 @@
   ],
   "quadGroup": 9,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c32",
@@ -777,7 +839,9 @@
   ],
   "quadGroup": 10,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c33",
@@ -801,7 +865,9 @@
   ],
   "quadGroup": 11,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c34",
@@ -825,7 +891,9 @@
   ],
   "quadGroup": 12,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c35",
@@ -849,7 +917,9 @@
   ],
   "quadGroup": 13,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c36",
@@ -873,7 +943,9 @@
   ],
   "quadGroup": 14,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c37",
@@ -897,7 +969,9 @@
   ],
   "quadGroup": 15,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c38",
@@ -921,7 +995,9 @@
   ],
   "quadGroup": 16,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c39",
@@ -945,7 +1021,9 @@
   ],
   "quadGroup": 17,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c40",
@@ -969,7 +1047,9 @@
   ],
   "quadGroup": 18,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c41",
@@ -993,7 +1073,9 @@
   ],
   "quadGroup": 19,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c42",
@@ -1017,7 +1099,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": 8.5
  },
  {
   "id": "c43",
@@ -1041,7 +1125,9 @@
   ],
   "quadGroup": 1,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c44",
@@ -1065,7 +1151,9 @@
   ],
   "quadGroup": 2,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.5,
+  "confoscope2": null
  },
  {
   "id": "c45",
@@ -1089,7 +1177,9 @@
   ],
   "quadGroup": 3,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.5,
+  "confoscope2": null
  },
  {
   "id": "c46",
@@ -1113,7 +1203,9 @@
   ],
   "quadGroup": 4,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c47",
@@ -1137,7 +1229,9 @@
   ],
   "quadGroup": 5,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c48",
@@ -1161,7 +1255,9 @@
   ],
   "quadGroup": 6,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c49",
@@ -1185,7 +1281,9 @@
   ],
   "quadGroup": 7,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c50",
@@ -1209,7 +1307,9 @@
   ],
   "quadGroup": 8,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c51",
@@ -1233,7 +1333,9 @@
   ],
   "quadGroup": 9,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c52",
@@ -1257,7 +1359,9 @@
   ],
   "quadGroup": 10,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c53",
@@ -1281,7 +1385,9 @@
   ],
   "quadGroup": 11,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c54",
@@ -1305,7 +1411,9 @@
   ],
   "quadGroup": 12,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c55",
@@ -1329,7 +1437,9 @@
   ],
   "quadGroup": 13,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c56",
@@ -1353,7 +1463,9 @@
   ],
   "quadGroup": 14,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c57",
@@ -1377,7 +1489,9 @@
   ],
   "quadGroup": 15,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c58",
@@ -1401,7 +1515,9 @@
   ],
   "quadGroup": 16,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c59",
@@ -1425,7 +1541,9 @@
   ],
   "quadGroup": 17,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c60",
@@ -1449,7 +1567,9 @@
   ],
   "quadGroup": 18,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c61",
@@ -1473,7 +1593,9 @@
   ],
   "quadGroup": 19,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c62",
@@ -1497,7 +1619,9 @@
   ],
   "quadGroup": 1,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c63",
@@ -1521,7 +1645,9 @@
   ],
   "quadGroup": 2,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c64",
@@ -1545,7 +1671,9 @@
   ],
   "quadGroup": 3,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c65",
@@ -1569,7 +1697,9 @@
   ],
   "quadGroup": 4,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c66",
@@ -1593,7 +1723,9 @@
   ],
   "quadGroup": 5,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c67",
@@ -1617,7 +1749,9 @@
   ],
   "quadGroup": 6,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c68",
@@ -1641,7 +1775,9 @@
   ],
   "quadGroup": 7,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c69",
@@ -1665,7 +1801,9 @@
   ],
   "quadGroup": 8,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c70",
@@ -1689,7 +1827,9 @@
   ],
   "quadGroup": 9,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c71",
@@ -1713,7 +1853,9 @@
   ],
   "quadGroup": 10,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c72",
@@ -1737,7 +1879,9 @@
   ],
   "quadGroup": 11,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c73",
@@ -1761,7 +1905,9 @@
   ],
   "quadGroup": 12,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c74",
@@ -1785,7 +1931,9 @@
   ],
   "quadGroup": 13,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c75",
@@ -1809,7 +1957,9 @@
   ],
   "quadGroup": 14,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c76",
@@ -1833,7 +1983,9 @@
   ],
   "quadGroup": 15,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c77",
@@ -1857,7 +2009,9 @@
   ],
   "quadGroup": 16,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c78",
@@ -1881,7 +2035,9 @@
   ],
   "quadGroup": 17,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c79",
@@ -1905,7 +2061,9 @@
   ],
   "quadGroup": 18,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c80",
@@ -1929,7 +2087,9 @@
   ],
   "quadGroup": 19,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c81",
@@ -1953,7 +2113,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c82",
@@ -1977,7 +2139,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c83",
@@ -2001,7 +2165,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c84",
@@ -2025,7 +2191,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c85",
@@ -2049,7 +2217,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c86",
@@ -2073,7 +2243,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.0,
+  "confoscope2": null
  },
  {
   "id": "c87",
@@ -2090,7 +2262,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c88",
@@ -2114,7 +2288,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c89",
@@ -2138,7 +2314,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c90",
@@ -2162,7 +2340,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c91",
@@ -2179,7 +2359,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c92",
@@ -2196,7 +2378,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c93",
@@ -2213,7 +2397,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c94",
@@ -2230,7 +2416,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c95",
@@ -2247,7 +2435,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c96",
@@ -2264,7 +2454,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c97",
@@ -2281,7 +2473,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c98",
@@ -2305,7 +2499,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c99",
@@ -2329,7 +2525,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c100",
@@ -2353,7 +2551,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.0,
+  "confoscope2": null
  },
  {
   "id": "c101",
@@ -2377,7 +2577,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c102",
@@ -2401,7 +2603,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.5,
+  "confoscope2": null
  },
  {
   "id": "c103",
@@ -2425,7 +2629,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c104",
@@ -2449,7 +2655,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c105",
@@ -2473,7 +2681,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c106",
@@ -2497,7 +2707,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c107",
@@ -2521,7 +2733,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.5,
+  "confoscope2": null
  },
  {
   "id": "c108",
@@ -2545,7 +2759,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c109",
@@ -2569,7 +2785,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c110",
@@ -2593,7 +2811,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c111",
@@ -2617,7 +2837,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c112",
@@ -2641,7 +2863,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c113",
@@ -2665,7 +2889,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c114",
@@ -2689,7 +2915,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c115",
@@ -2713,7 +2941,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c116",
@@ -2737,7 +2967,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c117",
@@ -2761,7 +2993,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c118",
@@ -2785,7 +3019,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c119",
@@ -2809,7 +3045,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c120",
@@ -2833,7 +3071,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c121",
@@ -2857,7 +3097,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c122",
@@ -2881,7 +3123,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c123",
@@ -2905,7 +3149,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c124",
@@ -2929,7 +3175,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c125",
@@ -2953,7 +3201,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": 8.5
  },
  {
   "id": "c126",
@@ -2977,7 +3227,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c127",
@@ -3001,7 +3253,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c128",
@@ -3031,7 +3285,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.4,
+  "confoscope2": null
  },
  {
   "id": "c129",
@@ -3055,7 +3311,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c130",
@@ -3079,7 +3337,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c131",
@@ -3103,7 +3363,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c132",
@@ -3127,7 +3389,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c133",
@@ -3151,7 +3415,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c134",
@@ -3175,7 +3441,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c135",
@@ -3199,7 +3467,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c136",
@@ -3223,7 +3493,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c137",
@@ -3247,7 +3519,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c138",
@@ -3271,7 +3545,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c139",
@@ -3295,7 +3571,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 0.0,
+  "confoscope2": null
  },
  {
   "id": "c140",
@@ -3319,7 +3597,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c141",
@@ -3343,7 +3623,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c142",
@@ -3367,7 +3649,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c143",
@@ -3391,7 +3675,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c144",
@@ -3415,7 +3701,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c145",
@@ -3439,7 +3727,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c146",
@@ -3463,7 +3753,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": 8.2
  },
  {
   "id": "c147",
@@ -3487,7 +3779,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.8,
+  "confoscope2": null
  },
  {
   "id": "c148",
@@ -3511,7 +3805,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.8,
+  "confoscope2": null
  },
  {
   "id": "c149",
@@ -3535,7 +3831,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.6,
+  "confoscope2": null
  },
  {
   "id": "c150",
@@ -3559,7 +3857,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.6,
+  "confoscope2": null
  },
  {
   "id": "c151",
@@ -3583,7 +3883,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c152",
@@ -3607,7 +3909,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c153",
@@ -3631,7 +3935,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c154",
@@ -3655,7 +3961,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c155",
@@ -3679,7 +3987,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c156",
@@ -3703,7 +4013,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.4,
+  "confoscope2": null
  },
  {
   "id": "c157",
@@ -3727,7 +4039,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c158",
@@ -3751,7 +4065,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c159",
@@ -3775,7 +4091,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c160",
@@ -3799,7 +4117,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c161",
@@ -3823,7 +4143,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c162",
@@ -3847,7 +4169,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c163",
@@ -3871,7 +4195,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c164",
@@ -3895,7 +4221,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c165",
@@ -3919,7 +4247,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c166",
@@ -3943,7 +4273,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.2,
+  "confoscope2": null
  },
  {
   "id": "c167",
@@ -3967,7 +4299,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.2,
+  "confoscope2": null
  },
  {
   "id": "c168",
@@ -3991,7 +4325,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.0,
+  "confoscope2": null
  },
  {
   "id": "c169",
@@ -4015,7 +4351,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.0,
+  "confoscope2": null
  },
  {
   "id": "c170",
@@ -4039,7 +4377,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.7,
+  "confoscope2": null
  },
  {
   "id": "c171",
@@ -4063,7 +4403,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.7,
+  "confoscope2": null
  },
  {
   "id": "c172",
@@ -4087,7 +4429,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c173",
@@ -4111,7 +4455,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c174",
@@ -4135,7 +4481,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c175",
@@ -4159,7 +4507,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c176",
@@ -4183,7 +4533,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c177",
@@ -4207,7 +4559,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c178",
@@ -4231,7 +4585,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c179",
@@ -4255,7 +4611,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c180",
@@ -4279,7 +4637,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c181",
@@ -4303,7 +4663,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c182",
@@ -4327,7 +4689,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c183",
@@ -4351,7 +4715,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c184",
@@ -4375,7 +4741,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c185",
@@ -4399,7 +4767,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c186",
@@ -4423,7 +4793,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c187",
@@ -4447,7 +4819,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c188",
@@ -4471,7 +4845,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c189",
@@ -4495,7 +4871,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c190",
@@ -4519,7 +4897,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c191",
@@ -4543,7 +4923,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c192",
@@ -4567,7 +4949,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c193",
@@ -4591,7 +4975,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c194",
@@ -4615,7 +5001,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.5,
+  "confoscope2": null
  },
  {
   "id": "c195",
@@ -4639,7 +5027,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c196",
@@ -4663,7 +5053,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c197",
@@ -4687,7 +5079,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c198",
@@ -4711,7 +5105,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c199",
@@ -4735,7 +5131,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c200",
@@ -4759,7 +5157,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c201",
@@ -4783,7 +5183,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c202",
@@ -4807,7 +5209,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c203",
@@ -4831,7 +5235,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c204",
@@ -4855,7 +5261,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c205",
@@ -4879,7 +5287,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c206",
@@ -4903,7 +5313,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.1,
+  "confoscope2": null
  },
  {
   "id": "c207",
@@ -4927,7 +5339,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c208",
@@ -4951,7 +5365,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c209",
@@ -4975,7 +5391,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c210",
@@ -4999,7 +5417,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c211",
@@ -5023,7 +5443,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c212",
@@ -5047,7 +5469,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c213",
@@ -5071,7 +5495,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c214",
@@ -5095,7 +5521,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c215",
@@ -5119,7 +5547,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.5,
+  "confoscope2": null
  },
  {
   "id": "c216",
@@ -5143,7 +5573,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c217",
@@ -5167,7 +5599,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c218",
@@ -5191,7 +5625,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.7,
+  "confoscope2": null
  },
  {
   "id": "c219",
@@ -5215,7 +5651,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c220",
@@ -5239,7 +5677,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c221",
@@ -5263,7 +5703,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.1,
+  "confoscope2": null
  },
  {
   "id": "c222",
@@ -5287,7 +5729,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.1,
+  "confoscope2": null
  },
  {
   "id": "c223",
@@ -5311,7 +5755,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c224",
@@ -5335,7 +5781,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c225",
@@ -5359,7 +5807,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c226",
@@ -5383,7 +5833,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c227",
@@ -5407,7 +5859,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c228",
@@ -5431,7 +5885,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.1,
+  "confoscope2": null
  },
  {
   "id": "c229",
@@ -5455,7 +5911,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.1,
+  "confoscope2": null
  },
  {
   "id": "c230",
@@ -5479,7 +5937,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c231",
@@ -5503,7 +5963,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c232",
@@ -5527,7 +5989,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c233",
@@ -5551,7 +6015,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c234",
@@ -5575,7 +6041,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c235",
@@ -5599,7 +6067,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c236",
@@ -5623,7 +6093,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c237",
@@ -5647,7 +6119,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.2,
+  "confoscope2": null
  },
  {
   "id": "c238",
@@ -5671,7 +6145,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.6,
+  "confoscope2": null
  },
  {
   "id": "c239",
@@ -5695,7 +6171,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.6,
+  "confoscope2": null
  },
  {
   "id": "c240",
@@ -5719,7 +6197,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.6,
+  "confoscope2": null
  },
  {
   "id": "c241",
@@ -5743,7 +6223,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c242",
@@ -5767,7 +6249,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c243",
@@ -5791,7 +6275,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c244",
@@ -5815,7 +6301,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c245",
@@ -5839,7 +6327,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c246",
@@ -5863,7 +6353,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c247",
@@ -5887,7 +6379,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c248",
@@ -5911,7 +6405,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c249",
@@ -5935,7 +6431,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c250",
@@ -5959,7 +6457,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c251",
@@ -5983,7 +6483,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c252",
@@ -6007,7 +6509,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c253",
@@ -6031,7 +6535,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c254",
@@ -6055,7 +6561,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c255",
@@ -6079,7 +6587,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c256",
@@ -6103,7 +6613,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c257",
@@ -6127,7 +6639,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c258",
@@ -6151,7 +6665,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c259",
@@ -6175,7 +6691,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c260",
@@ -6199,7 +6717,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c261",
@@ -6223,7 +6743,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c262",
@@ -6247,7 +6769,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c263",
@@ -6271,7 +6795,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c264",
@@ -6295,7 +6821,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c265",
@@ -6319,7 +6847,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c266",
@@ -6343,7 +6873,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c267",
@@ -6367,7 +6899,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c268",
@@ -6391,7 +6925,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.1,
+  "confoscope2": null
  },
  {
   "id": "c269",
@@ -6415,7 +6951,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c270",
@@ -6439,7 +6977,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c271",
@@ -6463,7 +7003,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c272",
@@ -6487,7 +7029,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c273",
@@ -6511,7 +7055,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c274",
@@ -6535,7 +7081,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c275",
@@ -6559,7 +7107,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c276",
@@ -6583,7 +7133,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c277",
@@ -6607,7 +7159,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c278",
@@ -6631,7 +7185,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c279",
@@ -6655,7 +7211,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c280",
@@ -6679,7 +7237,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c281",
@@ -6703,7 +7263,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c282",
@@ -6727,7 +7289,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c283",
@@ -6751,7 +7315,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c284",
@@ -6775,7 +7341,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c285",
@@ -6799,7 +7367,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c286",
@@ -6823,7 +7393,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c287",
@@ -6847,7 +7419,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c288",
@@ -6871,7 +7445,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.0,
+  "confoscope2": null
  },
  {
   "id": "c289",
@@ -6895,7 +7471,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.0,
+  "confoscope2": null
  },
  {
   "id": "c290",
@@ -6919,7 +7497,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c291",
@@ -6943,7 +7523,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c292",
@@ -6967,7 +7549,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c293",
@@ -6991,7 +7575,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c294",
@@ -7015,7 +7601,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c295",
@@ -7039,7 +7627,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c296",
@@ -7063,7 +7653,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.2,
+  "confoscope2": null
  },
  {
   "id": "c297",
@@ -7087,7 +7679,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c298",
@@ -7111,7 +7705,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c299",
@@ -7135,7 +7731,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c300",
@@ -7159,7 +7757,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c301",
@@ -7183,7 +7783,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c302",
@@ -7207,7 +7809,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c303",
@@ -7231,7 +7835,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.7,
+  "confoscope2": null
  },
  {
   "id": "c304",
@@ -7255,7 +7861,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c305",
@@ -7279,7 +7887,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c306",
@@ -7303,7 +7913,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c307",
@@ -7327,7 +7939,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c308",
@@ -7351,7 +7965,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c309",
@@ -7375,7 +7991,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c310",
@@ -7399,7 +8017,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c311",
@@ -7423,7 +8043,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c312",
@@ -7447,7 +8069,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c313",
@@ -7471,7 +8095,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c314",
@@ -7495,7 +8121,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c315",
@@ -7519,7 +8147,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c316",
@@ -7543,7 +8173,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c317",
@@ -7567,7 +8199,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c318",
@@ -7591,7 +8225,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c319",
@@ -7615,7 +8251,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c320",
@@ -7639,7 +8277,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c321",
@@ -7663,7 +8303,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c322",
@@ -7687,7 +8329,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c323",
@@ -7711,7 +8355,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c324",
@@ -7735,7 +8381,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c325",
@@ -7759,7 +8407,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c326",
@@ -7783,7 +8433,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c327",
@@ -7807,7 +8459,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c328",
@@ -7831,7 +8485,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c329",
@@ -7855,7 +8511,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c330",
@@ -7879,7 +8537,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c331",
@@ -7903,7 +8563,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.5,
+  "confoscope2": null
  },
  {
   "id": "c332",
@@ -7927,7 +8589,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c333",
@@ -7951,7 +8615,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c334",
@@ -7975,7 +8641,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c335",
@@ -7999,7 +8667,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c336",
@@ -8023,7 +8693,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c337",
@@ -8047,7 +8719,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c338",
@@ -8071,7 +8745,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c339",
@@ -8095,7 +8771,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c340",
@@ -8119,7 +8797,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c341",
@@ -8143,7 +8823,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c342",
@@ -8167,7 +8849,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c343",
@@ -8191,7 +8875,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c344",
@@ -8215,7 +8901,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c345",
@@ -8239,7 +8927,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c346",
@@ -8263,7 +8953,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c347",
@@ -8287,7 +8979,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c348",
@@ -8311,7 +9005,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c349",
@@ -8335,7 +9031,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c350",
@@ -8359,7 +9057,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c351",
@@ -8376,7 +9076,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c352",
@@ -8393,7 +9095,9 @@
   "schedule": [],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c353",
@@ -8417,7 +9121,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c354",
@@ -8441,7 +9147,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c355",
@@ -8465,7 +9173,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c356",
@@ -8489,7 +9199,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c357",
@@ -8513,7 +9225,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c358",
@@ -8537,7 +9251,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c359",
@@ -8561,7 +9277,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c360",
@@ -8585,7 +9303,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c361",
@@ -8609,7 +9329,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c362",
@@ -8633,7 +9355,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c363",
@@ -8657,7 +9381,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c364",
@@ -8681,7 +9407,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c365",
@@ -8705,7 +9433,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c366",
@@ -8729,7 +9459,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c367",
@@ -8753,7 +9485,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c368",
@@ -8777,7 +9511,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c369",
@@ -8801,7 +9537,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c370",
@@ -8825,7 +9563,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c371",
@@ -8849,7 +9589,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c372",
@@ -8873,7 +9615,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c373",
@@ -8897,7 +9641,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c374",
@@ -8921,7 +9667,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c375",
@@ -8945,7 +9693,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c376",
@@ -8969,7 +9719,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c377",
@@ -8993,7 +9745,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.1,
+  "confoscope2": null
  },
  {
   "id": "c378",
@@ -9017,7 +9771,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c379",
@@ -9041,7 +9797,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c380",
@@ -9065,7 +9823,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c381",
@@ -9089,7 +9849,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c382",
@@ -9113,7 +9875,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c383",
@@ -9137,7 +9901,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c384",
@@ -9161,7 +9927,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c385",
@@ -9185,7 +9953,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c386",
@@ -9209,7 +9979,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c387",
@@ -9233,7 +10005,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c388",
@@ -9257,7 +10031,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c389",
@@ -9281,7 +10057,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c390",
@@ -9305,7 +10083,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c391",
@@ -9329,7 +10109,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c392",
@@ -9353,7 +10135,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c393",
@@ -9377,7 +10161,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c394",
@@ -9401,7 +10187,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c395",
@@ -9425,7 +10213,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c396",
@@ -9449,7 +10239,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c397",
@@ -9473,7 +10265,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.0,
+  "confoscope2": null
  },
  {
   "id": "c398",
@@ -9497,7 +10291,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.0,
+  "confoscope2": null
  },
  {
   "id": "c399",
@@ -9521,7 +10317,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c400",
@@ -9545,7 +10343,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c401",
@@ -9569,7 +10369,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c402",
@@ -9593,7 +10395,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c403",
@@ -9617,7 +10421,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c404",
@@ -9641,7 +10447,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c405",
@@ -9665,7 +10473,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c406",
@@ -9689,7 +10499,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c407",
@@ -9713,7 +10525,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c408",
@@ -9737,7 +10551,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c409",
@@ -9761,7 +10577,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c410",
@@ -9785,7 +10603,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c411",
@@ -9809,7 +10629,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.6,
+  "confoscope2": null
  },
  {
   "id": "c412",
@@ -9833,7 +10655,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.0,
+  "confoscope2": null
  },
  {
   "id": "c413",
@@ -9857,7 +10681,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c414",
@@ -9881,7 +10707,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c415",
@@ -9905,7 +10733,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.6,
+  "confoscope2": null
  },
  {
   "id": "c416",
@@ -9929,7 +10759,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.6,
+  "confoscope2": null
  },
  {
   "id": "c417",
@@ -9953,7 +10785,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c418",
@@ -9977,7 +10811,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.6,
+  "confoscope2": null
  },
  {
   "id": "c419",
@@ -10001,7 +10837,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.4,
+  "confoscope2": null
  },
  {
   "id": "c420",
@@ -10025,7 +10863,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c421",
@@ -10049,7 +10889,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.1,
+  "confoscope2": null
  },
  {
   "id": "c422",
@@ -10073,7 +10915,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c423",
@@ -10097,7 +10941,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c424",
@@ -10121,7 +10967,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.2,
+  "confoscope2": null
  },
  {
   "id": "c425",
@@ -10145,7 +10993,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c426",
@@ -10169,7 +11019,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.3,
+  "confoscope2": null
  },
  {
   "id": "c427",
@@ -10193,7 +11045,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.3,
+  "confoscope2": null
  },
  {
   "id": "c428",
@@ -10217,7 +11071,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.0,
+  "confoscope2": null
  },
  {
   "id": "c429",
@@ -10241,7 +11097,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.2,
+  "confoscope2": null
  },
  {
   "id": "c430",
@@ -10265,7 +11123,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c431",
@@ -10289,7 +11149,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c432",
@@ -10313,7 +11175,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c433",
@@ -10337,7 +11201,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c434",
@@ -10361,7 +11227,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c435",
@@ -10385,7 +11253,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c436",
@@ -10409,7 +11279,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c437",
@@ -10433,7 +11305,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c438",
@@ -10457,7 +11331,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c439",
@@ -10481,7 +11357,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.6,
+  "confoscope2": null
  },
  {
   "id": "c440",
@@ -10505,7 +11383,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 6.9,
+  "confoscope2": null
  },
  {
   "id": "c441",
@@ -10529,7 +11409,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c442",
@@ -10553,7 +11435,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c443",
@@ -10577,7 +11461,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c444",
@@ -10601,7 +11487,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c445",
@@ -10625,7 +11513,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c446",
@@ -10649,7 +11539,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c447",
@@ -10673,7 +11565,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c448",
@@ -10697,7 +11591,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 5.6,
+  "confoscope2": null
  },
  {
   "id": "c449",
@@ -10721,7 +11617,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c450",
@@ -10745,7 +11643,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 7.0,
+  "confoscope2": null
  },
  {
   "id": "c451",
@@ -10769,7 +11669,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c452",
@@ -10793,7 +11695,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 4.5,
+  "confoscope2": null
  },
  {
   "id": "c453",
@@ -10817,7 +11721,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c454",
@@ -10841,7 +11747,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c455",
@@ -10865,7 +11773,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c456",
@@ -10889,7 +11799,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c457",
@@ -10913,7 +11825,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c458",
@@ -10937,7 +11851,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c459",
@@ -10961,7 +11877,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c460",
@@ -10985,7 +11903,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c461",
@@ -11009,7 +11929,9 @@
   ],
   "quadGroup": null,
   "langue": null,
-  "niveau": null
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c462",
@@ -11039,7 +11961,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c463",
@@ -11069,7 +11993,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c464",
@@ -11099,7 +12025,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c465",
@@ -11129,7 +12057,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c466",
@@ -11159,7 +12089,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": 10.0
  },
  {
   "id": "c467",
@@ -11189,7 +12121,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": 10.0
  },
  {
   "id": "c468",
@@ -11219,7 +12153,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c469",
@@ -11243,7 +12179,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c470",
@@ -11267,7 +12205,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c471",
@@ -11291,7 +12231,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c472",
@@ -11315,7 +12257,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c473",
@@ -11339,7 +12283,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c474",
@@ -11363,7 +12309,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c475",
@@ -11387,7 +12335,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Workshop",
-  "niveau": "A1 - ATELIER"
+  "niveau": "A1 - ATELIER",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c476",
@@ -11417,7 +12367,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c477",
@@ -11447,7 +12399,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 8.2,
+  "confoscope2": null
  },
  {
   "id": "c478",
@@ -11477,7 +12431,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c479",
@@ -11507,7 +12463,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.1"
+  "niveau": "B1.1",
+  "confoscope1": 9.0,
+  "confoscope2": 9.0
  },
  {
   "id": "c480",
@@ -11537,7 +12495,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.1"
+  "niveau": "B1.1",
+  "confoscope1": 9.0,
+  "confoscope2": 9.0
  },
  {
   "id": "c481",
@@ -11567,7 +12527,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.1"
+  "niveau": "B1.1",
+  "confoscope1": 7.0,
+  "confoscope2": 8.0
  },
  {
   "id": "c482",
@@ -11597,7 +12559,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.1"
+  "niveau": "B1.1",
+  "confoscope1": 7.0,
+  "confoscope2": 8.0
  },
  {
   "id": "c483",
@@ -11627,7 +12591,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.1"
+  "niveau": "B1.1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c484",
@@ -11657,7 +12623,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.2"
+  "niveau": "B1.2",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c485",
@@ -11687,7 +12655,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.2"
+  "niveau": "B1.2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c486",
@@ -11717,7 +12687,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B1.2"
+  "niveau": "B1.2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c487",
@@ -11747,7 +12719,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c488",
@@ -11777,7 +12751,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c489",
@@ -11807,7 +12783,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 10.0,
+  "confoscope2": null
  },
  {
   "id": "c490",
@@ -11837,7 +12815,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c491",
@@ -11861,7 +12841,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c492",
@@ -11885,7 +12867,9 @@
   ],
   "quadGroup": null,
   "langue": "FLE",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c493",
@@ -11915,7 +12899,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": 10.0
  },
  {
   "id": "c494",
@@ -11945,7 +12931,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": 10.0
  },
  {
   "id": "c495",
@@ -11975,7 +12963,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c496",
@@ -12005,7 +12995,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c497",
@@ -12035,7 +13027,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c498",
@@ -12065,7 +13059,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c499",
@@ -12095,7 +13091,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c500",
@@ -12125,7 +13123,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c501",
@@ -12155,7 +13155,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c502",
@@ -12185,7 +13187,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c503",
@@ -12215,7 +13219,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais Bi-classe",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c504",
@@ -12239,7 +13245,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 4.8,
+  "confoscope2": null
  },
  {
   "id": "c505",
@@ -12263,7 +13271,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 4.8,
+  "confoscope2": null
  },
  {
   "id": "c506",
@@ -12287,7 +13297,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c507",
@@ -12311,7 +13323,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c508",
@@ -12335,7 +13349,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c509",
@@ -12359,7 +13375,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c510",
@@ -12383,7 +13401,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c511",
@@ -12407,7 +13427,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c512",
@@ -12431,7 +13453,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c513",
@@ -12455,7 +13479,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 6.5,
+  "confoscope2": null
  },
  {
   "id": "c514",
@@ -12479,7 +13505,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c515",
@@ -12503,7 +13531,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 9.6,
+  "confoscope2": null
  },
  {
   "id": "c516",
@@ -12527,7 +13557,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c517",
@@ -12551,7 +13583,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c518",
@@ -12575,7 +13609,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": 8.7,
+  "confoscope2": null
  },
  {
   "id": "c519",
@@ -12599,7 +13635,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c520",
@@ -12623,7 +13661,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c521",
@@ -12647,7 +13687,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c522",
@@ -12671,7 +13713,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": 9.2,
+  "confoscope2": null
  },
  {
   "id": "c523",
@@ -12695,7 +13739,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c524",
@@ -12719,7 +13765,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": 7.2,
+  "confoscope2": null
  },
  {
   "id": "c525",
@@ -12743,7 +13791,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c526",
@@ -12767,7 +13817,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c527",
@@ -12791,7 +13843,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C2"
+  "niveau": "C2",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c528",
@@ -12815,7 +13869,9 @@
   ],
   "quadGroup": null,
   "langue": "Anglais",
-  "niveau": "C1/C2  \nONLY FOR \nMETIS"
+  "niveau": "C1/C2  \nONLY FOR \nMETIS",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c529",
@@ -12839,7 +13895,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c530",
@@ -12863,7 +13921,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c531",
@@ -12887,7 +13947,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 7.5,
+  "confoscope2": null
  },
  {
   "id": "c532",
@@ -12911,7 +13973,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 8.8,
+  "confoscope2": null
  },
  {
   "id": "c533",
@@ -12935,7 +13999,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c534",
@@ -12959,7 +14025,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c535",
@@ -12983,7 +14051,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c536",
@@ -13007,7 +14077,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c537",
@@ -13031,7 +14103,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c538",
@@ -13055,7 +14129,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c539",
@@ -13079,7 +14155,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c540",
@@ -13103,7 +14181,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c541",
@@ -13127,7 +14207,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c542",
@@ -13151,7 +14233,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c543",
@@ -13175,7 +14259,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c544",
@@ -13199,7 +14285,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": 7.8,
+  "confoscope2": null
  },
  {
   "id": "c545",
@@ -13223,7 +14311,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c546",
@@ -13247,7 +14337,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 8.8,
+  "confoscope2": null
  },
  {
   "id": "c547",
@@ -13271,7 +14363,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 8.8,
+  "confoscope2": null
  },
  {
   "id": "c548",
@@ -13295,7 +14389,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c549",
@@ -13319,7 +14415,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c550",
@@ -13343,7 +14441,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c551",
@@ -13367,7 +14467,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c552",
@@ -13391,7 +14493,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c553",
@@ -13415,7 +14519,9 @@
   ],
   "quadGroup": null,
   "langue": "Espagnol",
-  "niveau": "C1"
+  "niveau": "C1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c554",
@@ -13439,7 +14545,9 @@
   ],
   "quadGroup": null,
   "langue": "Allemand",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c555",
@@ -13463,7 +14571,9 @@
   ],
   "quadGroup": null,
   "langue": "Allemand",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c556",
@@ -13487,7 +14597,9 @@
   ],
   "quadGroup": null,
   "langue": "Allemand",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c557",
@@ -13511,7 +14623,9 @@
   ],
   "quadGroup": null,
   "langue": "Allemand",
-  "niveau": "B2"
+  "niveau": "B2",
+  "confoscope1": 8.0,
+  "confoscope2": null
  },
  {
   "id": "c558",
@@ -13535,7 +14649,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c559",
@@ -13559,7 +14675,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 9.3,
+  "confoscope2": null
  },
  {
   "id": "c560",
@@ -13583,7 +14701,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c561",
@@ -13607,7 +14727,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c562",
@@ -13631,7 +14753,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c563",
@@ -13655,7 +14779,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c564",
@@ -13679,7 +14805,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c565",
@@ -13703,7 +14831,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": 3.7,
+  "confoscope2": null
  },
  {
   "id": "c566",
@@ -13727,7 +14857,9 @@
   ],
   "quadGroup": null,
   "langue": "Italien",
-  "niveau": "B2/C1/C2"
+  "niveau": "B2/C1/C2",
+  "confoscope1": 9.3,
+  "confoscope2": null
  },
  {
   "id": "c567",
@@ -13757,7 +14889,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 9.0,
+  "confoscope2": null
  },
  {
   "id": "c568",
@@ -13787,7 +14921,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c569",
@@ -13817,7 +14953,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 8.8,
+  "confoscope2": null
  },
  {
   "id": "c570",
@@ -13847,7 +14985,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 8.8,
+  "confoscope2": null
  },
  {
   "id": "c571",
@@ -13877,7 +15017,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 6.0,
+  "confoscope2": 8.5
  },
  {
   "id": "c572",
@@ -13907,7 +15049,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 6.0,
+  "confoscope2": 8.5
  },
  {
   "id": "c573",
@@ -13937,7 +15081,9 @@
   ],
   "quadGroup": null,
   "langue": "Arabe Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c574",
@@ -13961,7 +15107,9 @@
   ],
   "quadGroup": null,
   "langue": "Portugais",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c575",
@@ -13985,7 +15133,9 @@
   ],
   "quadGroup": null,
   "langue": "Portugais",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c576",
@@ -14009,7 +15159,9 @@
   ],
   "quadGroup": null,
   "langue": "Portugais",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 9.5,
+  "confoscope2": null
  },
  {
   "id": "c577",
@@ -14033,7 +15185,9 @@
   ],
   "quadGroup": null,
   "langue": "Portugais",
-  "niveau": "B1"
+  "niveau": "B1",
+  "confoscope1": null,
+  "confoscope2": null
  },
  {
   "id": "c578",
@@ -14063,7 +15217,9 @@
   ],
   "quadGroup": null,
   "langue": "Swahili Bi-classe",
-  "niveau": "A1"
+  "niveau": "A1",
+  "confoscope1": 8.0,
+  "confoscope2": 6.0
  },
  {
   "id": "c579",
@@ -14093,7 +15249,9 @@
   ],
   "quadGroup": null,
   "langue": "Swahili Bi-classe",
-  "niveau": "A2"
+  "niveau": "A2",
+  "confoscope1": 6.0,
+  "confoscope2": 8.0
  },
  {
   "id": "c580",
@@ -14117,6 +15275,8 @@
   ],
   "quadGroup": null,
   "langue": "Humanités classiques - Latin (langue et culture)",
-  "niveau": "Niveau intermediaire"
+  "niveau": "Niveau intermediaire",
+  "confoscope1": 4.6,
+  "confoscope2": null
  }
 ]

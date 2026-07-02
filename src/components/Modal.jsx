@@ -36,8 +36,14 @@ export function CourseDetailModal({ course, onClose, onRemove }) {
             <Field label={t('colType')}         value={course.type} />
             <Field label={t('colCode')}         value={course.codeMatiere} />
             <Field label={t('colUp')}           value={course.up} />
-            <Field label={t('colEns1')}         value={course.teacher1} />
-            {course.teacher2 && <Field label={t('colEns2')} value={course.teacher2} />}
+            <Field label={t('colEns1')}         value={course.teacher1}
+              extra={course.confoscope1 != null ? <ConfoscopeTag score={course.confoscope1} /> : <NoRatingTag />}
+            />
+            {course.teacher2 && (
+              <Field label={t('colEns2')} value={course.teacher2}
+                extra={course.confoscope2 != null ? <ConfoscopeTag score={course.confoscope2} /> : <NoRatingTag />}
+              />
+            )}
             <Field label={t('colSchedule')}     value={formatSchedule(course)} span />
             {course.niveau && <Field label={t('colNiveau')} value={course.niveau} />}
           </div>
@@ -72,6 +78,7 @@ export function CourseListModal({ addedCourses, onClose, onRemove }) {
                 <th>{t('colSchedule')}</th>
                 <th>{t('colEns1')}</th>
                 <th>{t('colEns2')}</th>
+                <th>Confoscope</th>
                 <th></th>
               </tr>
             </thead>
@@ -87,6 +94,11 @@ export function CourseListModal({ addedCourses, onClose, onRemove }) {
                   <td>{c.teacher1 || ''}</td>
                   <td>{c.teacher2 || ''}</td>
                   <td>
+                    {c.confoscope1 != null
+                      ? <ConfoscopeTag score={c.confoscope1} />
+                      : <NoRatingTag />}
+                  </td>
+                  <td>
                     <button className="remove-link" onClick={() => onRemove(c.id)}>
                       {t('remove')}
                     </button>
@@ -101,14 +113,34 @@ export function CourseListModal({ addedCourses, onClose, onRemove }) {
   );
 }
 
-function Field({ label, value, span }) {
+function Field({ label, value, span, extra }) {
   if (!value && value !== 0) return null;
   return (
     <div className={span ? 'detail-field span' : 'detail-field'}>
       <span className="detail-label">{label}</span>
       <span className="detail-value">{value}</span>
+      {extra && <div className="detail-extra">{extra}</div>}
     </div>
   );
+}
+
+function ratingColor(score) {
+  if (score >= 8) return { bg: '#d4f0ea', text: '#1a6b5a', border: '#38B2AC' };
+  if (score >= 6) return { bg: '#fff7d4', text: '#7c5700', border: '#e0a020' };
+  return { bg: '#fde8e8', text: '#8b1a1a', border: '#E05252' };
+}
+
+export function ConfoscopeTag({ score }) {
+  const { bg, text, border } = ratingColor(score);
+  return (
+    <span className="confoscope-tag" style={{ background: bg, color: text, borderColor: border }}>
+      Confoscope Rating: {score.toFixed(1)}/10
+    </span>
+  );
+}
+
+export function NoRatingTag() {
+  return <span className="confoscope-tag no-rating">No Confoscope Rating</span>;
 }
 
 const PALETTE = ['#5b8def','#e07a5f','#81b29a','#f2cc8f','#9b5de5','#00bbf9','#f15bb5','#43aa8b'];
