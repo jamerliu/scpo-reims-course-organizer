@@ -30,11 +30,7 @@ export function evaluateProfile(profile, addedCourses) {
 
 export function evaluateLanguages(languageProfile, addedCourses, t) {
   if (!languageProfile) return [];
-  // t may be undefined when called without translation (e.g. tests) — fall back to English strings
-  const s = (key, vars = {}) => {
-    if (!t) return key;
-    return t(key, vars);
-  };
+  const s = (key, vars = {}) => (t ? t(key, vars) : key);
 
   const results = [];
   const langCourses = addedCourses.filter((c) => c.group === 'LANGUE');
@@ -48,55 +44,72 @@ export function evaluateLanguages(languageProfile, addedCourses, t) {
     return l.includes('anglais') || l.includes('english');
   });
 
+  // French: only show if student needs to study it (not native)
   if (languageProfile.needsFrench) {
     const target = languageProfile.frenchTarget || 'B2';
     const matched = langCourses.find((c) => {
       const l = (c.langue || '').toLowerCase();
       return l.includes('fle') || l.includes('français') || l.includes('francais');
     });
+    // Show "study to X to unlock third language" hint only if not yet eligible for third language
+    const showThirdHint = !languageProfile.thirdLanguageUnlocked;
     results.push({
       id: 'lang-french',
-      label: s('langStudyTo', { lang: 'French / Français', level: target }),
+      label: showThirdHint
+        ? `French / Français (study to ${target} to qualify for a third language)`
+        : `French / Français`,
       detail: matched
-        ? `✓ ${matched.title} (${matched.niveau || ''})`
+        ? `✓ ${matched.title}${matched.niveau ? ` (${matched.niveau})` : ''}`
         : s('langAddFrom', { lang: 'French / Français' }),
       fulfilled: hasFrench,
     });
   }
 
+  // English: only show if student needs to study it (not native)
   if (languageProfile.needsEnglish) {
     const target = languageProfile.englishTarget || 'C1';
     const matched = langCourses.find((c) => {
       const l = (c.langue || '').toLowerCase();
       return l.includes('anglais') || l.includes('english');
     });
+    const showThirdHint = !languageProfile.thirdLanguageUnlocked;
     results.push({
       id: 'lang-english',
-      label: s('langStudyTo', { lang: 'English / Anglais', level: target }),
+      label: showThirdHint
+        ? `English / Anglais (study to ${target} to qualify for a third language)`
+        : `English / Anglais`,
       detail: matched
-        ? `✓ ${matched.title} (${matched.niveau || ''})`
+        ? `✓ ${matched.title}${matched.niveau ? ` (${matched.niveau})` : ''}`
         : s('langAddFrom', { lang: 'English / Anglais' }),
       fulfilled: hasEnglish,
     });
   }
 
-  if (!languageProfile.needsFrench && !languageProfile.needsEnglish && langCourses.length === 0) {
+  // If both are native/fluent, show a single fulfilled note
+  if (!languageProfile.needsFrench && !languageProfile.needsEnglish) {
     results.push({
-      id: 'lang-note',
-      label: s('langSection'),
-      detail: s('langNoReq'),
+      id: 'lang-native',
+      label: 'French & English',
+      detail: 'Native / Fluent in both — no language courses required.',
       fulfilled: true,
     });
   }
 
-  if (languageProfile.thirdLanguageUnlocked && languageProfile.thirdLanguage) {
-    const l = languageProfile.thirdLanguage.toLowerCase();
-    const matched = langCourses.find((c) => c.langue && c.langue.toLowerCase().includes(l));
+  // Third language: only show section if eligible
+  if (languageProfile.thirdLanguageUnlocked) {
+    const thirdCourses = langCourses.filter((c) => {
+      const l = (c.langue || '').toLowerCase();
+      const isFr = l.includes('fle') || l.includes('français') || l.includes('francais');
+      const isEn = l.includes('anglais') || l.includes('english');
+      return !isFr && !isEn;
+    });
     results.push({
       id: 'lang-third',
-      label: s('langOptional', { lang: languageProfile.thirdLanguage }),
-      detail: matched ? `✓ ${matched.title}` : s('langAddFrom', { lang: languageProfile.thirdLanguage }),
-      fulfilled: matched != null,
+      label: 'Third language (optional)',
+      detail: thirdCourses.length > 0
+        ? `✓ ${thirdCourses.map((c) => c.title).join(', ')}`
+        : 'Add from the Languages tab if desired.',
+      fulfilled: thirdCourses.length > 0,
       optional: true,
     });
   }

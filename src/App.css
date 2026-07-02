@@ -437,3 +437,22 @@ tr.added-row { background: rgba(46, 125, 79, 0.08); }
 }
 .option-card-title { display: block; font-weight: 600; margin-bottom: 4px; }
 .option-card-items { display: block; font-size: 0.78rem; color: var(--muted); }
+
+/* ---------- language eligibility notice ---------- */
+.lang-eligibility {
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 8px 0 16px;
+  font-size: 0.9rem;
+}
+.lang-eligibility.eligible {
+  background: rgba(46, 125, 79, 0.08);
+  border-left: 3px solid var(--green);
+  color: var(--green);
+}
+.lang-eligibility.ineligible {
+  background: rgba(107, 100, 89, 0.07);
+  border-left: 3px solid var(--muted);
+  color: var(--muted);
+}
+.lang-eligibility p { margin: 0; }

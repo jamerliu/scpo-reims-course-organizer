@@ -209,24 +209,17 @@ function LanguagePanel({ languageCourses, languageProfile, addedIds, onAdd, onRe
   const { t } = useLang();
   const cols = getColumns(t, true);
 
-  const allowed = useMemo(() => {
-    const set = new Set();
-    if (languageProfile?.needsFrench)  set.add('french');
-    if (languageProfile?.needsEnglish) set.add('english');
-    if (languageProfile?.thirdLanguageUnlocked) set.add('third');
-    return set;
-  }, [languageProfile]);
-
   const visible = useMemo(() => languageCourses.filter((c) => {
     const l = (c.langue || '').toLowerCase();
     const isFr = l.includes('fle') || l.includes('français') || l.includes('francais');
     const isEn = l.includes('anglais') || l.includes('english');
-    if (isFr) return allowed.has('french');
-    if (isEn) return allowed.has('english');
-    if (!allowed.has('third')) return false;
-    if (languageProfile?.thirdLanguage) return l.includes(languageProfile.thirdLanguage.toLowerCase());
-    return true;
-  }).map(withDisplayFields), [languageCourses, allowed, languageProfile]);
+    // French courses: show only if student needs to study French
+    if (isFr) return languageProfile?.needsFrench === true;
+    // English courses: show only if student needs to study English
+    if (isEn) return languageProfile?.needsEnglish === true;
+    // Third-language courses: show only if eligible
+    return languageProfile?.thirdLanguageUnlocked === true;
+  }).map(withDisplayFields), [languageCourses, languageProfile]);
 
   const languages = useMemo(() => ['All', ...Array.from(new Set(visible.map((c) => c.langue || '—'))).sort()], [visible]);
   const [langFilter, setLangFilter] = useState('All');

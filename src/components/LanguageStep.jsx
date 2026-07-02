@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useLang } from '../i18n/LangContext';
 
-const THIRD_LANGUAGES = ['German', 'Spanish', 'Italian', 'Portuguese', 'Arabic', 'Swahili', 'Latin'];
-
 const LANG_RULES = {
   '1A_NA':        { englishTarget: 'C1', frenchTarget: 'B2' },
   '2A_NA':        { englishTarget: 'C1', frenchTarget: 'B2' },
@@ -12,30 +10,36 @@ const LANG_RULES = {
   '2A_AFRICA_FR': { englishTarget: 'C2', frenchTarget: null },
 };
 
-const FRENCH_LEVELS  = ['Below B1', 'B1', 'B2', 'C1', 'C2'];
-const FRENCH_LEVELS_FR = ['En dessous du B1', 'B1', 'B2', 'C1', 'C2'];
-const ENGLISH_LEVELS = ['Below B2', 'B2', 'C1', 'C2'];
-const ENGLISH_LEVELS_FR = ['En dessous du B2', 'B2', 'C1', 'C2'];
+const FRENCH_LEVELS    = ['Below B1', 'B1', 'B2', 'C1', 'C2', 'Native / Fluent'];
+const FRENCH_LEVELS_FR = ['En dessous du B1', 'B1', 'B2', 'C1', 'C2', 'Langue maternelle / Courant'];
+const ENGLISH_LEVELS    = ['Below B2', 'B2', 'C1', 'C2', 'Native / Fluent'];
+const ENGLISH_LEVELS_FR = ['En dessous du B2', 'B2', 'C1', 'C2', 'Langue maternelle / Courant'];
+
+const NATIVE_VALUES = new Set(['Native / Fluent', 'Langue maternelle / Courant']);
+const BELOW_B1_VALUES = new Set(['Below B1', 'En dessous du B1']);
+const BELOW_B2_VALUES = new Set(['Below B2', 'En dessous du B2']);
 
 export default function LanguageStep({ programKey, onContinue, onBack, langToggle }) {
   const { t, lang } = useLang();
   const rules = LANG_RULES[programKey] || { englishTarget: 'C1', frenchTarget: 'B2' };
 
-  const [frenchLevel,   setFrenchLevel]   = useState('');
-  const [englishLevel,  setEnglishLevel]  = useState('');
-  const [thirdLanguage, setThirdLanguage] = useState('');
+  const [frenchLevel,  setFrenchLevel]  = useState('');
+  const [englishLevel, setEnglishLevel] = useState('');
 
-  const nativeFluent = lang === 'fr' ? 'Langue maternelle / Courant' : 'Native / Fluent';
+  const frenchValues  = lang === 'fr' ? FRENCH_LEVELS_FR  : FRENCH_LEVELS;
+  const englishValues = lang === 'fr' ? ENGLISH_LEVELS_FR : ENGLISH_LEVELS;
 
-  const frenchValues  = [...(lang === 'fr' ? FRENCH_LEVELS_FR  : FRENCH_LEVELS),  nativeFluent];
-  const englishValues = [...(lang === 'fr' ? ENGLISH_LEVELS_FR : ENGLISH_LEVELS), nativeFluent];
-
-  const frenchAtB1Plus  = frenchLevel  !== '' && frenchLevel  !== 'Below B1' && frenchLevel !== 'En dessous du B1';
-  const englishAtB2Plus = englishLevel !== '' && englishLevel !== 'Below B2' && englishLevel !== 'En dessous du B2';
+  const frenchNative  = NATIVE_VALUES.has(frenchLevel);
+  const englishNative = NATIVE_VALUES.has(englishLevel);
+  const frenchAtB1Plus  = frenchLevel !== '' && !BELOW_B1_VALUES.has(frenchLevel);
+  const englishAtB2Plus = englishLevel !== '' && !BELOW_B2_VALUES.has(englishLevel);
   const thirdUnlocked   = frenchAtB1Plus && englishAtB2Plus;
 
   const showFrench  = rules.frenchTarget !== null;
   const canContinue = englishLevel !== '' && (!showFrench || frenchLevel !== '');
+
+  const needsFrench  = showFrench && !frenchNative;
+  const needsEnglish = !englishNative;
 
   const subtitle = showFrench
     ? t('langSetupSubEN', { englishTarget: rules.englishTarget, frenchTarget: rules.frenchTarget })
@@ -47,10 +51,12 @@ export default function LanguageStep({ programKey, onContinue, onBack, langToggl
       englishLevel,
       englishTarget: rules.englishTarget,
       frenchTarget:  rules.frenchTarget,
-      needsFrench:   showFrench,
-      needsEnglish:  true,
+      needsFrench,
+      needsEnglish,
+      frenchNative,
+      englishNative,
       thirdLanguageUnlocked: thirdUnlocked,
-      thirdLanguage: thirdUnlocked ? thirdLanguage : null,
+      thirdLanguage: null,
     });
   }
 
@@ -69,11 +75,7 @@ export default function LanguageStep({ programKey, onContinue, onBack, langToggl
           </p>
           <div className="option-row">
             {frenchValues.map((val) => (
-              <button
-                key={val}
-                className={frenchLevel === val ? 'toggle active' : 'toggle'}
-                onClick={() => setFrenchLevel(val)}
-              >
+              <button key={val} className={frenchLevel === val ? 'toggle active' : 'toggle'} onClick={() => setFrenchLevel(val)}>
                 {val}
               </button>
             ))}
@@ -88,35 +90,25 @@ export default function LanguageStep({ programKey, onContinue, onBack, langToggl
         </p>
         <div className="option-row">
           {englishValues.map((val) => (
-            <button
-              key={val}
-              className={englishLevel === val ? 'toggle active' : 'toggle'}
-              onClick={() => setEnglishLevel(val)}
-            >
+            <button key={val} className={englishLevel === val ? 'toggle active' : 'toggle'} onClick={() => setEnglishLevel(val)}>
               {val}
             </button>
           ))}
         </div>
       </div>
 
-      {thirdUnlocked ? (
-        <div className="lang-question">
-          <p><strong>{t('thirdLangTitle')}</strong> — {t('thirdLangAvailable')}</p>
-          <div className="option-row">
-            {THIRD_LANGUAGES.map((l) => (
-              <button
-                key={l}
-                className={thirdLanguage === l ? 'toggle active' : 'toggle'}
-                onClick={() => setThirdLanguage(l === thirdLanguage ? '' : l)}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
+      {canContinue && (
+        <div className={`lang-eligibility ${thirdUnlocked ? 'eligible' : 'ineligible'}`}>
+          {thirdUnlocked
+            ? <p>✓ {lang === 'fr'
+                ? "Vous êtes éligible à une troisième langue. Vous pourrez en ajouter une depuis l'onglet Langues dans le planificateur."
+                : "You are eligible for a third language. You can add one from the Languages tab in the planner."}</p>
+            : <p>{lang === 'fr'
+                ? "Une troisième langue nécessite B1 en français et B2 en anglais (48h/semestre chacun). Les cours de troisième langue ne seront pas disponibles."
+                : "A third language requires B1 in French and B2 in English (both 48h/semester). Third-language courses will not be available in the planner."}</p>
+          }
         </div>
-      ) : (canContinue && (
-        <p className="hint warn">{t('thirdLangLocked')}</p>
-      ))}
+      )}
 
       <button className="primary-btn" disabled={!canContinue} onClick={handleContinue}>
         {t('continueToCourses')}
