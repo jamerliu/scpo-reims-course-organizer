@@ -266,3 +266,18 @@ tr.added-row { background: rgba(46, 125, 79, 0.08); }
 @media (max-width: 1100px) {
   .build-layout { grid-template-columns: 1fr; overflow-y: auto; }
 }
+
+/* ---------- language toggle ---------- */
+.lang-toggle {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lang-toggle:hover { background: var(--line); }
+.top-bar-floating { position: absolute; top: 20px; right: 24px; }
+.screen.center-screen { position: relative; }
+

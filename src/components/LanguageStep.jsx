@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLang } from '../i18n/LangContext';
 
 const THIRD_LANGUAGES = ['German', 'Spanish', 'Italian', 'Portuguese', 'Arabic', 'Swahili', 'Latin'];
 
@@ -11,25 +12,34 @@ const LANG_RULES = {
   '2A_AFRICA_FR': { englishTarget: 'C2', frenchTarget: null },
 };
 
-const FRENCH_LEVELS  = ['Below B1', 'B1', 'B2', 'C1', 'C2', 'Native / Fluent'];
-const ENGLISH_LEVELS = ['Below B2', 'B2', 'C1', 'C2', 'Native / Fluent'];
+const FRENCH_LEVELS  = ['Below B1', 'B1', 'B2', 'C1', 'C2'];
+const FRENCH_LEVELS_FR = ['En dessous du B1', 'B1', 'B2', 'C1', 'C2'];
+const ENGLISH_LEVELS = ['Below B2', 'B2', 'C1', 'C2'];
+const ENGLISH_LEVELS_FR = ['En dessous du B2', 'B2', 'C1', 'C2'];
 
-export default function LanguageStep({ programKey, onContinue, onBack }) {
+export default function LanguageStep({ programKey, onContinue, onBack, langToggle }) {
+  const { t, lang } = useLang();
   const rules = LANG_RULES[programKey] || { englishTarget: 'C1', frenchTarget: 'B2' };
 
-  const [frenchLevel,  setFrenchLevel]  = useState('');
-  const [englishLevel, setEnglishLevel] = useState('');
+  const [frenchLevel,   setFrenchLevel]   = useState('');
+  const [englishLevel,  setEnglishLevel]  = useState('');
   const [thirdLanguage, setThirdLanguage] = useState('');
 
-  // Third language requires BOTH French ≥ B1 AND English ≥ B2
-  const frenchAtB1Plus  = ['B1','B2','C1','C2','Native / Fluent'].includes(frenchLevel);
-  const englishAtB2Plus = ['B2','C1','C2','Native / Fluent'].includes(englishLevel);
+  const nativeFluent = lang === 'fr' ? 'Langue maternelle / Courant' : 'Native / Fluent';
+
+  const frenchValues  = [...(lang === 'fr' ? FRENCH_LEVELS_FR  : FRENCH_LEVELS),  nativeFluent];
+  const englishValues = [...(lang === 'fr' ? ENGLISH_LEVELS_FR : ENGLISH_LEVELS), nativeFluent];
+
+  const frenchAtB1Plus  = frenchLevel  !== '' && frenchLevel  !== 'Below B1' && frenchLevel !== 'En dessous du B1';
+  const englishAtB2Plus = englishLevel !== '' && englishLevel !== 'Below B2' && englishLevel !== 'En dessous du B2';
   const thirdUnlocked   = frenchAtB1Plus && englishAtB2Plus;
 
-  // For FR track, French target is null so we skip the French question
-  const showFrench = rules.frenchTarget !== null;
-
+  const showFrench  = rules.frenchTarget !== null;
   const canContinue = englishLevel !== '' && (!showFrench || frenchLevel !== '');
+
+  const subtitle = showFrench
+    ? t('langSetupSubEN', { englishTarget: rules.englishTarget, frenchTarget: rules.frenchTarget })
+    : t('langSetupSubFR', { englishTarget: rules.englishTarget });
 
   function handleContinue() {
     onContinue({
@@ -46,24 +56,19 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
 
   return (
     <div className="screen center-screen">
-      <button className="link-back" onClick={onBack}>&larr; Back</button>
-      <h1>Language Setup</h1>
-      <p className="subtitle">
-        {rules.frenchTarget
-          ? `Your track requires studying English to ${rules.englishTarget} and/or French to ${rules.frenchTarget}.`
-          : `Your track requires studying English to ${rules.englishTarget}.`
-        }{' '}
-        You may not register in a third language until you are at B1 in French and B2 in English (both 48h/semester).
-      </p>
+      <div className="top-bar-floating">{langToggle}</div>
+      <button className="link-back" onClick={onBack}>{t('back')}</button>
+      <h1>{t('langSetupTitle')}</h1>
+      <p className="subtitle">{subtitle}</p>
 
       {showFrench && (
         <div className="lang-question">
           <p>
-            <strong>French</strong> — what level are you currently at?
-            {' '}<span className="hint inline">(Target: {rules.frenchTarget})</span>
+            <strong>{t('frenchLevelQ')}</strong>
+            {' '}<span className="hint inline">({t('target', { level: rules.frenchTarget })})</span>
           </p>
           <div className="option-row">
-            {FRENCH_LEVELS.map((val) => (
+            {frenchValues.map((val) => (
               <button
                 key={val}
                 className={frenchLevel === val ? 'toggle active' : 'toggle'}
@@ -78,11 +83,11 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
 
       <div className="lang-question">
         <p>
-          <strong>English</strong> — what level are you currently at?
-          {' '}<span className="hint inline">(Target: {rules.englishTarget})</span>
+          <strong>{t('englishLevelQ')}</strong>
+          {' '}<span className="hint inline">({t('target', { level: rules.englishTarget })})</span>
         </p>
         <div className="option-row">
-          {ENGLISH_LEVELS.map((val) => (
+          {englishValues.map((val) => (
             <button
               key={val}
               className={englishLevel === val ? 'toggle active' : 'toggle'}
@@ -96,10 +101,7 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
 
       {thirdUnlocked ? (
         <div className="lang-question">
-          <p>
-            <strong>Third language</strong> — you meet the B1 French + B2 English requirement, so a third language is available.
-            Pick one to unlock it in the course browser (optional).
-          </p>
+          <p><strong>{t('thirdLangTitle')}</strong> — {t('thirdLangAvailable')}</p>
           <div className="option-row">
             {THIRD_LANGUAGES.map((l) => (
               <button
@@ -113,13 +115,11 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
           </div>
         </div>
       ) : (canContinue && (
-        <p className="hint warn">
-          Third languages are not available until you reach B1 in French and B2 in English (both 48h/semester).
-        </p>
+        <p className="hint warn">{t('thirdLangLocked')}</p>
       ))}
 
       <button className="primary-btn" disabled={!canContinue} onClick={handleContinue}>
-        Continue to course selection
+        {t('continueToCourses')}
       </button>
     </div>
   );

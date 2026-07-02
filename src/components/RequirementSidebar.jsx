@@ -1,3 +1,4 @@
+import { useLang } from '../i18n/LangContext';
 import { evaluateProfile, evaluateLanguages } from '../utils/requirementEngine';
 
 function StatusDot({ fulfilled, optional }) {
@@ -18,28 +19,29 @@ function ItemRow({ label, detail, fulfilled, optional, indent }) {
 }
 
 export default function RequirementSidebar({ profile, addedCourses, languageProfile }) {
+  const { t } = useLang();
   const categories = evaluateProfile(profile, addedCourses);
-  const languages  = evaluateLanguages(languageProfile, addedCourses);
+  const languages  = evaluateLanguages(languageProfile, addedCourses, t);
 
-  const totalCats  = categories.length + (languages.length > 0 ? 1 : 0);
-  const doneCats   = categories.filter((c) => c.fulfilled).length + (languages.every((l) => l.fulfilled || l.optional) ? 1 : 0);
+  const totalCats = categories.length + (languages.length > 0 ? 1 : 0);
+  const doneCats  = categories.filter((c) => c.fulfilled).length
+    + (languages.every((l) => l.fulfilled || l.optional) ? 1 : 0);
 
   return (
     <div className="requirement-sidebar" id="requirements-export-target">
       <div className="req-header-bar">
-        <h3>Requirements</h3>
-        <span className="req-progress">{doneCats}/{totalCats} done</span>
+        <h3>{t('requirements')}</h3>
+        <span className="req-progress">{t('reqDone', { done: doneCats, total: totalCats })}</span>
       </div>
       <p className="req-program-label">{profile?.label}</p>
       {profile?.note && <p className="hint small">{profile.note}</p>}
 
-      {/* Language block */}
       {languages.length > 0 && (
         <div className="req-category">
           <div className="req-section-head">
             <StatusDot fulfilled={languages.every((l) => l.fulfilled || l.optional)} />
-            <strong>Languages</strong>
-            <span className="req-rule-hint">min. 4 credits/semester</span>
+            <strong>{t('langSection')}</strong>
+            <span className="req-rule-hint">{t('minCredits')}</span>
           </div>
           {languages.map((l) => (
             <ItemRow key={l.id} label={l.label} detail={l.detail} fulfilled={l.fulfilled} optional={l.optional} indent />
@@ -47,7 +49,6 @@ export default function RequirementSidebar({ profile, addedCourses, languageProf
         </div>
       )}
 
-      {/* Course requirement categories */}
       {categories.map((cat) => (
         <div className="req-category" key={cat.id}>
           <div className="req-section-head">
@@ -59,39 +60,30 @@ export default function RequirementSidebar({ profile, addedCourses, languageProf
           {cat.kind === 'mandatory' && cat.items.map((item, i) => {
             const detail = item.matchedCourse
               ? `✓ ${item.matchedCourse.title}${item.matchedCourse.teacher1 ? ' — ' + item.matchedCourse.teacher1 : ''}`
-              : 'Not yet added';
-            return (
-              <ItemRow key={i} label={item.label} detail={detail} fulfilled={item.fulfilled} indent />
-            );
+              : t('notYetAdded');
+            return <ItemRow key={i} label={item.label} detail={detail} fulfilled={item.fulfilled} indent />;
           })}
 
           {cat.kind === 'choose-one-of' && (
             <>
               {cat.activeOption ? (
                 <>
-                  <ItemRow
-                    label={`Selected: ${cat.activeOption.label}`}
-                    fulfilled={cat.fulfilled}
-                    indent
-                  />
+                  <ItemRow label={t('selectedOption', { label: cat.activeOption.label })} fulfilled={cat.fulfilled} indent />
                   {cat.activeOption.items.map((item, i) => {
                     const detail = item.matchedCourse
                       ? `✓ ${item.matchedCourse.title}${item.matchedCourse.teacher1 ? ' — ' + item.matchedCourse.teacher1 : ''}`
-                      : 'Not yet added';
-                    return (
-                      <ItemRow key={i} label={item.label} detail={detail} fulfilled={item.fulfilled} indent />
-                    );
+                      : t('notYetAdded');
+                    return <ItemRow key={i} label={item.label} detail={detail} fulfilled={item.fulfilled} indent />;
                   })}
-                  {/* Show other options faintly */}
                   {cat.options.filter((o) => o.label !== cat.activeOption.label).length > 0 && (
                     <p className="req-other-options">
-                      Other options: {cat.options.filter((o) => o.label !== cat.activeOption.label).map((o) => o.label).join(', ')}
+                      {t('otherOptions', { list: cat.options.filter((o) => o.label !== cat.activeOption.label).map((o) => o.label).join(', ') })}
                     </p>
                   )}
                 </>
               ) : (
                 <>
-                  <ItemRow label="Choose one option below:" fulfilled={false} indent />
+                  <ItemRow label={t('chooseOne')} fulfilled={false} indent />
                   {cat.options.map((opt, oi) => (
                     <div key={oi} className="req-option-block">
                       <div className="req-option-label">{opt.label}</div>

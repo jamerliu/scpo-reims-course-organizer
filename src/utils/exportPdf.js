@@ -1,28 +1,16 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-// Temporarily removes overflow/max-height clipping on an element and all
-// scrollable descendants so html2canvas captures the full content.
 function unlockScroll(el) {
   const saved = [];
-  const all = [el, ...el.querySelectorAll('*')];
-  all.forEach((node) => {
+  [el, ...el.querySelectorAll('*')].forEach((node) => {
     const s = window.getComputedStyle(node);
     if (s.overflow !== 'visible' || s.overflowX !== 'visible' || s.overflowY !== 'visible' || s.maxHeight !== 'none') {
-      saved.push({
-        node,
-        overflow: node.style.overflow,
-        overflowX: node.style.overflowX,
-        overflowY: node.style.overflowY,
-        maxHeight: node.style.maxHeight,
-        height: node.style.height,
-      });
-      node.style.overflow  = 'visible';
+      saved.push({ node, overflow: node.style.overflow, overflowX: node.style.overflowX, overflowY: node.style.overflowY, maxHeight: node.style.maxHeight });
+      node.style.overflow = 'visible';
       node.style.overflowX = 'visible';
       node.style.overflowY = 'visible';
       node.style.maxHeight = 'none';
-      // Don't override explicit pixel heights on the calendar grid itself
-      if (node.style.height && !node.style.height.includes('px')) return;
     }
   });
   return saved;
@@ -30,7 +18,7 @@ function unlockScroll(el) {
 
 function restoreScroll(saved) {
   saved.forEach(({ node, overflow, overflowX, overflowY, maxHeight }) => {
-    node.style.overflow  = overflow;
+    node.style.overflow = overflow;
     node.style.overflowX = overflowX;
     node.style.overflowY = overflowY;
     node.style.maxHeight = maxHeight;
@@ -39,7 +27,7 @@ function restoreScroll(saved) {
 
 async function captureElement(el) {
   const saved = unlockScroll(el);
-  await new Promise((r) => requestAnimationFrame(r)); // let layout reflow
+  await new Promise((r) => requestAnimationFrame(r));
   const canvas = await html2canvas(el, {
     scale: 1.5,
     backgroundColor: '#ffffff',
@@ -60,7 +48,6 @@ async function addSectionPage(pdf, el, orientation, title) {
   pdf.setFontSize(13);
   pdf.setTextColor(31, 45, 61);
   pdf.text(title, 20, 28);
-
   const canvas = await captureElement(el);
   const imgData = canvas.toDataURL('image/png');
   const pageW = pdf.internal.pageSize.getWidth();
@@ -74,27 +61,22 @@ async function addSectionPage(pdf, el, orientation, title) {
   pdf.addImage(imgData, 'PNG', (pageW - w) / 2, topOffset, w, h);
 }
 
-export async function exportReport({ calendarEl, listEl, requirementsEl, programLabel }) {
+export async function exportReport({ calendarEl, listEl, requirementsEl, programLabel, t }) {
+  const s = (key, vars) => (t ? t(key, vars) : key);
   const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
 
-  // Cover / title page
   pdf.setFontSize(18);
   pdf.setTextColor(31, 45, 61);
-  pdf.text('Course Selection Report', 40, 60);
+  pdf.text(s('pdfTitle'), 40, 60);
   pdf.setFontSize(12);
   pdf.setTextColor(107, 100, 89);
   pdf.text(programLabel, 40, 80);
-  pdf.text(`Generated ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`, 40, 96);
+  const dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  pdf.text(s('pdfGenerated', { date: dateStr }), 40, 96);
 
-  if (calendarEl) {
-    await addSectionPage(pdf, calendarEl, 'landscape', 'Weekly Calendar');
-  }
-  if (listEl) {
-    await addSectionPage(pdf, listEl, 'landscape', 'Selected Courses');
-  }
-  if (requirementsEl) {
-    await addSectionPage(pdf, requirementsEl, 'portrait', 'Requirement Checklist');
-  }
+  if (calendarEl)     await addSectionPage(pdf, calendarEl,     'landscape', s('pdfCalendar'));
+  if (listEl)         await addSectionPage(pdf, listEl,         'landscape', s('pdfCourseList'));
+  if (requirementsEl) await addSectionPage(pdf, requirementsEl, 'portrait',  s('pdfRequirements'));
 
   pdf.save('course-selection-report.pdf');
 }

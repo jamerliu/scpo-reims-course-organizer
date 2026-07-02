@@ -1,10 +1,14 @@
+import { useLang } from '../i18n/LangContext';
 import { GRADE_PROGRAMS } from '../data/programMap';
 
-export default function ProgramGradeSelect({ onSelect }) {
+export default function ProgramGradeSelect({ onSelect, langToggle }) {
+  const { t } = useLang();
+
   return (
     <div className="screen center-screen">
-      <h1>Course Selection Planner</h1>
-      <p className="subtitle">Sciences Po Reims — 202610 Schedule</p>
+      <div className="top-bar-floating">{langToggle}</div>
+      <h1>{t('selectTitle')}</h1>
+      <p className="subtitle">{t('selectSubtitle')}</p>
 
       {Object.entries(GRADE_PROGRAMS).map(([grade, programs]) => (
         <div className="grade-block" key={grade}>
@@ -14,9 +18,9 @@ export default function ProgramGradeSelect({ onSelect }) {
               <button
                 key={p.key}
                 className="option-card"
-                onClick={() => onSelect({ grade, programKey: p.key, programLabel: p.label })}
+                onClick={() => onSelect({ grade, programKey: p.key, programLabel: t(`prog.${p.key}`) })}
               >
-                {p.label}
+                {t(`prog.${p.key}`)}
               </button>
             ))}
           </div>

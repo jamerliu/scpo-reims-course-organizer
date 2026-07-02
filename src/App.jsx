@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import coursesData from './data/courses.json';
 import { REQUIREMENTS } from './data/requirements';
 import { PROGRAM_COURSE_GROUPS } from './data/programMap';
+import { useLang } from './i18n/LangContext';
 import ProgramGradeSelect from './components/ProgramGradeSelect';
 import LanguageStep from './components/LanguageStep';
 import CourseBrowser from './components/CourseBrowser';
@@ -19,31 +20,42 @@ function autoLectures(programKey) {
   const groups = PROGRAM_COURSE_GROUPS[programKey] || [];
   const pool = coursesData.filter((c) => groups.includes(c.group));
   const toAdd = new Set();
-
-  function collectFromItems(items) {
-    items.forEach((item) => {
-      if (item.autoAdd) {
-        const match = pool.find((c) => item.match(c));
-        if (match) toAdd.add(match.id);
-      }
-    });
-  }
   profile.categories.forEach((cat) => {
-    if (cat.kind === 'mandatory') collectFromItems(cat.items);
-    // choose-one-of lectures (majeure/mineure) are left for the student to pick manually
+    if (cat.kind === 'mandatory') {
+      cat.items.forEach((item) => {
+        if (item.autoAdd) {
+          const match = pool.find((c) => item.match(c));
+          if (match) toAdd.add(match.id);
+        }
+      });
+    }
   });
   return Array.from(toAdd);
 }
 
+function LangToggle() {
+  const { lang, setLang } = useLang();
+  return (
+    <button
+      className="lang-toggle"
+      onClick={() => setLang(lang === 'en' ? 'fr' : 'en')}
+      title={lang === 'en' ? 'Passer en français' : 'Switch to English'}
+    >
+      {lang === 'en' ? '🇫🇷 FR' : '🇬🇧 EN'}
+    </button>
+  );
+}
+
 export default function App() {
-  const [step, setStep] = useState('select'); // select | language | build
-  const [program, setProgram] = useState(null); // { grade, programKey, programLabel }
+  const { t } = useLang();
+  const [step, setStep] = useState('select');
+  const [program, setProgram] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
   const [addedIds, setAddedIds] = useState([]);
   const [exporting, setExporting] = useState(false);
 
-  const calendarRef = useRef(null);
-  const listRef = useRef(null);
+  const calendarRef     = useRef(null);
+  const listRef         = useRef(null);
   const requirementsRef = useRef(null);
 
   const courses = useMemo(() => {
@@ -52,7 +64,7 @@ export default function App() {
     return coursesData.filter((c) => groups.includes(c.group) || c.group === 'LANGUE');
   }, [program]);
 
-  const addedIdSet = useMemo(() => new Set(addedIds), [addedIds]);
+  const addedIdSet   = useMemo(() => new Set(addedIds), [addedIds]);
   const addedCourses = useMemo(() => addedIds.map((id) => byId.get(id)).filter(Boolean), [addedIds]);
 
   function handleProgramSelect(sel) {
@@ -77,10 +89,11 @@ export default function App() {
     setExporting(true);
     try {
       await exportReport({
-        calendarEl: calendarRef.current,
-        listEl: listRef.current,
+        calendarEl:     calendarRef.current,
+        listEl:         listRef.current,
         requirementsEl: requirementsRef.current,
-        programLabel: program?.programLabel ? `${program.grade} ${program.programLabel}` : 'Course Plan',
+        programLabel:   program?.programLabel ? `${program.grade} ${program.programLabel}` : 'Course Plan',
+        t,
       });
     } finally {
       setExporting(false);
@@ -88,11 +101,18 @@ export default function App() {
   }
 
   if (step === 'select') {
-    return <ProgramGradeSelect onSelect={handleProgramSelect} />;
+    return <ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} />;
   }
 
   if (step === 'language') {
-    return <LanguageStep programKey={program.programKey} onContinue={handleLanguageContinue} onBack={() => setStep('select')} />;
+    return (
+      <LanguageStep
+        programKey={program.programKey}
+        onContinue={handleLanguageContinue}
+        onBack={() => setStep('select')}
+        langToggle={<LangToggle />}
+      />
+    );
   }
 
   return (
@@ -102,10 +122,11 @@ export default function App() {
           <h1>{program.grade} — {program.programLabel}</h1>
         </div>
         <div className="header-actions">
-          <button onClick={() => setStep('select')}>Change program</button>
-          <button onClick={() => setStep('language')}>Language settings</button>
+          <LangToggle />
+          <button onClick={() => setStep('select')}>{t('changeProgram')}</button>
+          <button onClick={() => setStep('language')}>{t('languageSettings')}</button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
-            {exporting ? 'Exporting…' : 'Export PDF report'}
+            {exporting ? t('exporting') : t('exportPdf')}
           </button>
         </div>
       </header>

@@ -1,33 +1,35 @@
 import { useMemo, useState } from 'react';
+import { useLang } from '../i18n/LangContext';
 import { formatSchedule } from '../utils/schedule';
 
-// Standard columns shown in every course table
-const BASE_COLUMNS = [
-  { key: 'title',       label: 'Title' },
-  { key: 'discipline',  label: 'Discipline' },
-  { key: 'up',          label: 'UP' },
-  { key: 'codeMatiere', label: 'Code matière' },
-  { key: 'type',        label: 'Type' },
-  { key: 'day1',        label: 'Jour 1' },
-  { key: 'time1',       label: 'Horaire 1' },
-  { key: 'day2',        label: 'Jour 2' },
-  { key: 'time2',       label: 'Horaire 2' },
-  { key: 'teacher1',    label: 'Enseignant 1' },
-  { key: 'teacher2',    label: 'Enseignant 2' },
-];
-const LANG_COLUMNS = [
-  { key: 'title',       label: 'Title' },
-  { key: 'discipline',  label: 'Language' },
-  { key: 'niveau',      label: 'Niveau' },
-  { key: 'up',          label: 'UP' },
-  { key: 'codeMatiere', label: 'Code matière' },
-  { key: 'day1',        label: 'Jour 1' },
-  { key: 'time1',       label: 'Horaire 1' },
-  { key: 'day2',        label: 'Jour 2' },
-  { key: 'time2',       label: 'Horaire 2' },
-  { key: 'teacher1',    label: 'Enseignant 1' },
-  { key: 'teacher2',    label: 'Enseignant 2' },
-];
+function getColumns(t, isLang) {
+  if (isLang) return [
+    { key: 'title',       label: t('colTitle') },
+    { key: 'discipline',  label: t('language') },
+    { key: 'niveau',      label: t('colNiveau') },
+    { key: 'up',          label: t('colUp') },
+    { key: 'codeMatiere', label: t('colCode') },
+    { key: 'day1',        label: t('colJour1') },
+    { key: 'time1',       label: t('colHoraire1') },
+    { key: 'day2',        label: t('colJour2') },
+    { key: 'time2',       label: t('colHoraire2') },
+    { key: 'teacher1',    label: t('colEns1') },
+    { key: 'teacher2',    label: t('colEns2') },
+  ];
+  return [
+    { key: 'title',       label: t('colTitle') },
+    { key: 'discipline',  label: t('colDiscipline') },
+    { key: 'up',          label: t('colUp') },
+    { key: 'codeMatiere', label: t('colCode') },
+    { key: 'type',        label: t('colType') },
+    { key: 'day1',        label: t('colJour1') },
+    { key: 'time1',       label: t('colHoraire1') },
+    { key: 'day2',        label: t('colJour2') },
+    { key: 'time2',       label: t('colHoraire2') },
+    { key: 'teacher1',    label: t('colEns1') },
+    { key: 'teacher2',    label: t('colEns2') },
+  ];
+}
 
 function withDisplayFields(c) {
   const s0 = c.schedule[0], s1 = c.schedule[1];
@@ -40,33 +42,22 @@ function withDisplayFields(c) {
   };
 }
 
-// Build section tabs from the requirement profile.
-// Each category in the profile becomes a top-level section.
-// For choose-one-of categories (majeure, mineure), each option also gets
-// its own sub-section so the student can browse courses for that option specifically.
-// A catch-all "Other / Elective" section shows courses that don't match any requirement item.
-function buildSections(profile, allCourses, languageProfile) {
+function buildSections(profile, allCourses) {
   if (!profile) return [];
-
-  // Collect all matcher functions and which section they belong to
   const sections = [];
-
   profile.categories.forEach((cat) => {
     if (cat.kind === 'mandatory') {
-      // Each item within the category becomes a sub-bucket inside one section
-      const matchers = cat.items.map((item) => item.match);
-      const poolCourses = allCourses.filter((c) => matchers.some((m) => m(c)));
+      const matchers = cat.items.map((i) => i.match);
       sections.push({
         id: cat.id,
         label: cat.label,
         note: cat.note || null,
-        courses: poolCourses,
+        courses: allCourses.filter((c) => matchers.some((m) => m(c))),
         subsections: null,
       });
     } else if (cat.kind === 'choose-one-of') {
-      // Build one subsection per option
       const subsections = cat.options.map((opt) => {
-        const matchers = opt.items.map((item) => item.match);
+        const matchers = opt.items.map((i) => i.match);
         return {
           id: opt.label,
           label: opt.label,
@@ -74,44 +65,37 @@ function buildSections(profile, allCourses, languageProfile) {
           courses: allCourses.filter((c) => matchers.some((m) => m(c))),
         };
       });
-      // Also build a union pool for the top-level tab
       const allMatchers = cat.options.flatMap((o) => o.items.map((i) => i.match));
-      const poolCourses = allCourses.filter((c) => allMatchers.some((m) => m(c)));
       sections.push({
         id: cat.id,
         label: cat.label,
         note: cat.note || null,
-        courses: poolCourses,
+        courses: allCourses.filter((c) => allMatchers.some((m) => m(c))),
         subsections,
       });
     }
   });
-
-  // Language section (always last in non-language browsers, handled separately)
   return sections;
 }
 
 function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
   const [sortKey, setSortKey] = useState('title');
   const [sortDir, setSortDir] = useState('asc');
+  const { t } = useLang();
 
   function toggleSort(key) {
-    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    if (sortKey === key) setSortDir((d) => d === 'asc' ? 'desc' : 'asc');
     else { setSortKey(key); setSortDir('asc'); }
   }
 
-  const sorted = useMemo(() => {
-    return [...courses].sort((a, b) => {
-      const av = (a[sortKey] ?? '').toString();
-      const bv = (b[sortKey] ?? '').toString();
-      const cmp = av.localeCompare(bv, undefined, { numeric: true });
-      return sortDir === 'asc' ? cmp : -cmp;
-    });
-  }, [courses, sortKey, sortDir]);
+  const sorted = useMemo(() => [...courses].sort((a, b) => {
+    const av = (a[sortKey] ?? '').toString();
+    const bv = (b[sortKey] ?? '').toString();
+    const cmp = av.localeCompare(bv, undefined, { numeric: true });
+    return sortDir === 'asc' ? cmp : -cmp;
+  }), [courses, sortKey, sortDir]);
 
-  if (sorted.length === 0) {
-    return <p className="empty-row">No courses in this section.</p>;
-  }
+  if (sorted.length === 0) return <p className="empty-row">{t('noCourses')}</p>;
 
   return (
     <div className="table-wrap">
@@ -140,7 +124,7 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
                 <td>
                   <button
                     className={added ? 'add-btn added' : 'add-btn'}
-                    onClick={() => (added ? onRemove(c.id) : onAdd(c.id))}
+                    onClick={() => added ? onRemove(c.id) : onAdd(c.id)}
                   >
                     {added ? '✓' : '+'}
                   </button>
@@ -158,12 +142,13 @@ function CourseTable({ courses, addedIds, onAdd, onRemove, columns }) {
 }
 
 function SectionPanel({ section, addedIds, onAdd, onRemove }) {
+  const { t } = useLang();
+  const cols = getColumns(t, false);
   const [activeSub, setActiveSub] = useState(null);
-  const cols = BASE_COLUMNS;
 
   const displayCourses = useMemo(() => {
     const pool = activeSub
-      ? (section.subsections.find((s) => s.id === activeSub)?.courses || [])
+      ? (section.subsections?.find((s) => s.id === activeSub)?.courses || [])
       : section.courses;
     return pool.map(withDisplayFields);
   }, [section, activeSub]);
@@ -173,44 +158,41 @@ function SectionPanel({ section, addedIds, onAdd, onRemove }) {
   return (
     <div className="section-panel">
       <div className="section-panel-header">
-        <span className="section-count">{addedCount > 0 ? `${addedCount} added` : `${section.courses.length} courses`}</span>
+        <span className="section-count">
+          {addedCount > 0 ? t('added', { n: addedCount }) : t('coursesCount', { n: section.courses.length, plural: section.courses.length !== 1 ? 's' : '' })}
+        </span>
         {section.note && <span className="section-note">{section.note}</span>}
       </div>
 
       {section.subsections && (
         <div className="subtabs">
-          <button
-            className={activeSub === null ? 'subtab active' : 'subtab'}
-            onClick={() => setActiveSub(null)}
-          >
-            All options
+          <button className={activeSub === null ? 'subtab active' : 'subtab'} onClick={() => setActiveSub(null)}>
+            {t('allOptions')}
           </button>
-          {section.subsections.map((sub) => (
-            <button
-              key={sub.id}
-              className={activeSub === sub.id ? 'subtab active' : 'subtab'}
-              onClick={() => setActiveSub(sub.id)}
-            >
-              {sub.label}
-              {sub.courses.filter((c) => addedIds.has(c.id)).length > 0
-                ? ` ✓` : ''}
-            </button>
-          ))}
+          {section.subsections.map((sub) => {
+            const subAdded = sub.courses.filter((c) => addedIds.has(c.id)).length;
+            return (
+              <button
+                key={sub.id}
+                className={activeSub === sub.id ? 'subtab active' : 'subtab'}
+                onClick={() => setActiveSub(sub.id)}
+              >
+                {sub.label}{subAdded > 0 ? ' ✓' : ''}
+              </button>
+            );
+          })}
         </div>
       )}
 
-      <CourseTable
-        courses={displayCourses}
-        addedIds={addedIds}
-        onAdd={onAdd}
-        onRemove={onRemove}
-        columns={cols}
-      />
+      <CourseTable courses={displayCourses} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} columns={cols} />
     </div>
   );
 }
 
 function LanguagePanel({ languageCourses, languageProfile, addedIds, onAdd, onRemove }) {
+  const { t } = useLang();
+  const cols = getColumns(t, true);
+
   const allowed = useMemo(() => {
     const set = new Set();
     if (languageProfile?.needsFrench)  set.add('french');
@@ -219,83 +201,69 @@ function LanguagePanel({ languageCourses, languageProfile, addedIds, onAdd, onRe
     return set;
   }, [languageProfile]);
 
-  const visible = useMemo(() => {
-    return languageCourses.filter((c) => {
-      const l = (c.langue || '').toLowerCase();
-      const isFr = l.includes('fle') || l.includes('français') || l.includes('francais');
-      const isEn = l.includes('anglais') || l.includes('english');
-      if (isFr) return allowed.has('french');
-      if (isEn) return allowed.has('english');
-      if (!allowed.has('third')) return false;
-      if (languageProfile?.thirdLanguage) return l.includes(languageProfile.thirdLanguage.toLowerCase());
-      return true;
-    }).map(withDisplayFields);
-  }, [languageCourses, allowed, languageProfile]);
+  const visible = useMemo(() => languageCourses.filter((c) => {
+    const l = (c.langue || '').toLowerCase();
+    const isFr = l.includes('fle') || l.includes('français') || l.includes('francais');
+    const isEn = l.includes('anglais') || l.includes('english');
+    if (isFr) return allowed.has('french');
+    if (isEn) return allowed.has('english');
+    if (!allowed.has('third')) return false;
+    if (languageProfile?.thirdLanguage) return l.includes(languageProfile.thirdLanguage.toLowerCase());
+    return true;
+  }).map(withDisplayFields), [languageCourses, allowed, languageProfile]);
 
   const languages = useMemo(() => ['All', ...Array.from(new Set(visible.map((c) => c.langue || '—'))).sort()], [visible]);
   const [langFilter, setLangFilter] = useState('All');
-
   const filtered = langFilter === 'All' ? visible : visible.filter((c) => (c.langue || '—') === langFilter);
 
-  if (visible.length === 0) {
-    return (
-      <p className="empty-row hint">
-        No language courses available based on your language setup. Go back to change your language settings.
-      </p>
-    );
-  }
+  if (visible.length === 0) return <p className="empty-row hint">{t('noLangCourses')}</p>;
 
   return (
     <div className="section-panel">
       <div className="browser-toolbar">
         <label>
-          Language:
+          {t('language')}:
           <select value={langFilter} onChange={(e) => setLangFilter(e.target.value)}>
             {languages.map((l) => <option key={l} value={l}>{l}</option>)}
           </select>
         </label>
-        <span className="count">{filtered.length} courses</span>
+        <span className="count">{filtered.length} {t('language').toLowerCase()}</span>
       </div>
-      <CourseTable courses={filtered} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} columns={LANG_COLUMNS} />
+      <CourseTable courses={filtered} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} columns={cols} />
     </div>
   );
 }
 
 export default function CourseBrowser({ courses, languageProfile, profile, addedIds, onAdd, onRemove }) {
+  const { t } = useLang();
   const nonLangCourses = useMemo(() => courses.filter((c) => c.group !== 'LANGUE'), [courses]);
   const langCourses    = useMemo(() => courses.filter((c) => c.group === 'LANGUE'),  [courses]);
 
-  const sections = useMemo(
-    () => buildSections(profile, nonLangCourses, languageProfile),
-    [profile, nonLangCourses, languageProfile]
-  );
+  const sections = useMemo(() => buildSections(profile, nonLangCourses), [profile, nonLangCourses]);
 
-  // Add Languages as a fixed last section
   const allTabs = useMemo(() => [
     ...sections.map((s) => ({ id: s.id, label: s.label })),
-    { id: '__languages__', label: 'Languages' },
-  ], [sections]);
+    { id: '__languages__', label: t('languagesTab') },
+  ], [sections, t]);
 
-  const [activeTab, setActiveTab] = useState(allTabs[0]?.id || '');
-  const currentTabId = allTabs.some((t) => t.id === activeTab) ? activeTab : allTabs[0]?.id;
-
+  const [activeTab, setActiveTab] = useState(sections[0]?.id || '__languages__');
+  const currentTabId = allTabs.some((tab) => tab.id === activeTab) ? activeTab : allTabs[0]?.id;
   const activeSection = sections.find((s) => s.id === currentTabId);
 
   return (
     <div className="course-browser">
       <div className="tabs">
-        {allTabs.map((t) => {
-          const isLang = t.id === '__languages__';
-          const sec = sections.find((s) => s.id === t.id);
+        {allTabs.map((tab) => {
+          const sec = sections.find((s) => s.id === tab.id);
           const addedInSection = sec ? sec.courses.filter((c) => addedIds.has(c.id)).length : 0;
           return (
             <button
-              key={t.id}
-              className={t.id === currentTabId ? 'tab active' : 'tab'}
-              onClick={() => setActiveTab(t.id)}
+              key={tab.id}
+              className={tab.id === currentTabId ? 'tab active' : 'tab'}
+              onClick={() => setActiveTab(tab.id)}
             >
-              {t.label}
-              {!isLang && addedInSection > 0 && <span className="tab-badge">{addedInSection}</span>}
+              {tab.label}
+              {addedInSection > 0 && <span className="tab-badge">{addedInSection}</span>}
             </button>
           );
         })}
@@ -310,14 +278,9 @@ export default function CourseBrowser({ courses, languageProfile, profile, added
           onRemove={onRemove}
         />
       ) : activeSection ? (
-        <SectionPanel
-          section={activeSection}
-          addedIds={addedIds}
-          onAdd={onAdd}
-          onRemove={onRemove}
-        />
+        <SectionPanel section={activeSection} addedIds={addedIds} onAdd={onAdd} onRemove={onRemove} />
       ) : (
-        <p className="empty-row">No courses available for this section.</p>
+        <p className="empty-row">{t('noCourses')}</p>
       )}
     </div>
   );

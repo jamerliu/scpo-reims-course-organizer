@@ -5,8 +5,7 @@ export function evaluateCategory(category, addedCourses) {
       fulfilled: addedCourses.some((c) => item.match(c)),
       matchedCourse: addedCourses.find((c) => item.match(c)) || null,
     }));
-    const fulfilled = items.every((i) => i.fulfilled);
-    return { ...category, items, fulfilled };
+    return { ...category, items, fulfilled: items.every((i) => i.fulfilled) };
   }
   if (category.kind === 'choose-one-of') {
     const options = category.options.map((opt) => {
@@ -29,8 +28,14 @@ export function evaluateProfile(profile, addedCourses) {
   return profile.categories.map((cat) => evaluateCategory(cat, addedCourses));
 }
 
-export function evaluateLanguages(languageProfile, addedCourses) {
+export function evaluateLanguages(languageProfile, addedCourses, t) {
   if (!languageProfile) return [];
+  // t may be undefined when called without translation (e.g. tests) — fall back to English strings
+  const s = (key, vars = {}) => {
+    if (!t) return key;
+    return t(key, vars);
+  };
+
   const results = [];
   const langCourses = addedCourses.filter((c) => c.group === 'LANGUE');
 
@@ -51,8 +56,10 @@ export function evaluateLanguages(languageProfile, addedCourses) {
     });
     results.push({
       id: 'lang-french',
-      label: `French (study to ${target})`,
-      detail: matched ? `✓ ${matched.title} (${matched.niveau || ''})` : `Add a French course from the Languages tab`,
+      label: s('langStudyTo', { lang: 'French / Français', level: target }),
+      detail: matched
+        ? `✓ ${matched.title} (${matched.niveau || ''})`
+        : s('langAddFrom', { lang: 'French / Français' }),
       fulfilled: hasFrench,
     });
   }
@@ -65,8 +72,10 @@ export function evaluateLanguages(languageProfile, addedCourses) {
     });
     results.push({
       id: 'lang-english',
-      label: `English (study to ${target})`,
-      detail: matched ? `✓ ${matched.title} (${matched.niveau || ''})` : `Add an English course from the Languages tab`,
+      label: s('langStudyTo', { lang: 'English / Anglais', level: target }),
+      detail: matched
+        ? `✓ ${matched.title} (${matched.niveau || ''})`
+        : s('langAddFrom', { lang: 'English / Anglais' }),
       fulfilled: hasEnglish,
     });
   }
@@ -74,8 +83,8 @@ export function evaluateLanguages(languageProfile, addedCourses) {
   if (!languageProfile.needsFrench && !languageProfile.needsEnglish && langCourses.length === 0) {
     results.push({
       id: 'lang-note',
-      label: 'Language credits',
-      detail: 'You have reached your target levels. No language course required, but you may still add one for extra credits.',
+      label: s('langSection'),
+      detail: s('langNoReq'),
       fulfilled: true,
     });
   }
@@ -85,8 +94,8 @@ export function evaluateLanguages(languageProfile, addedCourses) {
     const matched = langCourses.find((c) => c.langue && c.langue.toLowerCase().includes(l));
     results.push({
       id: 'lang-third',
-      label: `${languageProfile.thirdLanguage} (third language — optional)`,
-      detail: matched ? `✓ ${matched.title}` : 'Add from the Languages tab if desired',
+      label: s('langOptional', { lang: languageProfile.thirdLanguage }),
+      detail: matched ? `✓ ${matched.title}` : s('langAddFrom', { lang: languageProfile.thirdLanguage }),
       fulfilled: matched != null,
       optional: true,
     });
