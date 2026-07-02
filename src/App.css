@@ -456,3 +456,24 @@ tr.added-row { background: rgba(46, 125, 79, 0.08); }
   color: var(--muted);
 }
 .lang-eligibility p { margin: 0; }
+
+/* ---------- watermark ---------- */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  opacity: 0.6;
+  z-index: 500;
+  pointer-events: auto;
+  user-select: none;
+}
+.watermark a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.watermark a:hover {
+  color: var(--terracotta);
+  text-decoration: underline;
+}

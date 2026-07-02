@@ -84,6 +84,17 @@ function LangToggle() {
   );
 }
 
+function Watermark() {
+  return (
+    <div className="watermark">
+      Made by James Liu&nbsp;|&nbsp;
+      <a href="https://www.instagram.com/jamerliu/" target="_blank" rel="noopener noreferrer">
+        @jamerliu
+      </a>
+    </div>
+  );
+}
+
 export default function App() {
   const { t } = useLang();
   const [step, setStep] = useState('select'); // select | majeure | language | build
@@ -158,28 +169,34 @@ export default function App() {
   }
 
   if (step === 'select') {
-    return <ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} />;
+    return <><ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} /><Watermark /></>;
   }
 
   if (step === 'majeure') {
     return (
-      <MajeureMineurSelect
-        programKey={program.programKey}
-        onSelect={handleMajeureMineurSelect}
-        onBack={() => setStep('select')}
-        langToggle={<LangToggle />}
-      />
+      <>
+        <MajeureMineurSelect
+          programKey={program.programKey}
+          onSelect={handleMajeureMineurSelect}
+          onBack={() => setStep('select')}
+          langToggle={<LangToggle />}
+        />
+        <Watermark />
+      </>
     );
   }
 
   if (step === 'language') {
     return (
-      <LanguageStep
-        programKey={program.programKey}
-        onContinue={handleLanguageContinue}
-        onBack={() => setStep('select')}
-        langToggle={<LangToggle />}
-      />
+      <>
+        <LanguageStep
+          programKey={program.programKey}
+          onContinue={handleLanguageContinue}
+          onBack={() => setStep('select')}
+          langToggle={<LangToggle />}
+        />
+        <Watermark />
+      </>
     );
   }
 
@@ -233,6 +250,7 @@ export default function App() {
           />
         </div>
       </div>
+      <Watermark />
     </div>
   );
 }
