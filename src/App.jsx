@@ -11,6 +11,7 @@ import CalendarView from './components/CalendarView';
 import RequirementSidebar from './components/RequirementSidebar';
 import AddedList from './components/AddedList';
 import LoadModal from './components/LoadModal';
+import ComparePage from './components/ComparePage';
 import { exportReport } from './utils/exportPdf';
 import { buildSaveData, downloadSave } from './utils/saveLoad';
 import './App.css';
@@ -99,7 +100,7 @@ function Watermark() {
 
 export default function App() {
   const { t, lang } = useLang();
-  const [step, setStep] = useState('select'); // select | majeure | language | build
+  const [step, setStep] = useState('select'); // select | majeure | language | build | compare
   const [program, setProgram] = useState(null);
   const [majeureMineure, setMajeureMineure] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
@@ -207,6 +208,29 @@ export default function App() {
     }
   }
 
+  // Build the current stack object for passing to ComparePage
+  const currentStackForCompare = program ? {
+    label: `${program.grade} — ${program.programLabel}`,
+    programKey: program.programKey,
+    savedAt: null,
+    courses: addedCourses,
+    addedIds,
+    languageProfile,
+    majeureMineure,
+  } : null;
+
+  if (step === 'compare') {
+    return (
+      <>
+        <ComparePage
+          onBack={() => setStep('build')}
+          currentStack={currentStackForCompare}
+        />
+        <Watermark />
+      </>
+    );
+  }
+
   if (step === 'select') {
     return (
       <>
@@ -265,6 +289,9 @@ export default function App() {
           </button>
           <button className="load-btn" onClick={() => setShowLoad(true)} title={lang === 'fr' ? 'Charger un emploi du temps' : 'Load a saved schedule'}>
             {lang === 'fr' ? '📂 Charger' : '📂 Load'}
+          </button>
+          <button className="compare-btn" onClick={() => setStep('compare')}>
+            {lang === 'fr' ? '⚖ Comparer' : '⚖ Compare'}
           </button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}
