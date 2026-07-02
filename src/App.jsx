@@ -95,7 +95,7 @@ export default function App() {
   }
 
   if (step === 'language') {
-    return <LanguageStep onContinue={handleLanguageContinue} onBack={() => setStep('select')} />;
+    return <LanguageStep programKey={program.programKey} onContinue={handleLanguageContinue} onBack={() => setStep('select')} />;
   }
 
   return (

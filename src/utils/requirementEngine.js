@@ -1,11 +1,9 @@
-// Given a requirement profile (from data/requirements.js) and the list of
-// courses currently on the calendar, compute fulfillment status per category.
-
 export function evaluateCategory(category, addedCourses) {
   if (category.kind === 'mandatory') {
     const items = category.items.map((item) => ({
       ...item,
       fulfilled: addedCourses.some((c) => item.match(c)),
+      matchedCourse: addedCourses.find((c) => item.match(c)) || null,
     }));
     const fulfilled = items.every((i) => i.fulfilled);
     return { ...category, items, fulfilled };
@@ -15,6 +13,7 @@ export function evaluateCategory(category, addedCourses) {
       const items = opt.items.map((item) => ({
         ...item,
         fulfilled: addedCourses.some((c) => item.match(c)),
+        matchedCourse: addedCourses.find((c) => item.match(c)) || null,
       }));
       return { ...opt, items, fulfilled: items.every((i) => i.fulfilled) };
     });
@@ -31,17 +30,67 @@ export function evaluateProfile(profile, addedCourses) {
 }
 
 export function evaluateLanguages(languageProfile, addedCourses) {
+  if (!languageProfile) return [];
   const results = [];
-  const langCourses = (lang) => addedCourses.filter((c) => c.group === 'LANGUE' && c.langue && c.langue.toLowerCase().includes(lang));
+  const langCourses = addedCourses.filter((c) => c.group === 'LANGUE');
+
+  const hasFrench = langCourses.some((c) => {
+    const l = (c.langue || '').toLowerCase();
+    return l.includes('fle') || l.includes('français') || l.includes('francais');
+  });
+  const hasEnglish = langCourses.some((c) => {
+    const l = (c.langue || '').toLowerCase();
+    return l.includes('anglais') || l.includes('english');
+  });
+
   if (languageProfile.needsFrench) {
-    results.push({ id: 'lang-french', label: 'French', fulfilled: langCourses('fle').length > 0 || langCourses('french').length > 0 });
+    const target = languageProfile.frenchTarget || 'B2';
+    const matched = langCourses.find((c) => {
+      const l = (c.langue || '').toLowerCase();
+      return l.includes('fle') || l.includes('français') || l.includes('francais');
+    });
+    results.push({
+      id: 'lang-french',
+      label: `French (study to ${target})`,
+      detail: matched ? `✓ ${matched.title} (${matched.niveau || ''})` : `Add a French course from the Languages tab`,
+      fulfilled: hasFrench,
+    });
   }
+
   if (languageProfile.needsEnglish) {
-    results.push({ id: 'lang-english', label: 'English', fulfilled: langCourses('anglais').length > 0 || langCourses('english').length > 0 });
+    const target = languageProfile.englishTarget || 'C1';
+    const matched = langCourses.find((c) => {
+      const l = (c.langue || '').toLowerCase();
+      return l.includes('anglais') || l.includes('english');
+    });
+    results.push({
+      id: 'lang-english',
+      label: `English (study to ${target})`,
+      detail: matched ? `✓ ${matched.title} (${matched.niveau || ''})` : `Add an English course from the Languages tab`,
+      fulfilled: hasEnglish,
+    });
   }
+
+  if (!languageProfile.needsFrench && !languageProfile.needsEnglish && langCourses.length === 0) {
+    results.push({
+      id: 'lang-note',
+      label: 'Language credits',
+      detail: 'You have reached your target levels. No language course required, but you may still add one for extra credits.',
+      fulfilled: true,
+    });
+  }
+
   if (languageProfile.thirdLanguageUnlocked && languageProfile.thirdLanguage) {
     const l = languageProfile.thirdLanguage.toLowerCase();
-    results.push({ id: 'lang-third', label: languageProfile.thirdLanguage, fulfilled: addedCourses.some((c) => c.group === 'LANGUE' && c.langue && c.langue.toLowerCase().includes(l)) });
+    const matched = langCourses.find((c) => c.langue && c.langue.toLowerCase().includes(l));
+    results.push({
+      id: 'lang-third',
+      label: `${languageProfile.thirdLanguage} (third language — optional)`,
+      detail: matched ? `✓ ${matched.title}` : 'Add from the Languages tab if desired',
+      fulfilled: matched != null,
+      optional: true,
+    });
   }
+
   return results;
 }
