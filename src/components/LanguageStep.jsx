@@ -11,8 +11,8 @@ const LANG_RULES = {
   '2A_AFRICA_FR': { englishTarget: 'C2', frenchTarget: null },
 };
 
-const FRENCH_LEVELS  = ['Below B1', 'B1', 'B2', 'C1', 'C2'];
-const ENGLISH_LEVELS = ['Below B2', 'B2', 'C1', 'C2'];
+const FRENCH_LEVELS  = ['Below B1', 'B1', 'B2', 'C1', 'C2', 'Native / Fluent'];
+const ENGLISH_LEVELS = ['Below B2', 'B2', 'C1', 'C2', 'Native / Fluent'];
 
 export default function LanguageStep({ programKey, onContinue, onBack }) {
   const rules = LANG_RULES[programKey] || { englishTarget: 'C1', frenchTarget: 'B2' };
@@ -22,8 +22,8 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
   const [thirdLanguage, setThirdLanguage] = useState('');
 
   // Third language requires BOTH French ≥ B1 AND English ≥ B2
-  const frenchAtB1Plus  = ['B1','B2','C1','C2'].includes(frenchLevel);
-  const englishAtB2Plus = ['B2','C1','C2'].includes(englishLevel);
+  const frenchAtB1Plus  = ['B1','B2','C1','C2','Native / Fluent'].includes(frenchLevel);
+  const englishAtB2Plus = ['B2','C1','C2','Native / Fluent'].includes(englishLevel);
   const thirdUnlocked   = frenchAtB1Plus && englishAtB2Plus;
 
   // For FR track, French target is null so we skip the French question
@@ -98,8 +98,7 @@ export default function LanguageStep({ programKey, onContinue, onBack }) {
         <div className="lang-question">
           <p>
             <strong>Third language</strong> — you meet the B1 French + B2 English requirement, so a third language is available.
-            Pick one to unlock it in the course browser (optional).{' '}
-            <span className="hint inline">Max 2 foreign languages total. Mandarin/Chinese not offered this year.</span>
+            Pick one to unlock it in the course browser (optional).
           </p>
           <div className="option-row">
             {THIRD_LANGUAGES.map((l) => (
