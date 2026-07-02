@@ -96,7 +96,7 @@ function Watermark() {
 }
 
 export default function App() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [step, setStep] = useState('select'); // select | majeure | language | build
   const [program, setProgram] = useState(null);
   const [majeureMineure, setMajeureMineure] = useState(null);
@@ -156,12 +156,16 @@ export default function App() {
   async function handleExport() {
     setExporting(true);
     try {
-      await exportReport({
-        calendarEl:     calendarRef.current,
-        listEl:         listRef.current,
-        requirementsEl: requirementsRef.current,
-        programLabel:   program?.programLabel ? `${program.grade} ${program.programLabel}` : 'Course Plan',
-        t,
+      const profile = REQUIREMENTS[program.programKey];
+      const { evaluateProfile, evaluateLanguages } = await import('./utils/requirementEngine');
+      const requirementResults = evaluateProfile(profile, addedCourses);
+      const langResults = evaluateLanguages(languageProfile, addedCourses, t);
+      exportReport({
+        addedCourses,
+        requirementResults,
+        langResults,
+        programLabel: program?.programLabel ? `${program.grade} — ${program.programLabel}` : 'Course Plan',
+        lang,
       });
     } finally {
       setExporting(false);
