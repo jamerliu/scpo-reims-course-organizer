@@ -2118,444 +2118,6 @@
   "confoscope2": null
  },
  {
-  "id": "c82",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 12611.0,
-  "title": "Introductory Math Gr1",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "MORENO-LOPEZ Maximiliano",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Mon",
-    "start": "12:20",
-    "end": "14:20",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c83",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 13870.0,
-  "title": "Introductory Math Gr2",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "MORENO-LOPEZ Maximiliano",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Mon",
-    "start": "14:30",
-    "end": "16:30",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c84",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 12612.0,
-  "title": "Introductory Math Gr3",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "SOLTANI Maryam",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Fri",
-    "start": "12:20",
-    "end": "14:20",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c85",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 12613.0,
-  "title": "Introductory Math Gr4",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "SOLTANI Maryam",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Fri",
-    "start": "14:30",
-    "end": "16:30",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c86",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 13297.0,
-  "title": "Introductory Math Gr5",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "ANDRE Etienne",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Fri",
-    "start": "10:10",
-    "end": "12:10",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": 3.0,
-  "confoscope2": null
- },
- {
-  "id": "c87",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 14735.0,
-  "title": "Introductory Math Gr6",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c88",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 15429.0,
-  "title": "Introductory Math Gr7",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "ALLAOUI Aïssa",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Tue",
-    "start": "18:50",
-    "end": "20:50",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c89",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 18327.0,
-  "title": "Introductory Math Gr8",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "ALLAOUI Aïssa",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Wed",
-    "start": "18:50",
-    "end": "20:50",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c90",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Introductory",
-  "up": 19571.0,
-  "title": "Introductory Math Gr9",
-  "codeMatiere": "BMAT 17A01",
-  "teacher1": "SOLTANI Maryam",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Fri",
-    "start": "16:40",
-    "end": "18:40",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c91",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12615.0,
-  "title": "Intermediate Math Gr1",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c92",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12616.0,
-  "title": "Intermediate Math Gr2",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c93",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12617.0,
-  "title": "Intermediate Math Gr3",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c94",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12618.0,
-  "title": "Intermediate Math Gr4",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c95",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12703.0,
-  "title": "Intermediate Math Gr5",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c96",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 12709.0,
-  "title": "Intermediate Math Gr6",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c97",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Intermediate",
-  "up": 14736.0,
-  "title": "Intermediate Math Gr7",
-  "codeMatiere": "BMAT 17A02",
-  "teacher1": "A préciser",
-  "teacher2": null,
-  "schedule": [],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": null,
-  "confoscope2": null
- },
- {
-  "id": "c98",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Advanced",
-  "up": 15032.0,
-  "title": "Advanced Math Gr1",
-  "codeMatiere": "BMAT 17A03",
-  "teacher1": "NIKIEMA Charlemagne",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Wed",
-    "start": "08:00",
-    "end": "10:00",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": 3.7,
-  "confoscope2": null
- },
- {
-  "id": "c99",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Advanced",
-  "up": 12619.0,
-  "title": "Advanced Math Gr2",
-  "codeMatiere": "BMAT 17A03",
-  "teacher1": "NIKIEMA Charlemagne",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Wed",
-    "start": "12:20",
-    "end": "14:20",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": 3.7,
-  "confoscope2": null
- },
- {
-  "id": "c100",
-  "group": "1A_NA",
-  "programme": "1A - North America",
-  "majeure": null,
-  "discipline": "Mathematics",
-  "type": "Advanced",
-  "up": 20338.0,
-  "title": "Advanced Math Gr3",
-  "codeMatiere": "BMAT 17A03",
-  "teacher1": "ANDRE Etienne",
-  "teacher2": null,
-  "schedule": [
-   {
-    "day": "Fri",
-    "start": "12:20",
-    "end": "14:20",
-    "note": null
-   }
-  ],
-  "quadGroup": null,
-  "langue": null,
-  "niveau": null,
-  "confoscope1": 3.0,
-  "confoscope2": null
- },
- {
   "id": "c101",
   "group": "1A_NA",
   "programme": "1A - North America",
@@ -15277,6 +14839,500 @@
   "langue": "Humanités classiques - Latin (langue et culture)",
   "niveau": "Niveau intermediaire",
   "confoscope1": 4.6,
+  "confoscope2": null
+ },
+ {
+  "id": "c82",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 12611.0,
+  "title": "Introductory Math Gr1",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "MORENO-LOPEZ Maximiliano",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "12:20",
+    "end": "14:20",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c83",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 13870.0,
+  "title": "Introductory Math Gr2",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "MORENO-LOPEZ Maximiliano",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "14:30",
+    "end": "16:30",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c84",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 12612.0,
+  "title": "Introductory Math Gr3",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "SOLTANI Maryam",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "12:20",
+    "end": "14:20",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c85",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 12613.0,
+  "title": "Introductory Math Gr4",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "SOLTANI Maryam",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "14:30",
+    "end": "16:30",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c86",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 13297.0,
+  "title": "Introductory Math Gr5",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "ANDRE Etienne",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "10:10",
+    "end": "12:10",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 3.0,
+  "confoscope2": null
+ },
+ {
+  "id": "c87",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Introductory",
+  "up": 14735.0,
+  "title": "Introductory Math Gr6",
+  "codeMatiere": "BMAT 17A01",
+  "teacher1": "SOLTANI Maryam",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "16:40",
+    "end": "18:40",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c91",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12615.0,
+  "title": "Intermediate Math Gr1",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ASSARI Ismahane",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "10:10",
+    "end": "12:10",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c92",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12616.0,
+  "title": "Intermediate Math Gr2",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ASSARI Ismahane",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "12:20",
+    "end": "14:20",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c93",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12617.0,
+  "title": "Intermediate Math Gr3",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "MALMBERG Selma",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "08:00",
+    "end": "10:00",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 8.3,
+  "confoscope2": null
+ },
+ {
+  "id": "c94",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12618.0,
+  "title": "Intermediate Math Gr4",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ASSARI Ismahane",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "14:30",
+    "end": "16:30",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c95",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12703.0,
+  "title": "Intermediate Math Gr5",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ALLAOUI Aïssa",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Mon",
+    "start": "18:50",
+    "end": "20:50",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 4.4,
+  "confoscope2": null
+ },
+ {
+  "id": "c96",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 12709.0,
+  "title": "Intermediate Math Gr6",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ALLAOUI Aïssa",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Tue",
+    "start": "18:50",
+    "end": "20:50",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 4.4,
+  "confoscope2": null
+ },
+ {
+  "id": "c97",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Intermediate",
+  "up": 14736.0,
+  "title": "Intermediate Math Gr7",
+  "codeMatiere": "BMAT 17A02",
+  "teacher1": "ALLAOUI Aïssa",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Wed",
+    "start": "18:50",
+    "end": "20:50",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 4.4,
+  "confoscope2": null
+ },
+ {
+  "id": "c98",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 15032.0,
+  "title": "Advanced Math Gr1",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "NIKIEMA Charlemagne",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Wed",
+    "start": "08:00",
+    "end": "10:00",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 3.7,
+  "confoscope2": null
+ },
+ {
+  "id": "c99",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 12619.0,
+  "title": "Advanced Math Gr2",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "NIKIEMA Charlemagne",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Wed",
+    "start": "12:20",
+    "end": "14:20",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 3.7,
+  "confoscope2": null
+ },
+ {
+  "id": "c100",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 20338.0,
+  "title": "Advanced Math Gr3",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "ANDRE Etienne",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "12:20",
+    "end": "14:20",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": 3.0,
+  "confoscope2": null
+ },
+ {
+  "id": "c21297",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 20717.0,
+  "title": "Advanced Math Gr4",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "BENTRAD Ali",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "08:00",
+    "end": "10:00",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c21298",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 20718.0,
+  "title": "Advanced Math Gr5",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "BENTRAD Ali",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "10:10",
+    "end": "12:10",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
+  "confoscope2": null
+ },
+ {
+  "id": "c21299",
+  "group": "1A_NA",
+  "programme": "1A - North America",
+  "majeure": null,
+  "discipline": "Mathematics",
+  "type": "Advanced",
+  "up": 20719.0,
+  "title": "Advanced Math Gr6",
+  "codeMatiere": "BMAT 17A03",
+  "teacher1": "BENTRAD Ali",
+  "teacher2": null,
+  "schedule": [
+   {
+    "day": "Fri",
+    "start": "14:30",
+    "end": "16:30",
+    "note": null
+   }
+  ],
+  "quadGroup": null,
+  "langue": null,
+  "niveau": null,
+  "confoscope1": null,
   "confoscope2": null
  }
 ]
