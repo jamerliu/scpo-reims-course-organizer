@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import coursesData from './data/courses.json';
 import { REQUIREMENTS, MAJEURE_OPTIONS, MINEURE_OPTIONS } from './data/requirements';
 import { PROGRAM_COURSE_GROUPS } from './data/programMap';
@@ -227,6 +228,7 @@ export default function App() {
           currentStack={currentStackForCompare}
         />
         <Watermark />
+        <Analytics />
       </>
     );
   }
@@ -237,6 +239,7 @@ export default function App() {
         <ProgramGradeSelect onSelect={handleProgramSelect} langToggle={<LangToggle />} onLoad={() => setShowLoad(true)} />
         {showLoad && <LoadModal onClose={() => setShowLoad(false)} onRestore={handleRestore} />}
         <Watermark />
+        <Analytics />
       </>
     );
   }
@@ -251,6 +254,7 @@ export default function App() {
           langToggle={<LangToggle />}
         />
         <Watermark />
+        <Analytics />
       </>
     );
   }
@@ -265,6 +269,7 @@ export default function App() {
           langToggle={<LangToggle />}
         />
         <Watermark />
+        <Analytics />
       </>
     );
   }
@@ -333,6 +338,7 @@ export default function App() {
         </div>
       </div>
       <Watermark />
+      <Analytics />
     </div>
   );
 }
