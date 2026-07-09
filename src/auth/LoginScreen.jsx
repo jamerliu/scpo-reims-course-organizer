@@ -67,9 +67,9 @@ function SignIn({ onRegister, onForgot }) {
         {loading ? 'Signing in…' : 'Sign in →'}
       </button>
 
-      <div style={{ display:'flex', justifyContent:'space-between', marginTop: 8 }}>
+      <div style={{ display:'flex', justifyContent:'space-between', marginTop: 8, flexWrap:'wrap', gap:6 }}>
         <button type="button" className="hd-text-btn" onClick={onForgot}>
-          Forgot password?
+          Forgot password? · Previously logged in with a magic link? Click here to set your password.
         </button>
         <button type="button" className="hd-text-btn" onClick={onRegister}>
           No account? Register →
