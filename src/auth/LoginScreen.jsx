@@ -16,10 +16,12 @@ export default function LoginScreen() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOtp({
+    const result = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: window.location.origin },
     });
+    console.log('Supabase OTP result:', JSON.stringify(result, null, 2));
+    const { error } = result;
     setLoading(false);
     if (error) {
       setError(error.message || error.error_description || JSON.stringify(error) || 'Something went wrong. Check your Supabase email settings.');

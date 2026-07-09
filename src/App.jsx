@@ -106,6 +106,7 @@ function Watermark() {
 
 export default function App({ initialStep, onGoHome }) {
   const { t, lang } = useLang();
+  const { signOut } = useAuth();
   const [step, setStep] = useState(
     initialStep === 'marketplace' ? 'marketplace' : 'select'
   );
@@ -405,10 +406,10 @@ export default function App({ initialStep, onGoHome }) {
             </button>
           )}
           <button onClick={() => setStep('language')}>{t('languageSettings')}</button>
-          <button className="save-btn" onClick={handleSave} title={lang === 'fr' ? 'Sauvegarder l\'emploi du temps' : 'Save schedule to file'}>
+          <button className="save-btn" onClick={handleSave}>
             {lang === 'fr' ? '💾 Sauvegarder' : '💾 Save'}
           </button>
-          <button className="load-btn" onClick={() => setShowLoad(true)} title={lang === 'fr' ? 'Charger un emploi du temps' : 'Load a saved schedule'}>
+          <button className="load-btn" onClick={() => setShowLoad(true)}>
             {lang === 'fr' ? '📂 Charger' : '📂 Load'}
           </button>
           <button className="compare-btn" onClick={() => setStep('compare')}>
@@ -422,6 +423,9 @@ export default function App({ initialStep, onGoHome }) {
           </button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}
+          </button>
+          <button className="load-btn" onClick={signOut} title="Sign out">
+            ↩ {lang === 'fr' ? 'Déconnexion' : 'Sign out'}
           </button>
         </div>
       </header>

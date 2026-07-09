@@ -368,7 +368,7 @@ function TradeModal({ posting, myScheduleIds, onClose }) {
 // ── Main Marketplace Page ─────────────────────────────────────────────────────
 
 export default function MarketplacePage({ onBack }) {
-  const { profile, updateProfile } = useAuth();
+  const { profile, updateProfile, signOut } = useAuth();
   const [postings,    setPostings]    = useState([]);
   const [loading,     setLoading]     = useState(true);
   const [search,      setSearch]      = useState('');
@@ -413,7 +413,6 @@ export default function MarketplacePage({ onBack }) {
     const myIds = new Set(myScheduleIds);
     return [...postings]
       .filter(p => {
-        if (p.user_id === profile?.id) return false; // hide own postings in main list
         if (search) {
           const q = search.toLowerCase();
           if (!p.offered_title?.toLowerCase().includes(q) &&
@@ -449,6 +448,9 @@ export default function MarketplacePage({ onBack }) {
           <input ref={fileRef} type="file" accept=".json" style={{display:'none'}} onChange={handleScheduleUpload} />
           <button className="hd-btn hd-btn-secondary" onClick={() => fileRef.current?.click()}>
             📂 {myScheduleIds.length > 0 ? `Schedule loaded (${myScheduleIds.length})` : 'Load my schedule'}
+          </button>
+          <button className="hd-btn hd-btn-secondary" onClick={signOut} style={{ fontSize: 13 }}>
+            ↩ Sign out
           </button>
           <button className="hd-btn hd-btn-primary" onClick={() => setShowNewForm(true)}>
             + New posting
