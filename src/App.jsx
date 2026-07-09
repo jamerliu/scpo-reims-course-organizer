@@ -13,6 +13,7 @@ import AddedList from './components/AddedList';
 import LoadModal from './components/LoadModal';
 import ComparePage from './components/ComparePage';
 import RegistrationTab from './components/RegistrationTab';
+import OptimizerPage from './components/OptimizerPage';
 import { exportReport } from './utils/exportPdf';
 import { buildSaveData, downloadSave } from './utils/saveLoad';
 import { isLecture } from './utils/lectureGuard';
@@ -102,8 +103,9 @@ function Watermark() {
 
 export default function App() {
   const { t, lang } = useLang();
-  const [step, setStep] = useState('select'); // select | majeure | language | build | compare
+  const [step, setStep] = useState('select'); // select | majeure | language | build | compare | optimize
   const [buildTab, setBuildTab] = useState('planner'); // planner | registration
+  const [enFrPreference, setEnFrPreference] = useState(null); // null | 'EN' | 'FR'
   const [program, setProgram] = useState(null);
   const [majeureMineure, setMajeureMineure] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
@@ -199,6 +201,7 @@ export default function App() {
       program, majeureMineure, languageProfile,
       addedIds, starredIds, coursesById: byId,
       regStatuses, regSecondaries, regOrder,
+      enFrPreference,
     });
     const slug = program?.programKey?.toLowerCase().replace(/_/g, '-') || 'schedule';
     const date = new Date().toISOString().slice(0, 10);
@@ -214,6 +217,7 @@ export default function App() {
     setRegStatuses(result.regStatuses || {});
     setRegSecondaries(result.regSecondaries || {});
     setRegOrder(result.regOrder || []);
+    setEnFrPreference(result.enFrPreference || null);
     setStep('build');
   }
 
@@ -250,9 +254,45 @@ export default function App() {
   if (step === 'compare') {
     return (
       <>
-        <ComparePage
+        <ComparePage onBack={() => setStep('build')} currentStack={currentStackForCompare} />
+        <Watermark />
+      </>
+    );
+  }
+
+  if (step === 'optimize') {
+    return (
+      <>
+        <OptimizerPage
+          programKey={program.programKey}
+          majeureMineure={majeureMineure}
+          addedCourses={addedCourses}
+          enFrPreference={enFrPreference}
+          setEnFrPreference={setEnFrPreference}
+          lang={lang}
           onBack={() => setStep('build')}
-          currentStack={currentStackForCompare}
+          onLoadPlanner={(result) => {
+            setAddedIds(result.courseIds);
+            const newNonLecture = result.courseIds.filter((id) => {
+              const c = byId.get(id); return c && !isLecture(c);
+            });
+            setRegOrder(newNonLecture);
+            setRegStatuses({});
+            setRegSecondaries(result.secondaries || {});
+            setStep('build');
+            setBuildTab('planner');
+          }}
+          onLoadRegistration={(result) => {
+            setAddedIds(result.courseIds);
+            const newNonLecture = result.courseIds.filter((id) => {
+              const c = byId.get(id); return c && !isLecture(c);
+            });
+            setRegOrder(newNonLecture);
+            setRegStatuses({});
+            setRegSecondaries(result.secondaries || {});
+            setStep('build');
+            setBuildTab('registration');
+          }}
         />
         <Watermark />
       </>
@@ -336,6 +376,9 @@ export default function App() {
           <button className="compare-btn" onClick={() => setStep('compare')}>
             {lang === 'fr' ? '⚖ Comparer' : '⚖ Compare'}
           </button>
+          <button className="optimize-btn" onClick={() => setStep('optimize')}>
+            {lang === 'fr' ? '⚡ Optimiser' : '⚡ Optimize'}
+          </button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}
           </button>
@@ -357,6 +400,7 @@ export default function App() {
                 onAdd={addCourse}
                 onRemove={removeCourse}
                 onStar={toggleStar}
+                enFrPreference={enFrPreference}
               />
             </div>
 

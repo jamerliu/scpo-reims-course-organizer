@@ -7,7 +7,7 @@
 export const SAVE_VERSION = 1;
 
 // ---------- SAVE ----------
-export function buildSaveData({ program, majeureMineure, languageProfile, addedIds, starredIds, coursesById, regStatuses, regSecondaries, regOrder }) {
+export function buildSaveData({ program, majeureMineure, languageProfile, addedIds, starredIds, coursesById, regStatuses, regSecondaries, regOrder, enFrPreference }) {
   const addedMeta = addedIds.map((id) => {
     const c = coursesById.get(id);
     return c ? { id, title: c.title, codeMatiere: c.codeMatiere, group: c.group } : { id };
@@ -46,6 +46,7 @@ export function buildSaveData({ program, majeureMineure, languageProfile, addedI
       secondaries: regSecondaries || {},
       order:       regOrder       || [],
     },
+    enFrPreference: enFrPreference || null,
     _meta: {
       addedCourses:   addedMeta,
       starredCourses: starredMeta,
@@ -144,6 +145,7 @@ export function validateSaveData(raw, { validProgramKeys, coursesById }) {
     regStatuses:    raw.registration?.statuses    || {},
     regSecondaries: raw.registration?.secondaries || {},
     regOrder:       (raw.registration?.order || []).filter((id) => coursesById.has(id)),
+    enFrPreference: raw.enFrPreference || null,
   };
 }
 

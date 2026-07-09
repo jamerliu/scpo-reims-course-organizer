@@ -45,37 +45,39 @@ function withDisplayFields(c) {
   };
 }
 
-function buildSections(profile, allCourses) {
+function applyEnFrFilter(courses, catId, enFrPref) {
+  if (!enFrPref) return courses;
+  if (catId === 'digital-culture') {
+    if (enFrPref === 'EN') return courses.filter((c) => (c.title||'').includes('ANG'));
+    if (enFrPref === 'FR') return courses.filter((c) => !(c.title||'').includes('ANG'));
+  }
+  if (catId === 'capstone') {
+    if (enFrPref === 'EN') return courses.filter((c) => c.codeMatiere === 'ECEF 27A00');
+    if (enFrPref === 'FR') return courses.filter((c) => c.codeMatiere === 'ECEF 27F00');
+  }
+  return courses;
+}
+
+function buildSections(profile, allCourses, enFrPref) {
   if (!profile) return [];
   const sections = [];
   profile.categories.forEach((cat) => {
     if (cat.kind === 'mandatory') {
       const matchers = cat.items.map((i) => i.match);
-      sections.push({
-        id: cat.id,
-        label: cat.label,
-        note: cat.note || null,
-        courses: allCourses.filter((c) => matchers.some((m) => m(c))),
-        subsections: null,
-      });
+      let pool = allCourses.filter((c) => matchers.some((m) => m(c)));
+      pool = applyEnFrFilter(pool, cat.id, enFrPref);
+      sections.push({ id: cat.id, label: cat.label, note: cat.note||null, courses: pool, subsections: null });
     } else if (cat.kind === 'choose-one-of') {
       const subsections = cat.options.map((opt) => {
         const matchers = opt.items.map((i) => i.match);
-        return {
-          id: opt.label,
-          label: opt.label,
-          note: opt.note || null,
-          courses: allCourses.filter((c) => matchers.some((m) => m(c))),
-        };
+        let pool = allCourses.filter((c) => matchers.some((m) => m(c)));
+        pool = applyEnFrFilter(pool, cat.id, enFrPref);
+        return { id: opt.label, label: opt.label, note: opt.note||null, courses: pool };
       });
       const allMatchers = cat.options.flatMap((o) => o.items.map((i) => i.match));
-      sections.push({
-        id: cat.id,
-        label: cat.label,
-        note: cat.note || null,
-        courses: allCourses.filter((c) => allMatchers.some((m) => m(c))),
-        subsections,
-      });
+      let pool = allCourses.filter((c) => allMatchers.some((m) => m(c)));
+      pool = applyEnFrFilter(pool, cat.id, enFrPref);
+      sections.push({ id: cat.id, label: cat.label, note: cat.note||null, courses: pool, subsections });
     }
   });
   return sections;
@@ -314,12 +316,12 @@ function FavouritesPanel({ allCourses, starredIds, addedIds, onAdd, onRemove, on
   );
 }
 
-export default function CourseBrowser({ courses, languageProfile, profile, addedIds, starredIds, onAdd, onRemove, onStar }) {
+export default function CourseBrowser({ courses, languageProfile, profile, addedIds, starredIds, onAdd, onRemove, onStar, enFrPreference }) {
   const { t, lang } = useLang();
   const nonLangCourses = useMemo(() => courses.filter((c) => c.group !== 'LANGUE'), [courses]);
   const langCourses    = useMemo(() => courses.filter((c) => c.group === 'LANGUE'),  [courses]);
 
-  const sections = useMemo(() => buildSections(profile, nonLangCourses), [profile, nonLangCourses]);
+  const sections = useMemo(() => buildSections(profile, nonLangCourses, enFrPreference), [profile, nonLangCourses, enFrPreference]);
 
   const favLabel = lang === 'fr' ? '★ Favoris' : '★ Favourites';
   const favCount = courses.filter((c) => starredIds?.has(c.id)).length;
