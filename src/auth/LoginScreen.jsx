@@ -21,8 +21,11 @@ export default function LoginScreen() {
       options: { emailRedirectTo: window.location.origin },
     });
     setLoading(false);
-    if (error) setError(error.message);
-    else setSent(true);
+    if (error) {
+      setError(error.message || error.error_description || JSON.stringify(error) || 'Something went wrong. Check your Supabase email settings.');
+    } else {
+      setSent(true);
+    }
   }
 
   return (
