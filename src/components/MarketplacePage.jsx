@@ -23,53 +23,67 @@ function fmtSchedule(schedule) {
   return schedule.map(s => `${DAY_LABELS[s.day]||s.day} ${s.start}–${s.end}`).join(' · ');
 }
 
-// ── iCal Calendar View ───────────────────────────────────────────────────────
+// ── iCal Calendar View — Typical Week ───────────────────────────────────────
 const WEEK_DAYS = ['Mon','Tue','Wed','Thu','Fri'];
 const CAL_PALETTE = ['#6C63FF','#38B2AC','#E07A5F','#81B29A','#F2CC8F','#9B5DE5','#00BBF9','#F15BB5'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAY_NUM = { 1:'Mon', 2:'Tue', 3:'Wed', 4:'Thu', 5:'Fri' };
 
 function IcalCalendarView({ calendarEvents }) {
-  const weeks = useMemo(() => {
-    const weekMap = new Map();
+  // Build a "typical week" — one slot per unique (title + time + day) combination.
+  // Count how many weeks each slot appears in to detect biweekly courses.
+  const typicalSlots = useMemo(() => {
+    // First count total number of weeks in the calendar
+    const weekKeys = new Set();
     calendarEvents.forEach(ev => {
-      if (!ev.startDate || !ev.dayOfWeek || ev.dayOfWeek === 0 || ev.dayOfWeek === 6) return;
+      if (!ev.startDate) return;
       const d = new Date(ev.startDate);
       d.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1));
-      const weekKey = d.toISOString().slice(0,10);
-      if (!weekMap.has(weekKey)) weekMap.set(weekKey, { weekStart: new Date(d), events: [] });
-      weekMap.get(weekKey).events.push(ev);
+      weekKeys.add(d.toISOString().slice(0, 10));
     });
-    return [...weekMap.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([,v]) => v);
+    const totalWeeks = weekKeys.size || 1;
+
+    // Aggregate by (day, timeStr, title)
+    const slotMap = new Map();
+    calendarEvents.forEach(ev => {
+      if (!ev.dayOfWeek || ev.dayOfWeek < 1 || ev.dayOfWeek > 5) return;
+      const key = `${ev.dayOfWeek}|${ev.timeStr}|${ev.courseTitle || ev.summary}`;
+      if (!slotMap.has(key)) {
+        slotMap.set(key, {
+          dayOfWeek: ev.dayOfWeek,
+          day: DAY_NUM[ev.dayOfWeek],
+          timeStr: ev.timeStr,
+          title: ev.courseTitle || ev.summary,
+          location: ev.location,
+          count: 0,
+        });
+      }
+      slotMap.get(key).count++;
+    });
+
+    // Mark biweekly: appears in roughly half the weeks (count <= totalWeeks * 0.6)
+    return [...slotMap.values()].map(slot => ({
+      ...slot,
+      biweekly: slot.count <= totalWeeks * 0.6,
+    }));
   }, [calendarEvents]);
 
-  const [weekIdx, setWeekIdx] = useState(0);
-  if (!weeks.length) return null;
+  const colorMap = useMemo(() => {
+    const map = new Map();
+    let ci = 0;
+    typicalSlots.forEach(s => {
+      if (!map.has(s.title)) map.set(s.title, CAL_PALETTE[ci++ % CAL_PALETTE.length]);
+    });
+    return map;
+  }, [typicalSlots]);
 
-  const colorMap = new Map();
-  let ci = 0;
-  calendarEvents.forEach(ev => {
-    const key = ev.courseTitle || ev.summary;
-    if (key && !colorMap.has(key)) colorMap.set(key, CAL_PALETTE[ci++ % CAL_PALETTE.length]);
-  });
+  if (!typicalSlots.length) return null;
 
-  const week = weeks[Math.min(weekIdx, weeks.length-1)];
   const hours = [];
   for (let m = GRID_START; m <= GRID_END; m += 60) hours.push(m);
 
-  function weekLabel(d) {
-    const end = new Date(d); end.setDate(end.getDate()+4);
-    return `${d.getDate()} ${MONTHS[d.getMonth()]} – ${end.getDate()} ${MONTHS[end.getMonth()]}`;
-  }
-
   return (
     <div className="ical-cal-wrap">
-      <div className="ical-cal-nav">
-        <button className="hd-btn hd-btn-secondary" style={{padding:'4px 12px',fontSize:12}}
-          disabled={weekIdx===0} onClick={()=>setWeekIdx(i=>Math.max(0,i-1))}>← Prev</button>
-        <span className="ical-week-label">Week of {weekLabel(week.weekStart)}</span>
-        <button className="hd-btn hd-btn-secondary" style={{padding:'4px 12px',fontSize:12}}
-          disabled={weekIdx>=weeks.length-1} onClick={()=>setWeekIdx(i=>Math.min(weeks.length-1,i+1))}>Next →</button>
-      </div>
       <div className="ical-cal-inner">
         <div className="ical-day-headers">
           <div className="ical-time-gutter"/>
@@ -84,25 +98,29 @@ function IcalCalendarView({ calendarEvents }) {
             ))}
           </div>
           {WEEK_DAYS.map((day, di) => {
-            const dayNum = di+1;
-            const dayEvs = week.events.filter(ev => ev.dayOfWeek === dayNum);
+            const dayNum = di + 1;
+            const daySlots = typicalSlots.filter(s => s.dayOfWeek === dayNum);
             return (
               <div key={day} className="ical-day-col">
                 {hours.map(m => <div key={m} className="ical-hour-line" style={{top:`${((m-GRID_START)/GRID_SPAN)*100}%`}}/>)}
-                {dayEvs.map((ev, i) => {
-                  const parts  = (ev.timeStr||'').split('–');
-                  const sm = toMin(parts[0]); const em = toMin(parts[1]);
+                {daySlots.map((slot, i) => {
+                  const parts = (slot.timeStr||'').split('–');
+                  const sm = toMin(parts[0]);
+                  const em = toMin(parts[1]);
                   if (!sm && !em) return null;
                   const top = ((Math.max(sm,GRID_START)-GRID_START)/GRID_SPAN)*100;
                   const ht  = Math.max(((Math.min(em,GRID_END)-Math.max(sm,GRID_START))/GRID_SPAN)*100, 2);
-                  const key = ev.courseTitle || ev.summary;
-                  const color = colorMap.get(key) || '#888';
+                  const color = colorMap.get(slot.title) || '#888';
                   return (
-                    <div key={i} className="ical-block" style={{top:`${top}%`,height:`${ht}%`,background:color}}
-                      title={`${ev.summary}\n${ev.timeStr}\n${ev.location||''}`}>
-                      <div className="ical-block-title">{ev.courseTitle || ev.summary}</div>
-                      <div className="ical-block-time">{ev.timeStr}</div>
-                      {ev.location && <div className="ical-block-loc">{ev.location}</div>}
+                    <div key={i} className={`ical-block ${slot.biweekly ? 'biweekly' : ''}`}
+                      style={{top:`${top}%`, height:`${ht}%`, background: color,
+                        opacity: slot.biweekly ? 0.7 : 1,
+                        backgroundImage: slot.biweekly ? 'repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,0.15) 3px,rgba(255,255,255,0.15) 6px)' : 'none'
+                      }}
+                      title={`${slot.title}\n${slot.timeStr}${slot.location ? '\n'+slot.location : ''}${slot.biweekly ? '\n(biweekly)' : ''}`}>
+                      <div className="ical-block-title">{slot.title}</div>
+                      <div className="ical-block-time">{slot.timeStr}{slot.biweekly ? ' ·2wk' : ''}</div>
+                      {slot.location && <div className="ical-block-loc">{slot.location}</div>}
                     </div>
                   );
                 })}
@@ -111,9 +129,16 @@ function IcalCalendarView({ calendarEvents }) {
           })}
         </div>
       </div>
-      <p style={{fontSize:11,color:'#aaa',marginTop:6,fontFamily:'Patrick Hand, cursive'}}>
-        {weeks.length} week{weeks.length!==1?'s':''} total · navigate to see biweekly patterns
-      </p>
+      <div style={{display:'flex', gap:12, marginTop:8, flexWrap:'wrap'}}>
+        <p style={{fontSize:11,color:'#aaa',fontFamily:'Patrick Hand, cursive', margin:0}}>
+          Typical week · {typicalSlots.length} course slot{typicalSlots.length!==1?'s':''}
+        </p>
+        {typicalSlots.some(s => s.biweekly) && (
+          <p style={{fontSize:11,color:'#aaa',fontFamily:'Patrick Hand, cursive', margin:0}}>
+            ░ = biweekly (alternating weeks)
+          </p>
+        )}
+      </div>
     </div>
   );
 }
