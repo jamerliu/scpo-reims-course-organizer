@@ -2,38 +2,25 @@ import { useState, useMemo, useRef } from 'react';
 import { useLang } from '../i18n/LangContext';
 import { ConfoscopeTag, NoRatingTag } from './Modal';
 import { propagateSwap, findCandidateSecondaries, coursesConflict } from '../utils/registrationEngine';
+import { isLecture } from '../utils/lectureGuard';
 import { formatSchedule } from '../utils/schedule';
 import coursesData from '../data/courses.json';
 
 const byId = new Map(coursesData.map((c) => [c.id, c]));
 
-const STATUS = {
-  PENDING:     'pending',     // not yet enrolled, schedule slot held
-  CONFIRMED:   'confirmed',   // successfully enrolled — locked
-  UNAVAILABLE: 'unavailable', // course was full / removed
-};
-
+const STATUS = { PENDING: 'pending', CONFIRMED: 'confirmed', UNAVAILABLE: 'unavailable' };
 const STATUS_META = {
-  pending:     { label: 'Pending',     labelFr: 'En attente',   color: '#6B7280', bg: 'rgba(163,177,198,0.15)' },
-  confirmed:   { label: 'Confirmed',   labelFr: 'Confirmé',     color: '#38B2AC', bg: 'rgba(56,178,172,0.1)'  },
-  unavailable: { label: 'Unavailable', labelFr: 'Indisponible', color: '#E05252', bg: 'rgba(224,82,82,0.08)' },
+  pending:     { color: '#6B7280', bg: 'rgba(163,177,198,0.15)' },
+  confirmed:   { color: '#38B2AC', bg: 'rgba(56,178,172,0.1)'  },
+  unavailable: { color: '#E05252', bg: 'rgba(224,82,82,0.08)'  },
 };
 
-// ── Secondary picker modal ─────────────────────────────────────────────────
+// ── Secondary Picker Modal ────────────────────────────────────────────────────
 
 function SecondaryPicker({ course, candidates, currentlyAssigned, onAssign, onClose, lang }) {
   const [dragOver, setDragOver] = useState(false);
   const [picked, setPicked]     = useState(currentlyAssigned || null);
-
   const s = (en, fr) => lang === 'fr' ? fr : en;
-
-  function handleDrop(e) {
-    e.preventDefault();
-    setDragOver(false);
-    const id = e.dataTransfer.getData('reg-secondary-id');
-    if (id) setPicked(id);
-  }
-
   const pickedCourse = picked ? byId.get(picked) : null;
 
   return (
@@ -42,20 +29,13 @@ function SecondaryPicker({ course, candidates, currentlyAssigned, onAssign, onCl
         <button className="modal-close" onClick={onClose}>✕</button>
         <h3>{s('Set secondary for', 'Définir le secondaire pour')}:</h3>
         <div className="reg-modal-primary-label">{course.title} <code>{course.codeMatiere}</code></div>
+        <p className="reg-modal-hint">{s('Drag a candidate onto the drop zone, or click to select.', 'Glissez un candidat sur la zone de dépôt, ou cliquez pour sélectionner.')}</p>
 
-        <p className="reg-modal-hint">
-          {s(
-            'Drag a candidate from the list below onto the drop zone, or click one to select it.',
-            'Glissez un cours candidat sur la zone de dépôt, ou cliquez pour le sélectionner.'
-          )}
-        </p>
-
-        {/* Drop zone */}
         <div
           className={`reg-drop-zone ${dragOver ? 'drag-over' : ''} ${pickedCourse ? 'has-pick' : ''}`}
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
-          onDrop={handleDrop}
+          onDrop={(e) => { e.preventDefault(); setDragOver(false); const id = e.dataTransfer.getData('reg-secondary-id'); if (id) setPicked(id); }}
         >
           {pickedCourse ? (
             <div className="reg-drop-picked">
@@ -64,36 +44,21 @@ function SecondaryPicker({ course, candidates, currentlyAssigned, onAssign, onCl
               <button className="reg-drop-clear" onClick={() => setPicked(null)}>✕</button>
             </div>
           ) : (
-            <span className="reg-drop-hint-text">
-              {dragOver
-                ? (s('Drop here', 'Déposer ici'))
-                : (s('Drop secondary course here', 'Déposez le cours secondaire ici'))}
-            </span>
+            <span className="reg-drop-hint-text">{dragOver ? s('Drop here', 'Déposer ici') : s('Drop secondary course here', 'Déposez le cours secondaire ici')}</span>
           )}
         </div>
 
-        {/* Candidate list */}
         <div className="reg-candidates">
-          {candidates.length === 0 && (
-            <p className="reg-no-candidates">
-              {s('No alternative sections found for this course code.', 'Aucune section alternative trouvée pour ce code.')}
-            </p>
-          )}
+          {candidates.length === 0 && <p className="reg-no-candidates">{s('No alternative sections found.', 'Aucune section alternative trouvée.')}</p>}
           {candidates.map((c) => (
-            <div
-              key={c.id}
-              className={`reg-candidate ${picked === c.id ? 'selected' : ''}`}
-              draggable
-              onDragStart={(e) => e.dataTransfer.setData('reg-secondary-id', c.id)}
-              onClick={() => setPicked(c.id === picked ? null : c.id)}
-            >
+            <div key={c.id} className={`reg-candidate ${picked === c.id ? 'selected' : ''}`}
+              draggable onDragStart={(e) => e.dataTransfer.setData('reg-secondary-id', c.id)}
+              onClick={() => setPicked(c.id === picked ? null : c.id)}>
               <div className="reg-candidate-title">{c.title}</div>
               <div className="reg-candidate-meta">
                 <span>{formatSchedule(c)}</span>
                 {c.teacher1 && <span>{c.teacher1}</span>}
-                {c.confoscope1 != null
-                  ? <ConfoscopeTag score={c.confoscope1} />
-                  : <NoRatingTag />}
+                {c.confoscope1 != null ? <ConfoscopeTag score={c.confoscope1} /> : <NoRatingTag />}
               </div>
             </div>
           ))}
@@ -101,11 +66,7 @@ function SecondaryPicker({ course, candidates, currentlyAssigned, onAssign, onCl
 
         <div className="reg-modal-actions">
           <button className="reg-modal-cancel" onClick={onClose}>{s('Cancel', 'Annuler')}</button>
-          <button
-            className="reg-modal-save"
-            disabled={!picked}
-            onClick={() => { onAssign(picked); onClose(); }}
-          >
+          <button className="reg-modal-save" disabled={!picked} onClick={() => { onAssign(picked); onClose(); }}>
             {s('Save secondary', 'Enregistrer le secondaire')}
           </button>
         </div>
@@ -114,7 +75,7 @@ function SecondaryPicker({ course, candidates, currentlyAssigned, onAssign, onCl
   );
 }
 
-// ── Swap result modal ──────────────────────────────────────────────────────
+// ── Swap Result Modal ─────────────────────────────────────────────────────────
 
 function SwapResultModal({ swapResult, unavailableCourse, onConfirm, onCancel, lang }) {
   const s = (en, fr) => lang === 'fr' ? fr : en;
@@ -125,7 +86,6 @@ function SwapResultModal({ swapResult, unavailableCourse, onConfirm, onCancel, l
       <div className="reg-modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onCancel}>✕</button>
         <h3>{s('Swap result', 'Résultat de l\'échange')}</h3>
-
         <div className="swap-summary">
           <div className="swap-row">
             <span className="swap-label">{s('Dropping', 'Suppression')}</span>
@@ -141,68 +101,63 @@ function SwapResultModal({ swapResult, unavailableCourse, onConfirm, onCancel, l
 
         {conflictsWithConfirmed.length > 0 && (
           <div className="swap-block conflict-confirmed">
-            <div className="swap-block-title">
-              ⛔ {s('Conflicts with confirmed (locked) courses — secondary may not work:', 'Conflits avec des cours confirmés (verrouillés) — le secondaire peut ne pas fonctionner :')}
-            </div>
-            {conflictsWithConfirmed.map((c) => (
-              <div key={c.id} className="swap-conflict-item">
-                <strong>{c.title}</strong> — {formatSchedule(c)}
-              </div>
-            ))}
+            <div className="swap-block-title">⛔ {s('Conflicts with confirmed (locked) courses:', 'Conflits avec des cours confirmés (verrouillés) :')}</div>
+            {conflictsWithConfirmed.map((c) => <div key={c.id} className="swap-conflict-item"><strong>{c.title}</strong> — {formatSchedule(c)}</div>)}
           </div>
         )}
-
         {conflictsWithPending.length > 0 && (
           <div className="swap-block conflict-pending">
-            <div className="swap-block-title">
-              ⚠ {s('These pending courses now conflict — you\'ll need to re-select them:', 'Ces cours en attente sont maintenant en conflit — vous devrez les re-sélectionner :')}
-            </div>
-            {conflictsWithPending.map((c) => (
-              <div key={c.id} className="swap-conflict-item">
-                <strong>{c.title}</strong> — {formatSchedule(c)}
-              </div>
-            ))}
+            <div className="swap-block-title">⚠ {s('These pending courses now conflict — you\'ll need to re-select them:', 'Ces cours en attente sont maintenant en conflit :')}</div>
+            {conflictsWithPending.map((c) => <div key={c.id} className="swap-conflict-item"><strong>{c.title}</strong> — {formatSchedule(c)}</div>)}
           </div>
         )}
-
         {conflictsWithConfirmed.length === 0 && conflictsWithPending.length === 0 && (
-          <div className="swap-block no-conflicts">
-            ✓ {s('No conflicts — the secondary fits your schedule cleanly.', 'Aucun conflit — le secondaire s\'intègre parfaitement à votre emploi du temps.')}
-          </div>
+          <div className="swap-block no-conflicts">✓ {s('No conflicts — the secondary fits cleanly.', 'Aucun conflit — le secondaire s\'intègre parfaitement.')}</div>
         )}
 
         <div className="reg-modal-actions">
           <button className="reg-modal-cancel" onClick={onCancel}>{s('Cancel', 'Annuler')}</button>
-          <button className="reg-modal-save" onClick={onConfirm}>
-            {s('Apply swap', 'Appliquer l\'échange')}
-          </button>
+          <button className="reg-modal-save" onClick={onConfirm}>{s('Apply swap', 'Appliquer l\'échange')}</button>
         </div>
       </div>
     </div>
   );
 }
 
-// ── Main Registration Tab ──────────────────────────────────────────────────
+// ── Main Registration Tab ─────────────────────────────────────────────────────
 
 export default function RegistrationTab({
   addedCourses,
   allProgramCourses,
-  onUpdateIds,          // (newIds: string[]) => void  — replaces addedIds after a swap
+  statuses, setStatuses,
+  secondaries, setSecondaries,
+  order, setOrder,
+  onUpdateIds,
 }) {
   const { lang } = useLang();
   const s = (en, fr) => lang === 'fr' ? fr : en;
 
-  // Per-course status: { [id]: STATUS }
-  const [statuses, setStatuses]       = useState({});
-  // Secondary assignments: { [primaryId]: secondaryId }
-  const [secondaries, setSecondaries] = useState({});
-  // Which picker is open
-  const [pickerFor, setPickerFor]     = useState(null);
-  // Pending swap result to confirm
-  const [swapResult, setSwapResult]   = useState(null);
-  const [swapContext, setSwapContext]  = useState(null); // { unavailableId, secondaryId }
-  // Search/filter
-  const [filter, setFilter]           = useState('');
+  const [pickerFor, setPickerFor]   = useState(null);
+  const [swapResult, setSwapResult] = useState(null);
+  const [swapContext, setSwapContext] = useState(null);
+  const [filter, setFilter]         = useState('');
+
+  // Exclude lectures
+  const eligibleCourses = useMemo(
+    () => addedCourses.filter((c) => !isLecture(c)),
+    [addedCourses]
+  );
+
+  // Build display list following the user-defined order
+  const orderedCourses = useMemo(() => {
+    const idToC = new Map(eligibleCourses.map((c) => [c.id, c]));
+    // IDs in order that are still in eligibleCourses
+    const ordered = order.filter((id) => idToC.has(id)).map((id) => idToC.get(id));
+    // Any eligible courses not yet in order (newly added) go at end
+    const inOrder = new Set(order);
+    const extra = eligibleCourses.filter((c) => !inOrder.has(c.id));
+    return [...ordered, ...extra];
+  }, [eligibleCourses, order]);
 
   const confirmedIds = useMemo(
     () => new Set(Object.entries(statuses).filter(([, v]) => v === STATUS.CONFIRMED).map(([k]) => k)),
@@ -217,18 +172,8 @@ export default function RegistrationTab({
 
   function handleMarkUnavailable(course) {
     const secId = secondaries[course.id];
-    if (!secId) {
-      // No secondary — just mark unavailable, warn user
-      setStatus(course.id, STATUS.UNAVAILABLE);
-      return;
-    }
-    // Compute conflict propagation
-    const result = propagateSwap({
-      unavailableId: course.id,
-      secondaryId: secId,
-      currentIds,
-      confirmedIds,
-    });
+    if (!secId) { setStatus(course.id, STATUS.UNAVAILABLE); return; }
+    const result = propagateSwap({ unavailableId: course.id, secondaryId: secId, currentIds, confirmedIds });
     if (!result) return;
     setSwapResult(result);
     setSwapContext({ unavailableId: course.id, secondaryId: secId });
@@ -236,20 +181,23 @@ export default function RegistrationTab({
 
   function applySwap() {
     const { unavailableId, secondaryId } = swapContext;
-    // Replace primary with secondary in the course list
     const newIds = currentIds.map((id) => id === unavailableId ? secondaryId : id);
-    // Mark conflicts-with-pending as pending (they stay but are flagged)
     const conflictIds = new Set(swapResult.conflictsWithPending.map((c) => c.id));
     setStatuses((prev) => {
       const next = { ...prev, [unavailableId]: STATUS.UNAVAILABLE, [secondaryId]: STATUS.PENDING };
       conflictIds.forEach((id) => { next[id] = STATUS.PENDING; });
       return next;
     });
-    // Remove secondaries that now conflict (they need new secondaries)
     setSecondaries((prev) => {
       const next = { ...prev };
       conflictIds.forEach((id) => { delete next[id]; });
       delete next[unavailableId];
+      return next;
+    });
+    setOrder((prev) => {
+      const pos = prev.indexOf(unavailableId);
+      const next = [...prev];
+      if (pos !== -1) next.splice(pos, 1, secondaryId); else next.push(secondaryId);
       return next;
     });
     onUpdateIds(newIds);
@@ -257,107 +205,99 @@ export default function RegistrationTab({
     setSwapContext(null);
   }
 
-  function assignSecondary(primaryId, secondaryId) {
-    setSecondaries((prev) => ({ ...prev, [primaryId]: secondaryId }));
+  // Drag-to-reorder state
+  const dragIdRef  = useRef(null);
+  const dragOverId = useRef(null);
+
+  function handleDragStart(e, id) {
+    dragIdRef.current = id;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('reg-reorder-id', id);
+  }
+  function handleDragEnter(id) { dragOverId.current = id; }
+  function handleDragEnd() {
+    const from = dragIdRef.current;
+    const to   = dragOverId.current;
+    if (!from || !to || from === to) { dragIdRef.current = null; dragOverId.current = null; return; }
+    setOrder((prev) => {
+      const base = [...new Set([...prev, ...orderedCourses.map((c) => c.id)])];
+      const fromIdx = base.indexOf(from);
+      const toIdx   = base.indexOf(to);
+      if (fromIdx === -1 || toIdx === -1) return prev;
+      const next = [...base];
+      next.splice(fromIdx, 1);
+      next.splice(toIdx, 0, from);
+      return next;
+    });
+    dragIdRef.current = null;
+    dragOverId.current = null;
   }
 
-  const pickerCourse = pickerFor ? byId.get(pickerFor) : null;
-  const pickerCandidates = pickerFor
-    ? findCandidateSecondaries(pickerFor, allProgramCourses, currentIds)
-    : [];
+  const conflictWarnings = useMemo(() => {
+    const active = addedCourses.filter((c) => statuses[c.id] !== STATUS.UNAVAILABLE);
+    const pairs = [];
+    for (let i = 0; i < active.length; i++)
+      for (let j = i + 1; j < active.length; j++)
+        if (coursesConflict(active[i], active[j])) pairs.push([active[i], active[j]]);
+    return pairs;
+  }, [addedCourses, statuses]);
+
+  const counts = useMemo(() => ({
+    confirmed:   eligibleCourses.filter((c) => statuses[c.id] === STATUS.CONFIRMED).length,
+    pending:     eligibleCourses.filter((c) => !statuses[c.id] || statuses[c.id] === STATUS.PENDING).length,
+    unavailable: eligibleCourses.filter((c) => statuses[c.id] === STATUS.UNAVAILABLE).length,
+    withSecondary: eligibleCourses.filter((c) => secondaries[c.id]).length,
+  }), [eligibleCourses, statuses, secondaries]);
 
   const filtered = useMemo(() => {
-    if (!filter) return addedCourses;
+    if (!filter) return orderedCourses;
     const q = filter.toLowerCase();
-    return addedCourses.filter((c) =>
+    return orderedCourses.filter((c) =>
       c.title?.toLowerCase().includes(q) ||
       c.codeMatiere?.toLowerCase().includes(q) ||
       c.discipline?.toLowerCase().includes(q)
     );
-  }, [addedCourses, filter]);
+  }, [orderedCourses, filter]);
 
-  // Group by status for the summary bar
-  const counts = useMemo(() => ({
-    confirmed:   addedCourses.filter((c) => statuses[c.id] === STATUS.CONFIRMED).length,
-    pending:     addedCourses.filter((c) => !statuses[c.id] || statuses[c.id] === STATUS.PENDING).length,
-    unavailable: addedCourses.filter((c) => statuses[c.id] === STATUS.UNAVAILABLE).length,
-    withSecondary: addedCourses.filter((c) => secondaries[c.id]).length,
-  }), [addedCourses, statuses, secondaries]);
-
-  // Find conflict warnings: any two pending/confirmed courses that clash
-  const conflictWarnings = useMemo(() => {
-    const active = addedCourses.filter((c) => statuses[c.id] !== STATUS.UNAVAILABLE);
-    const pairs = [];
-    for (let i = 0; i < active.length; i++) {
-      for (let j = i + 1; j < active.length; j++) {
-        if (coursesConflict(active[i], active[j])) {
-          pairs.push([active[i], active[j]]);
-        }
-      }
-    }
-    return pairs;
-  }, [addedCourses, statuses]);
+  const pickerCourse = pickerFor ? byId.get(pickerFor) : null;
+  const pickerCandidates = pickerFor ? findCandidateSecondaries(pickerFor, allProgramCourses, currentIds) : [];
 
   return (
     <div className="reg-tab">
       {/* Summary bar */}
       <div className="reg-summary-bar">
-        <div className="reg-stat confirmed">
-          <span className="reg-stat-n">{counts.confirmed}</span>
-          <span className="reg-stat-label">{s('Confirmed', 'Confirmé')}</span>
-        </div>
-        <div className="reg-stat pending">
-          <span className="reg-stat-n">{counts.pending}</span>
-          <span className="reg-stat-label">{s('Pending', 'En attente')}</span>
-        </div>
-        <div className="reg-stat unavailable">
-          <span className="reg-stat-n">{counts.unavailable}</span>
-          <span className="reg-stat-label">{s('Unavailable', 'Indisponible')}</span>
-        </div>
-        <div className="reg-stat secondary">
-          <span className="reg-stat-n">{counts.withSecondary}</span>
-          <span className="reg-stat-label">{s('Have secondary', 'Ont un secondaire')}</span>
-        </div>
-
+        <div className="reg-stat confirmed"><span className="reg-stat-n">{counts.confirmed}</span><span className="reg-stat-label">{s('Confirmed', 'Confirmé')}</span></div>
+        <div className="reg-stat pending"><span className="reg-stat-n">{counts.pending}</span><span className="reg-stat-label">{s('Pending', 'En attente')}</span></div>
+        <div className="reg-stat unavailable"><span className="reg-stat-n">{counts.unavailable}</span><span className="reg-stat-label">{s('Unavailable', 'Indisponible')}</span></div>
+        <div className="reg-stat secondary"><span className="reg-stat-n">{counts.withSecondary}</span><span className="reg-stat-label">{s('Have secondary', 'Ont un secondaire')}</span></div>
+        <div className="reg-hint-reorder">{s('Drag ⠿ to reorder priority', 'Glissez ⠿ pour réordonner')}</div>
         {conflictWarnings.length > 0 && (
-          <div className="reg-conflict-banner">
-            ⚠ {conflictWarnings.length} {s('time conflict(s) detected', 'conflit(s) horaire(s) détecté(s)')}
-          </div>
+          <div className="reg-conflict-banner">⚠ {conflictWarnings.length} {s('time conflict(s)', 'conflit(s) horaire(s)')}</div>
         )}
       </div>
 
-      {/* Conflict detail */}
       {conflictWarnings.length > 0 && (
         <div className="reg-conflict-list">
           {conflictWarnings.map(([a, b], i) => (
             <div key={i} className="reg-conflict-row">
               <span className="reg-conflict-label">⚠</span>
-              <strong>{a.title}</strong>
-              <span className="reg-conflict-vs">↔</span>
-              <strong>{b.title}</strong>
+              <strong>{a.title}</strong><span className="reg-conflict-vs">↔</span><strong>{b.title}</strong>
               <span className="reg-conflict-detail">{formatSchedule(a)} / {formatSchedule(b)}</span>
             </div>
           ))}
         </div>
       )}
 
-      {/* Filter */}
       <div className="reg-filter-bar">
-        <input
-          className="reg-filter-input"
-          placeholder={s('Filter courses…', 'Filtrer les cours…')}
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-        <span className="reg-filter-count">{filtered.length} / {addedCourses.length}</span>
+        <input className="reg-filter-input" placeholder={s('Filter courses…', 'Filtrer les cours…')} value={filter} onChange={(e) => setFilter(e.target.value)} />
+        <span className="reg-filter-count">{filtered.length} / {eligibleCourses.length}</span>
       </div>
 
-      {/* Course list */}
       <div className="reg-course-list">
-        {filtered.length === 0 && (
-          <p className="reg-empty">{s('No courses in your schedule yet. Add them from the Planner tab.', 'Aucun cours dans votre emploi du temps. Ajoutez-en depuis l\'onglet Planificateur.')}</p>
+        {eligibleCourses.length === 0 && (
+          <p className="reg-empty">{s('No courses in your schedule yet. Add them from the Planner tab.', 'Aucun cours. Ajoutez-en depuis l\'onglet Planificateur.')}</p>
         )}
-        {filtered.map((course) => {
+        {filtered.map((course, idx) => {
           const status = statuses[course.id] || STATUS.PENDING;
           const meta   = STATUS_META[status];
           const secId  = secondaries[course.id];
@@ -369,9 +309,15 @@ export default function RegistrationTab({
               key={course.id}
               className={`reg-course-card ${status}`}
               style={{ borderLeftColor: meta.color, background: meta.bg }}
+              draggable
+              onDragStart={(e) => handleDragStart(e, course.id)}
+              onDragEnter={() => handleDragEnter(course.id)}
+              onDragEnd={handleDragEnd}
+              onDragOver={(e) => e.preventDefault()}
             >
-              {/* Top row: title + status controls */}
               <div className="reg-card-top">
+                <span className="reg-drag-handle" title={s('Drag to reorder', 'Glisser pour réordonner')}>⠿</span>
+                <span className="reg-priority-num">{idx + 1}</span>
                 <div className="reg-card-info">
                   <div className="reg-card-title" style={{ textDecoration: isUnavail ? 'line-through' : 'none', color: isUnavail ? '#aaa' : undefined }}>
                     {course.title}
@@ -380,54 +326,22 @@ export default function RegistrationTab({
                     {course.codeMatiere && <code>{course.codeMatiere}</code>}
                     {course.teacher1 && <span>{course.teacher1}</span>}
                     <span>{formatSchedule(course)}</span>
-                    {course.confoscope1 != null
-                      ? <ConfoscopeTag score={course.confoscope1} />
-                      : <NoRatingTag />}
+                    {course.confoscope1 != null ? <ConfoscopeTag score={course.confoscope1} /> : <NoRatingTag />}
                   </div>
                 </div>
-
                 <div className="reg-card-controls">
-                  {/* Status pills */}
                   {!isUnavail && (
                     <>
-                      {status !== STATUS.CONFIRMED && (
-                        <button
-                          className="reg-pill confirm"
-                          onClick={() => setStatus(course.id, STATUS.CONFIRMED)}
-                          title={s('Mark as confirmed enrolled', 'Marquer comme inscrit confirmé')}
-                        >
-                          ✓ {s('Confirm', 'Confirmer')}
-                        </button>
-                      )}
-                      {status === STATUS.CONFIRMED && (
-                        <button
-                          className="reg-pill unconfirm"
-                          onClick={() => setStatus(course.id, STATUS.PENDING)}
-                        >
-                          ↩ {s('Unconfirm', 'Annuler confirmation')}
-                        </button>
-                      )}
-                      <button
-                        className="reg-pill unavail"
-                        onClick={() => handleMarkUnavailable(course)}
-                        title={s('Mark as unavailable / full', 'Marquer comme indisponible / complet')}
-                      >
-                        ✕ {s('Unavailable', 'Indisponible')}
-                      </button>
+                      {status !== STATUS.CONFIRMED
+                        ? <button className="reg-pill confirm" onClick={() => setStatus(course.id, STATUS.CONFIRMED)}>✓ {s('Confirm', 'Confirmer')}</button>
+                        : <button className="reg-pill unconfirm" onClick={() => setStatus(course.id, STATUS.PENDING)}>↩ {s('Unconfirm', 'Annuler')}</button>}
+                      <button className="reg-pill unavail" onClick={() => handleMarkUnavailable(course)}>✕ {s('Unavailable', 'Indisponible')}</button>
                     </>
                   )}
-                  {isUnavail && (
-                    <button
-                      className="reg-pill restore"
-                      onClick={() => setStatus(course.id, STATUS.PENDING)}
-                    >
-                      ↩ {s('Restore', 'Restaurer')}
-                    </button>
-                  )}
+                  {isUnavail && <button className="reg-pill restore" onClick={() => setStatus(course.id, STATUS.PENDING)}>↩ {s('Restore', 'Restaurer')}</button>}
                 </div>
               </div>
 
-              {/* Secondary row */}
               {!isUnavail && (
                 <div className="reg-secondary-row">
                   {secCourse ? (
@@ -435,65 +349,29 @@ export default function RegistrationTab({
                       <span className="reg-secondary-badge">2°</span>
                       <span className="reg-secondary-title">{secCourse.title}</span>
                       <span className="reg-secondary-sched">{formatSchedule(secCourse)}</span>
-                      <button
-                        className="reg-secondary-edit"
-                        onClick={() => setPickerFor(course.id)}
-                      >
-                        {s('Change', 'Modifier')}
-                      </button>
-                      <button
-                        className="reg-secondary-remove"
-                        onClick={() => setSecondaries((p) => { const n = { ...p }; delete n[course.id]; return n; })}
-                      >
-                        ✕
-                      </button>
+                      <button className="reg-secondary-edit" onClick={() => setPickerFor(course.id)}>{s('Change', 'Modifier')}</button>
+                      <button className="reg-secondary-remove" onClick={() => setSecondaries((p) => { const n = { ...p }; delete n[course.id]; return n; })}>✕</button>
                     </div>
                   ) : (
-                    <button
-                      className="reg-add-secondary"
-                      onClick={() => setPickerFor(course.id)}
-                    >
-                      + {s('Add secondary', 'Ajouter un secondaire')}
-                    </button>
+                    <button className="reg-add-secondary" onClick={() => setPickerFor(course.id)}>+ {s('Add secondary', 'Ajouter un secondaire')}</button>
                   )}
                 </div>
               )}
-
-              {/* Unavailable note with secondary info */}
-              {isUnavail && secCourse && (
-                <div className="reg-swapped-note">
-                  {s('Swapped to', 'Remplacé par')}: <strong>{secCourse.title}</strong> — {formatSchedule(secCourse)}
-                </div>
-              )}
-              {isUnavail && !secCourse && (
-                <div className="reg-no-secondary-warn">
-                  ⚠ {s('No secondary assigned — no automatic replacement available.', 'Aucun secondaire assigné — aucun remplacement automatique disponible.')}
-                </div>
-              )}
+              {isUnavail && secCourse && <div className="reg-swapped-note">{s('Swapped to', 'Remplacé par')}: <strong>{secCourse.title}</strong> — {formatSchedule(secCourse)}</div>}
+              {isUnavail && !secCourse && <div className="reg-no-secondary-warn">⚠ {s('No secondary assigned.', 'Aucun secondaire assigné.')}</div>}
             </div>
           );
         })}
       </div>
 
-      {/* Modals */}
       {pickerFor && pickerCourse && (
-        <SecondaryPicker
-          course={pickerCourse}
-          candidates={pickerCandidates}
-          currentlyAssigned={secondaries[pickerFor] || null}
-          onAssign={(secId) => assignSecondary(pickerFor, secId)}
-          onClose={() => setPickerFor(null)}
-          lang={lang}
-        />
+        <SecondaryPicker course={pickerCourse} candidates={pickerCandidates} currentlyAssigned={secondaries[pickerFor] || null}
+          onAssign={(secId) => setSecondaries((prev) => ({ ...prev, [pickerFor]: secId }))}
+          onClose={() => setPickerFor(null)} lang={lang} />
       )}
       {swapResult && swapContext && (
-        <SwapResultModal
-          swapResult={swapResult}
-          unavailableCourse={byId.get(swapContext.unavailableId)}
-          onConfirm={applySwap}
-          onCancel={() => { setSwapResult(null); setSwapContext(null); }}
-          lang={lang}
-        />
+        <SwapResultModal swapResult={swapResult} unavailableCourse={byId.get(swapContext.unavailableId)}
+          onConfirm={applySwap} onCancel={() => { setSwapResult(null); setSwapContext(null); }} lang={lang} />
       )}
     </div>
   );

@@ -7,7 +7,7 @@
 export const SAVE_VERSION = 1;
 
 // ---------- SAVE ----------
-export function buildSaveData({ program, majeureMineure, languageProfile, addedIds, starredIds, coursesById }) {
+export function buildSaveData({ program, majeureMineure, languageProfile, addedIds, starredIds, coursesById, regStatuses, regSecondaries, regOrder }) {
   const addedMeta = addedIds.map((id) => {
     const c = coursesById.get(id);
     return c ? { id, title: c.title, codeMatiere: c.codeMatiere, group: c.group } : { id };
@@ -28,25 +28,29 @@ export function buildSaveData({ program, majeureMineure, languageProfile, addedI
     },
     majeureMineure: majeureMineure || null,
     languageProfile: {
-      frenchLevel:          languageProfile?.frenchLevel ?? null,
-      englishLevel:         languageProfile?.englishLevel ?? null,
-      englishTarget:        languageProfile?.englishTarget ?? null,
-      frenchTarget:         languageProfile?.frenchTarget ?? null,
-      needsFrench:          languageProfile?.needsFrench ?? false,
-      needsEnglish:         languageProfile?.needsEnglish ?? false,
-      frenchNative:         languageProfile?.frenchNative ?? false,
-      englishNative:        languageProfile?.englishNative ?? false,
+      frenchLevel:           languageProfile?.frenchLevel ?? null,
+      englishLevel:          languageProfile?.englishLevel ?? null,
+      englishTarget:         languageProfile?.englishTarget ?? null,
+      frenchTarget:          languageProfile?.frenchTarget ?? null,
+      needsFrench:           languageProfile?.needsFrench ?? false,
+      needsEnglish:          languageProfile?.needsEnglish ?? false,
+      frenchNative:          languageProfile?.frenchNative ?? false,
+      englishNative:         languageProfile?.englishNative ?? false,
       thirdLanguageUnlocked: languageProfile?.thirdLanguageUnlocked ?? false,
-      thirdLanguage:        languageProfile?.thirdLanguage ?? null,
+      thirdLanguage:         languageProfile?.thirdLanguage ?? null,
     },
-    addedCourseIds: addedIds,
+    addedCourseIds:   addedIds,
     starredCourseIds: starredIds,
-    // Human-readable metadata (not used for restore, just for inspection)
+    registration: {
+      statuses:    regStatuses    || {},
+      secondaries: regSecondaries || {},
+      order:       regOrder       || [],
+    },
     _meta: {
-      addedCourses: addedMeta,
+      addedCourses:   addedMeta,
       starredCourses: starredMeta,
-      totalAdded: addedIds.length,
-      totalStarred: starredIds.length,
+      totalAdded:     addedIds.length,
+      totalStarred:   starredIds.length,
     },
   };
 }
@@ -137,6 +141,9 @@ export function validateSaveData(raw, { validProgramKeys, coursesById }) {
     languageProfile: raw.languageProfile || null,
     totalOriginalAdded: raw.addedCourseIds.length,
     totalOriginalStarred: (raw.starredCourseIds || []).length,
+    regStatuses:    raw.registration?.statuses    || {},
+    regSecondaries: raw.registration?.secondaries || {},
+    regOrder:       (raw.registration?.order || []).filter((id) => coursesById.has(id)),
   };
 }
 

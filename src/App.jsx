@@ -15,6 +15,7 @@ import ComparePage from './components/ComparePage';
 import RegistrationTab from './components/RegistrationTab';
 import { exportReport } from './utils/exportPdf';
 import { buildSaveData, downloadSave } from './utils/saveLoad';
+import { isLecture } from './utils/lectureGuard';
 import './App.css';
 
 const byId = new Map(coursesData.map((c) => [c.id, c]));
@@ -111,6 +112,11 @@ export default function App() {
   const [exporting, setExporting] = useState(false);
   const [showLoad, setShowLoad] = useState(false);
 
+  // Registration tab state — lifted here so it survives tab switches
+  const [regStatuses,   setRegStatuses]   = useState({}); // { [id]: 'pending'|'confirmed'|'unavailable' }
+  const [regSecondaries, setRegSecondaries] = useState({}); // { [primaryId]: secondaryId }
+  const [regOrder,      setRegOrder]      = useState([]); // ordered list of non-lecture course IDs
+
   const calendarRef     = useRef(null);
   const listRef         = useRef(null);
   const requirementsRef = useRef(null);
@@ -143,11 +149,16 @@ export default function App() {
 
   function handleLanguageContinue(langProfile) {
     setLanguageProfile(langProfile);
-    setAddedIds(autoLectures(program.programKey, majeureMineure));
+    const auto = autoLectures(program.programKey, majeureMineure);
+    setAddedIds(auto);
+    setRegStatuses({});
+    setRegSecondaries({});
+    setRegOrder([]);
     setStep('build');
   }
 
   function addCourse(id) {
+    const course = byId.get(id);
     const siblings = getQuadSiblings(id);
     setAddedIds((prev) => {
       const set = new Set(prev);
@@ -155,10 +166,26 @@ export default function App() {
       siblings.forEach((s) => set.add(s));
       return Array.from(set);
     });
+    // Add non-lectures to regOrder if not already present
+    if (course && !isLecture(course)) {
+      setRegOrder((prev) => prev.includes(id) ? prev : [...prev, id]);
+    }
+    siblings.forEach((sid) => {
+      const sc = byId.get(sid);
+      if (sc && !isLecture(sc)) {
+        setRegOrder((prev) => prev.includes(sid) ? prev : [...prev, sid]);
+      }
+    });
   }
+
   function removeCourse(id) {
+    const course = byId.get(id);
+    if (course && isLecture(course)) return;
     const siblings = getQuadSiblings(id);
     setAddedIds((prev) => prev.filter((x) => x !== id && !siblings.includes(x)));
+    setRegOrder((prev) => prev.filter((x) => x !== id && !siblings.includes(x)));
+    setRegStatuses((prev) => { const n = { ...prev }; delete n[id]; siblings.forEach((s) => delete n[s]); return n; });
+    setRegSecondaries((prev) => { const n = { ...prev }; delete n[id]; siblings.forEach((s) => delete n[s]); return n; });
   }
 
   function toggleStar(id) {
@@ -169,12 +196,9 @@ export default function App() {
 
   function handleSave() {
     const data = buildSaveData({
-      program,
-      majeureMineure,
-      languageProfile,
-      addedIds,
-      starredIds,
-      coursesById: byId,
+      program, majeureMineure, languageProfile,
+      addedIds, starredIds, coursesById: byId,
+      regStatuses, regSecondaries, regOrder,
     });
     const slug = program?.programKey?.toLowerCase().replace(/_/g, '-') || 'schedule';
     const date = new Date().toISOString().slice(0, 10);
@@ -182,12 +206,14 @@ export default function App() {
   }
 
   function handleRestore(result) {
-    // Restore full program/language/course state from validated save data
     setProgram(result.program);
     setMajeureMineure(result.majeureMineure);
     setLanguageProfile(result.languageProfile);
     setAddedIds(result.safeAddedIds);
     setStarredIds(result.safeStarredIds);
+    setRegStatuses(result.regStatuses || {});
+    setRegSecondaries(result.regSecondaries || {});
+    setRegOrder(result.regOrder || []);
     setStep('build');
   }
 
@@ -356,7 +382,23 @@ export default function App() {
             <RegistrationTab
               addedCourses={addedCourses}
               allProgramCourses={courses}
-              onUpdateIds={(newIds) => setAddedIds(newIds)}
+              statuses={regStatuses}
+              setStatuses={setRegStatuses}
+              secondaries={regSecondaries}
+              setSecondaries={setRegSecondaries}
+              order={regOrder}
+              setOrder={setRegOrder}
+              onUpdateIds={(newIds) => {
+                setAddedIds(newIds);
+                // Sync regOrder: keep existing order, append any new IDs at end
+                setRegOrder((prev) => {
+                  const prevSet = new Set(prev);
+                  const incoming = newIds.filter((id) => { const c = byId.get(id); return c && !isLecture(c); });
+                  const kept = prev.filter((id) => incoming.includes(id));
+                  const added = incoming.filter((id) => !prevSet.has(id));
+                  return [...kept, ...added];
+                });
+              }}
             />
           </div>
         )}

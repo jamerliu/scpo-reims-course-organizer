@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLang } from '../i18n/LangContext';
 import { DAYS, GRID_START_MIN, GRID_END_MIN, blockStyle, findConflicts } from '../utils/schedule';
 import { CourseDetailModal, courseColor } from './Modal';
+import { isLecture } from '../utils/lectureGuard';
 
 const HOURS = [];
 for (let m = GRID_START_MIN; m <= GRID_END_MIN; m += 60) HOURS.push(m);

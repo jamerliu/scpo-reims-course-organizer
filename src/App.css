@@ -1432,3 +1432,24 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 .swap-block.conflict-pending .swap-block-title { color: #7c5700; }
 .swap-block.no-conflicts { background: rgba(56,178,172,0.08); border-left: 3px solid var(--success); color: var(--success); font-weight: 600; }
 .swap-conflict-item { font-size: 0.78rem; color: var(--text); padding: 3px 0; }
+
+/* locked lecture calendar block */
+.locked-block { cursor: default !important; }
+.locked-block:hover { transform: none !important; }
+.lock-icon { position: absolute; top: 2px; right: 4px; font-size: 0.55rem; opacity: 0.8; }
+
+/* reg drag handle + priority number */
+.reg-drag-handle {
+  font-size: 1rem; color: var(--muted); cursor: grab; flex-shrink: 0;
+  padding: 2px 4px; border-radius: 4px; user-select: none;
+  transition: color var(--transition);
+}
+.reg-drag-handle:hover { color: var(--accent); }
+.reg-drag-handle:active { cursor: grabbing; }
+.reg-priority-num {
+  font-size: 0.68rem; font-weight: 800; color: var(--muted); min-width: 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif; flex-shrink: 0;
+}
+.reg-hint-reorder {
+  font-size: 0.72rem; color: var(--muted); margin-left: auto; font-style: italic;
+}
