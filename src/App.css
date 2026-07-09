@@ -1715,3 +1715,27 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 .opt-slot-badge.primary-badge { background: var(--accent); color: white; }
 .opt-slot-badge.backup-badge  { background: rgba(163,177,198,0.3); color: var(--muted); }
 .opt-slot-sched { font-size: 0.7rem; color: var(--muted); }
+
+/* optimizer collapse / load-into-compare */
+.opt-result-card.collapsed .opt-result-header { border-bottom: none; }
+.opt-collapse-btn {
+  background: none; border: none; color: var(--muted); font-size: 0.75rem;
+  cursor: pointer; padding: 2px 6px; flex-shrink: 0;
+  transition: color var(--transition);
+}
+.opt-collapse-btn:hover { color: var(--accent); }
+.opt-collapse-bar { display: flex; gap: 8px; }
+.opt-collapse-all-btn {
+  background: var(--surface); border: none; box-shadow: var(--shadow-sm);
+  color: var(--muted); padding: 5px 14px; border-radius: var(--radius-pill);
+  font-size: 0.75rem; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer;
+  transition: box-shadow var(--transition), color var(--transition);
+}
+.opt-collapse-all-btn:hover { box-shadow: var(--shadow-md); color: var(--text); }
+.opt-load-compare-btn {
+  background: var(--surface); border: none; box-shadow: var(--shadow-sm);
+  padding: 6px 12px; border-radius: var(--radius-btn); font-size: 0.75rem; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; cursor: pointer; color: #e0a020;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.opt-load-compare-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }

@@ -178,7 +178,7 @@ function pickBest(slot, chosen, avoidDays, avoidSlots, quadGroup, usedScores = n
  */
 export function generateSchedules({
   profile, programKey, fixedIds, lockedIds,
-  majeureMineure, avoidDays, avoidSlots, enFrPreference,
+  majeureMineure, avoidDays, avoidSlots, enFrPreference, languageProfile,
 }) {
   const groups = PROGRAM_COURSE_GROUPS[programKey] || [];
   const programPool = coursesData.filter(
@@ -186,6 +186,35 @@ export function generateSchedules({
   );
 
   const slots = buildSlots({ profile, programPool, lockedIds, majeureMineure, enFrPreference });
+
+  // Add language slots based on languageProfile
+  const langPool = coursesData.filter((c) => c.group === 'LANGUE' && (c.schedule || []).length > 0);
+
+  function langSlot(id, label, filterFn) {
+    const candidates = langPool.filter(filterFn);
+    if (candidates.length === 0) return;
+    const lockedCandidate = candidates.find((c) => lockedIds.has(c.id));
+    slots.push({ id, label, catId: 'language', candidates, locked: lockedCandidate?.id || null, isQuad: false });
+  }
+
+  if (languageProfile?.needsFrench) {
+    langSlot('lang::french', `French (study to ${languageProfile.frenchTarget || 'B2'})`, (c) => {
+      const l = (c.langue || '').toLowerCase();
+      return l.includes('fle') || l.includes('français') || l.includes('francais');
+    });
+  }
+  if (languageProfile?.needsEnglish) {
+    langSlot('lang::english', `English (study to ${languageProfile.englishTarget || 'C1'})`, (c) => {
+      const l = (c.langue || '').toLowerCase();
+      return l.includes('anglais') || l.includes('english');
+    });
+  }
+  if (languageProfile?.thirdLanguageUnlocked && languageProfile?.thirdLanguage) {
+    const tl = languageProfile.thirdLanguage.toLowerCase();
+    langSlot(`lang::third::${tl}`, `${languageProfile.thirdLanguage} (third language)`, (c) =>
+      (c.langue || '').toLowerCase().includes(tl)
+    );
+  }
   const fixedCourses = fixedIds.map((id) => byId.get(id)).filter(Boolean);
 
   // For 1A NA: quadruplette groups 1–19 are linked across 4 codes

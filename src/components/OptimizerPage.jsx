@@ -79,7 +79,7 @@ function MiniCalPreview({ courseIds, avoidDays, avoidSlots }) {
 }
 
 // ── Result card ───────────────────────────────────────────────────────────────
-function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoadRegistration, lang }) {
+function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoadRegistration, onLoadCompare, collapsed, onToggleCollapse, lang }) {
   const [expanded, setExpanded] = useState(false);
   const s = (en, fr) => lang === 'fr' ? fr : en;
 
@@ -91,8 +91,11 @@ function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoad
   const rankClass = ['gold','silver','bronze'][rank] || '';
 
   return (
-    <div className={`opt-result-card ${rankClass}`}>
+    <div className={`opt-result-card ${rankClass} ${collapsed ? 'collapsed' : ''}`}>
       <div className="opt-result-header">
+        <button className="opt-collapse-btn" onClick={onToggleCollapse} title={collapsed ? s('Expand','Développer') : s('Collapse','Réduire')}>
+          {collapsed ? '▶' : '▼'}
+        </button>
         <span className="opt-rank">{rankLabel}</span>
         <div className="opt-result-meta">
           <span className="opt-score-badge">Score: {Math.round(result.score)}</span>
@@ -108,41 +111,49 @@ function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoad
           <button className="opt-load-reg-btn" onClick={() => onLoadRegistration(result)}>
             📝 {s('Load into Registration','Charger dans l\'Inscription')}
           </button>
-          <button className="opt-expand-btn" onClick={() => setExpanded((v) => !v)}>
-            {expanded ? '▲' : '▼'} {s('Details','Détails')}
+          <button className="opt-load-compare-btn" onClick={() => onLoadCompare(result)}>
+            ⚖ {s('Load into Compare','Charger dans Comparer')}
           </button>
+          {!collapsed && (
+            <button className="opt-expand-btn" onClick={() => setExpanded((v) => !v)}>
+              {expanded ? '▲' : '▼'} {s('Details','Détails')}
+            </button>
+          )}
         </div>
       </div>
 
-      <MiniCalPreview courseIds={result.courseIds} avoidDays={avoidDays} avoidSlots={avoidSlots} />
-
-      {expanded && (
-        <div className="opt-slot-list">
-          <div className="opt-slot-list-title">{s('Selected groups + backups','Groupes sélectionnés + sauvegardes')}</div>
-          {result.slotSummary.map((p, i) => {
-            const primary = byId.get(p.courseId);
-            const backup  = p.backupId ? byId.get(p.backupId) : null;
-            return (
-              <div key={i} className="opt-slot-row">
-                <div className="opt-slot-label">{p.label}</div>
-                <div className="opt-slot-primary">
-                  <span className="opt-slot-badge primary-badge">1°</span>
-                  <span>{p.pickedTitle}</span>
-                  {primary && <span className="opt-slot-sched">{formatSchedule(primary)}</span>}
-                  {primary?.confoscope1 != null && <ConfoscopeTag score={primary.confoscope1} />}
-                </div>
-                {backup && (
-                  <div className="opt-slot-backup">
-                    <span className="opt-slot-badge backup-badge">2°</span>
-                    <span>{p.backupTitle}</span>
-                    <span className="opt-slot-sched">{formatSchedule(backup)}</span>
-                    {backup?.confoscope1 != null && <ConfoscopeTag score={backup.confoscope1} />}
+      {!collapsed && (
+        <>
+          <MiniCalPreview courseIds={result.courseIds} avoidDays={avoidDays} avoidSlots={avoidSlots} />
+          {expanded && (
+            <div className="opt-slot-list">
+              <div className="opt-slot-list-title">{s('Selected groups + backups','Groupes sélectionnés + sauvegardes')}</div>
+              {result.slotSummary.map((p, i) => {
+                const primary = byId.get(p.courseId);
+                const backup  = p.backupId ? byId.get(p.backupId) : null;
+                return (
+                  <div key={i} className="opt-slot-row">
+                    <div className="opt-slot-label">{p.label}</div>
+                    <div className="opt-slot-primary">
+                      <span className="opt-slot-badge primary-badge">1°</span>
+                      <span>{p.pickedTitle}</span>
+                      {primary && <span className="opt-slot-sched">{formatSchedule(primary)}</span>}
+                      {primary?.confoscope1 != null && <ConfoscopeTag score={primary.confoscope1} />}
+                    </div>
+                    {backup && (
+                      <div className="opt-slot-backup">
+                        <span className="opt-slot-badge backup-badge">2°</span>
+                        <span>{p.backupTitle}</span>
+                        <span className="opt-slot-sched">{formatSchedule(backup)}</span>
+                        {backup?.confoscope1 != null && <ConfoscopeTag score={backup.confoscope1} />}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -150,9 +161,9 @@ function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoad
 
 // ── Main Optimizer Page ───────────────────────────────────────────────────────
 export default function OptimizerPage({
-  programKey, majeureMineure, addedCourses,
+  programKey, majeureMineure, addedCourses, languageProfile,
   enFrPreference, setEnFrPreference,
-  onBack, onLoadPlanner, onLoadRegistration, lang,
+  onBack, onLoadPlanner, onLoadRegistration, onLoadCompare, lang,
 }) {
   const s = (en, fr) => lang === 'fr' ? fr : en;
 
@@ -168,9 +179,10 @@ export default function OptimizerPage({
     return new Set(addedCourses.filter((c) => isLecture(c)).map((c) => c.id));
   });
 
-  const [results, setResults]   = useState([]);
-  const [running, setRunning]   = useState(false);
-  const [hasRun,  setHasRun]    = useState(false);
+  const [results, setResults]       = useState([]);
+  const [running, setRunning]       = useState(false);
+  const [hasRun,  setHasRun]        = useState(false);
+  const [collapsedCards, setCollapsedCards] = useState(new Set());
 
   // Fixed IDs (lectures) — always in schedule
   const fixedIds = useMemo(() => addedCourses.filter((c) => isLecture(c)).map((c) => c.id), [addedCourses]);
@@ -194,7 +206,7 @@ export default function OptimizerPage({
       const res = generateSchedules({
         profile, programKey, fixedIds,
         lockedIds, majeureMineure,
-        avoidDays, avoidSlots, enFrPreference,
+        avoidDays, avoidSlots, enFrPreference, languageProfile,
       });
       setResults(res);
       setRunning(false);
@@ -308,6 +320,16 @@ export default function OptimizerPage({
               <p>{s('Try unlocking some courses or reducing your avoid preferences.','Essayez de déverrouiller des cours ou de réduire vos préférences d\'évitement.')}</p>
             </div>
           )}
+          {!running && results.length > 0 && (
+            <div className="opt-collapse-bar">
+              <button className="opt-collapse-all-btn" onClick={() => setCollapsedCards(new Set(results.map((_,i)=>i)))}>
+                ▶ {s('Collapse all','Tout réduire')}
+              </button>
+              <button className="opt-collapse-all-btn" onClick={() => setCollapsedCards(new Set())}>
+                ▼ {s('Expand all','Tout développer')}
+              </button>
+            </div>
+          )}
           {!running && results.map((result, i) => (
             <ResultCard
               key={i}
@@ -315,8 +337,15 @@ export default function OptimizerPage({
               rank={i}
               avoidDays={avoidDays}
               avoidSlots={avoidSlots}
+              collapsed={collapsedCards.has(i)}
+              onToggleCollapse={() => setCollapsedCards((prev) => {
+                const next = new Set(prev);
+                next.has(i) ? next.delete(i) : next.add(i);
+                return next;
+              })}
               onLoadPlanner={(r) => onLoadPlanner(r)}
               onLoadRegistration={(r) => onLoadRegistration(r)}
+              onLoadCompare={(r) => onLoadCompare(r)}
               lang={lang}
             />
           ))}

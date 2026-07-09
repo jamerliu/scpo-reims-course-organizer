@@ -327,10 +327,17 @@ function DiffTable({ stacks, activeIndices, lang }) {
 
 // ── Main Compare Page ─────────────────────────────────────────────────────────
 
-export default function ComparePage({ onBack, currentStack }) {
+export default function ComparePage({ onBack, currentStack, extraStack, onExtraStackConsumed }) {
   const { lang } = useLang();
-  const [stacks, setStacks]           = useState(() => currentStack ? [currentStack] : []);
-  const [activeIndices, setActive]    = useState(() => new Set([0]));
+  const [stacks, setStacks] = useState(() => {
+    const initial = currentStack ? [currentStack] : [];
+    if (extraStack) initial.push(extraStack);
+    return initial;
+  });
+  const [activeIndices, setActive] = useState(() => {
+    const count = (currentStack ? 1 : 0) + (extraStack ? 1 : 0);
+    return new Set(Array.from({ length: count }, (_, i) => i));
+  });
   const [viewMode, setViewMode]       = useState('sidebyside'); // sidebyside | overlay | diff
   const [baseIdx, setBaseIdx]         = useState(0);
   const [droppedIds, setDroppedIds]   = useState(new Set());

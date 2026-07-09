@@ -113,6 +113,7 @@ export default function App() {
   const [starredIds, setStarredIds] = useState([]);
   const [exporting, setExporting] = useState(false);
   const [showLoad, setShowLoad] = useState(false);
+  const [optimizedCompareStack, setOptimizedCompareStack] = useState(null);
 
   // Registration tab state — lifted here so it survives tab switches
   const [regStatuses,   setRegStatuses]   = useState({}); // { [id]: 'pending'|'confirmed'|'unavailable' }
@@ -254,7 +255,12 @@ export default function App() {
   if (step === 'compare') {
     return (
       <>
-        <ComparePage onBack={() => setStep('build')} currentStack={currentStackForCompare} />
+        <ComparePage
+          onBack={() => setStep('build')}
+          currentStack={currentStackForCompare}
+          extraStack={optimizedCompareStack}
+          onExtraStackConsumed={() => setOptimizedCompareStack(null)}
+        />
         <Watermark />
       </>
     );
@@ -267,6 +273,7 @@ export default function App() {
           programKey={program.programKey}
           majeureMineure={majeureMineure}
           addedCourses={addedCourses}
+          languageProfile={languageProfile}
           enFrPreference={enFrPreference}
           setEnFrPreference={setEnFrPreference}
           lang={lang}
@@ -292,6 +299,20 @@ export default function App() {
             setRegSecondaries(result.secondaries || {});
             setStep('build');
             setBuildTab('registration');
+          }}
+          onLoadCompare={(result) => {
+            // Push this optimizer result as a stack into the Compare page
+            const stackFromResult = {
+              label: `Optimized — ${program.grade} ${program.programLabel}`,
+              programKey: program.programKey,
+              savedAt: new Date().toISOString(),
+              courses: result.courseIds.map((id) => byId.get(id)).filter(Boolean),
+              addedIds: result.courseIds,
+              languageProfile,
+              majeureMineure,
+            };
+            setOptimizedCompareStack(stackFromResult);
+            setStep('compare');
           }}
         />
         <Watermark />
