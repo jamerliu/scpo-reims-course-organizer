@@ -635,3 +635,18 @@ textarea.hd-input { border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px
 .ical-block-title { font-weight: 700; line-height: 1.2; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: 'Patrick Hand', cursive; }
 .ical-block-time  { font-size: 0.48rem; opacity: 0.9; }
 .ical-block-loc   { font-size: 0.46rem; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* selected offered course */
+.hd-selected-offer {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  background: #2d2d2d; color: white; border-radius: 8px;
+  padding: 8px 12px; margin-bottom: 4px; font-family: 'Patrick Hand', cursive; font-size: 0.85rem;
+}
+.hd-selected-offer button {
+  background: none; border: none; color: #ccc; cursor: pointer; font-size: 0.9rem; margin-left: auto;
+}
+.hd-selected-offer button:hover { color: #ff4d4d; }
+.hd-pick-section-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #aaa; padding: 4px 6px; font-family: 'Patrick Hand', cursive;
+}

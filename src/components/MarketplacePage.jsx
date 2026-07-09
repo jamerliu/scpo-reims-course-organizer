@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../utils/supabase';
 import { useAuth } from '../auth/AuthContext';
 import { parseSaveFile } from '../utils/saveLoad';
-import { importFromIcalUrl } from '../utils/parseIcal';
 import { isLecture } from '../utils/lectureGuard';
 import coursesData from '../data/courses.json';
 import '../auth/handdrawn.css';
@@ -21,126 +20,6 @@ function toMin(hhmm) {
 function fmtSchedule(schedule) {
   if (!schedule?.length) return '—';
   return schedule.map(s => `${DAY_LABELS[s.day]||s.day} ${s.start}–${s.end}`).join(' · ');
-}
-
-// ── iCal Calendar View — Typical Week ───────────────────────────────────────
-const WEEK_DAYS = ['Mon','Tue','Wed','Thu','Fri'];
-const CAL_PALETTE = ['#6C63FF','#38B2AC','#E07A5F','#81B29A','#F2CC8F','#9B5DE5','#00BBF9','#F15BB5'];
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DAY_NUM = { 1:'Mon', 2:'Tue', 3:'Wed', 4:'Thu', 5:'Fri' };
-
-function IcalCalendarView({ calendarEvents }) {
-  // Build a "typical week" — one slot per unique (title + time + day) combination.
-  // Count how many weeks each slot appears in to detect biweekly courses.
-  const typicalSlots = useMemo(() => {
-    // First count total number of weeks in the calendar
-    const weekKeys = new Set();
-    calendarEvents.forEach(ev => {
-      if (!ev.startDate) return;
-      const d = new Date(ev.startDate);
-      d.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1));
-      weekKeys.add(d.toISOString().slice(0, 10));
-    });
-    const totalWeeks = weekKeys.size || 1;
-
-    // Aggregate by (day, timeStr, title)
-    const slotMap = new Map();
-    calendarEvents.forEach(ev => {
-      if (!ev.dayOfWeek || ev.dayOfWeek < 1 || ev.dayOfWeek > 5) return;
-      const key = `${ev.dayOfWeek}|${ev.timeStr}|${ev.courseTitle || ev.summary}`;
-      if (!slotMap.has(key)) {
-        slotMap.set(key, {
-          dayOfWeek: ev.dayOfWeek,
-          day: DAY_NUM[ev.dayOfWeek],
-          timeStr: ev.timeStr,
-          title: ev.courseTitle || ev.summary,
-          location: ev.location,
-          count: 0,
-        });
-      }
-      slotMap.get(key).count++;
-    });
-
-    // Mark biweekly: appears in roughly half the weeks (count <= totalWeeks * 0.6)
-    return [...slotMap.values()].map(slot => ({
-      ...slot,
-      biweekly: slot.count <= totalWeeks * 0.6,
-    }));
-  }, [calendarEvents]);
-
-  const colorMap = useMemo(() => {
-    const map = new Map();
-    let ci = 0;
-    typicalSlots.forEach(s => {
-      if (!map.has(s.title)) map.set(s.title, CAL_PALETTE[ci++ % CAL_PALETTE.length]);
-    });
-    return map;
-  }, [typicalSlots]);
-
-  if (!typicalSlots.length) return null;
-
-  const hours = [];
-  for (let m = GRID_START; m <= GRID_END; m += 60) hours.push(m);
-
-  return (
-    <div className="ical-cal-wrap">
-      <div className="ical-cal-inner">
-        <div className="ical-day-headers">
-          <div className="ical-time-gutter"/>
-          {WEEK_DAYS.map(d => <div key={d} className="ical-day-head">{d}</div>)}
-        </div>
-        <div className="ical-grid">
-          <div className="ical-time-col">
-            {hours.map(m => (
-              <div key={m} className="ical-hour-label" style={{top:`${((m-GRID_START)/GRID_SPAN)*100}%`}}>
-                {String(Math.floor(m/60)).padStart(2,'0')}
-              </div>
-            ))}
-          </div>
-          {WEEK_DAYS.map((day, di) => {
-            const dayNum = di + 1;
-            const daySlots = typicalSlots.filter(s => s.dayOfWeek === dayNum);
-            return (
-              <div key={day} className="ical-day-col">
-                {hours.map(m => <div key={m} className="ical-hour-line" style={{top:`${((m-GRID_START)/GRID_SPAN)*100}%`}}/>)}
-                {daySlots.map((slot, i) => {
-                  const parts = (slot.timeStr||'').split('–');
-                  const sm = toMin(parts[0]);
-                  const em = toMin(parts[1]);
-                  if (!sm && !em) return null;
-                  const top = ((Math.max(sm,GRID_START)-GRID_START)/GRID_SPAN)*100;
-                  const ht  = Math.max(((Math.min(em,GRID_END)-Math.max(sm,GRID_START))/GRID_SPAN)*100, 2);
-                  const color = colorMap.get(slot.title) || '#888';
-                  return (
-                    <div key={i} className={`ical-block ${slot.biweekly ? 'biweekly' : ''}`}
-                      style={{top:`${top}%`, height:`${ht}%`, background: color,
-                        opacity: slot.biweekly ? 0.7 : 1,
-                        backgroundImage: slot.biweekly ? 'repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,0.15) 3px,rgba(255,255,255,0.15) 6px)' : 'none'
-                      }}
-                      title={`${slot.title}\n${slot.timeStr}${slot.location ? '\n'+slot.location : ''}${slot.biweekly ? '\n(biweekly)' : ''}`}>
-                      <div className="ical-block-title">{slot.title}</div>
-                      <div className="ical-block-time">{slot.timeStr}{slot.biweekly ? ' ·2wk' : ''}</div>
-                      {slot.location && <div className="ical-block-loc">{slot.location}</div>}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div style={{display:'flex', gap:12, marginTop:8, flexWrap:'wrap'}}>
-        <p style={{fontSize:11,color:'#aaa',fontFamily:'Patrick Hand, cursive', margin:0}}>
-          Typical week · {typicalSlots.length} course slot{typicalSlots.length!==1?'s':''}
-        </p>
-        {typicalSlots.some(s => s.biweekly) && (
-          <p style={{fontSize:11,color:'#aaa',fontFamily:'Patrick Hand, cursive', margin:0}}>
-            ░ = biweekly (alternating weeks)
-          </p>
-        )}
-      </div>
-    </div>
-  );
 }
 
 // ── Mini calendar for trade preview ─────────────────────────────────────────
@@ -200,21 +79,39 @@ function TradeCalendarPreview({ baseIds, removeId, addId }) {
 // ── New Posting Form ─────────────────────────────────────────────────────────
 
 function NewPostingForm({ profile, scheduleIds, onDone, onClose }) {
-  const [offeredId,    setOfferedId]    = useState('');
-  const [requestedIds, setRequestedIds] = useState([]);
+  const [offeredId,     setOfferedId]     = useState('');
+  const [offerSearch,   setOfferSearch]   = useState('');
+  const [requestedIds,  setRequestedIds]  = useState([]);
   const [requestSearch, setRequestSearch] = useState('');
-  const [note,         setNote]         = useState('');
-  const [expiryDays,   setExpiryDays]   = useState(2);
-  const [saving,       setSaving]       = useState(false);
-  const [error,        setError]        = useState('');
+  const [note,          setNote]          = useState('');
+  const [expiryDays,    setExpiryDays]    = useState(2);
+  const [saving,        setSaving]        = useState(false);
+  const [error,         setError]         = useState('');
 
-  // Courses in the user's schedule (non-lecture only) = things they can offer
-  const offerableCourses = useMemo(() =>
+  // Courses from uploaded schedule (non-lecture)
+  const scheduleCourses = useMemo(() =>
     scheduleIds.map(id => byId.get(id)).filter(c => c && !isLecture(c)),
     [scheduleIds]
   );
 
-  // All courses for requesting (search)
+  // Search pool for offered course — full course list excluding lectures
+  const offerPool = useMemo(() => {
+    const q = offerSearch.toLowerCase();
+    if (!q) return [];
+    return coursesData.filter(c =>
+      !isLecture(c) &&
+      c.schedule?.length > 0 &&
+      (c.title?.toLowerCase().includes(q) || c.codeMatiere?.toLowerCase().includes(q))
+    ).slice(0, 20);
+  }, [offerSearch]);
+
+  // Merge: schedule courses first, then search results (deduplicated)
+  const offerableCourses = useMemo(() => {
+    const scheduleSet = new Set(scheduleCourses.map(c => c.id));
+    const extra = offerPool.filter(c => !scheduleSet.has(c.id));
+    return [...scheduleCourses, ...extra];
+  }, [scheduleCourses, offerPool]);
+
   const requestPool = useMemo(() => {
     const q = requestSearch.toLowerCase();
     if (!q) return [];
@@ -227,7 +124,7 @@ function NewPostingForm({ profile, scheduleIds, onDone, onClose }) {
 
   async function submit() {
     if (!offeredId || requestedIds.length === 0) {
-      setError('Please select an offered course and at least one requested course.');
+      setError('Please select a course to offer and at least one course you want.');
       return;
     }
     const offered = byId.get(offeredId);
@@ -263,22 +160,56 @@ function NewPostingForm({ profile, scheduleIds, onDone, onClose }) {
 
         <h2 className="hd-title" style={{ fontSize: 24, marginBottom: 20 }}>📌 New posting</h2>
 
-        <label className="hd-label">Course I'm offering (from my schedule)</label>
-        <div className="hd-course-pick-list">
-          {offerableCourses.length === 0 && (
-            <p className="hd-body-text" style={{color:'#999'}}>No courses in your schedule yet. Upload your schedule JSON first.</p>
-          )}
-          {offerableCourses.map(c => (
-            <button key={c.id} type="button"
-              className={`hd-course-pick-item ${offeredId === c.id ? 'selected' : ''}`}
-              onClick={() => setOfferedId(c.id === offeredId ? '' : c.id)}>
-              <span className="hd-cpick-title">{c.title}</span>
-              <span className="hd-cpick-meta">{fmtSchedule(c.schedule)} · {c.codeMatiere}</span>
-            </button>
-          ))}
-        </div>
+        {/* Offered course */}
+        <label className="hd-label">Course I'm offering</label>
+        <input className="hd-input" placeholder="Search by title or code to find your course…"
+          value={offerSearch} onChange={e => setOfferSearch(e.target.value)}
+          style={{ marginBottom: 6 }} />
 
-        <label className="hd-label" style={{marginTop:16}}>Courses I'd accept in return (search)</label>
+        {offeredId && byId.get(offeredId) && (
+          <div className="hd-selected-offer">
+            <span>✓ {byId.get(offeredId).title}</span>
+            <span style={{ fontSize:12, color:'#888' }}>{fmtSchedule(byId.get(offeredId).schedule)}</span>
+            <button onClick={() => setOfferedId('')}>✕</button>
+          </div>
+        )}
+
+        {!offeredId && (
+          <div className="hd-course-pick-list">
+            {scheduleCourses.length > 0 && !offerSearch && (
+              <>
+                <div className="hd-pick-section-label">From your uploaded schedule</div>
+                {scheduleCourses.map(c => (
+                  <button key={c.id} type="button"
+                    className="hd-course-pick-item"
+                    onClick={() => { setOfferedId(c.id); setOfferSearch(''); }}>
+                    <span className="hd-cpick-title">{c.title}</span>
+                    <span className="hd-cpick-meta">{fmtSchedule(c.schedule)} · {c.codeMatiere}</span>
+                  </button>
+                ))}
+              </>
+            )}
+            {offerSearch && offerPool.length === 0 && (
+              <p className="hd-body-text" style={{color:'#999', padding:'8px 4px', fontSize:13}}>No courses found. Try a different search.</p>
+            )}
+            {offerPool.map(c => (
+              <button key={c.id} type="button"
+                className="hd-course-pick-item"
+                onClick={() => { setOfferedId(c.id); setOfferSearch(''); }}>
+                <span className="hd-cpick-title">{c.title}</span>
+                <span className="hd-cpick-meta">{fmtSchedule(c.schedule)} · {c.codeMatiere}</span>
+              </button>
+            ))}
+            {!offerSearch && scheduleCourses.length === 0 && (
+              <p className="hd-body-text" style={{color:'#999', padding:'8px 4px', fontSize:13}}>
+                Search above, or upload your schedule JSON for quick access to your courses.
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Requested courses */}
+        <label className="hd-label" style={{marginTop:16}}>Courses I'd accept in return</label>
         <input className="hd-input" placeholder="Search by title or code…"
           value={requestSearch} onChange={e => setRequestSearch(e.target.value)} />
 
@@ -321,8 +252,7 @@ function NewPostingForm({ profile, scheduleIds, onDone, onClose }) {
           {[1,2,3].map(d => (
             <button key={d} type="button"
               className={`hd-btn ${expiryDays===d ? 'hd-btn-primary' : 'hd-btn-secondary'}`}
-              style={{ flex:1 }}
-              onClick={() => setExpiryDays(d)}>
+              style={{ flex:1 }} onClick={() => setExpiryDays(d)}>
               {d} day{d>1?'s':''}
             </button>
           ))}
@@ -502,10 +432,6 @@ export default function MarketplacePage({ onBack }) {
   const [showNewForm, setShowNewForm] = useState(false);
   const [tradePosting,setTradePosting]= useState(null);
   const [myScheduleIds, setMyScheduleIds] = useState(profile?.schedule_json?.addedCourseIds || []);
-  const [icalUrl,       setIcalUrl]       = useState('');
-  const [icalLoading,   setIcalLoading]   = useState(false);
-  const [icalError,     setIcalError]     = useState('');
-  const [icalEvents,    setIcalEvents]    = useState(null); // raw calendar events for preview
   const [showImport,    setShowImport]    = useState(false);
   const fileRef = useRef(null);
 
@@ -522,26 +448,6 @@ export default function MarketplacePage({ onBack }) {
       .order('created_at', { ascending: false });
     setPostings(data || []);
     setLoading(false);
-  }
-
-  async function handleIcalImport() {
-    if (!icalUrl.trim()) return;
-    setIcalLoading(true);
-    setIcalError('');
-    try {
-      const result = await importFromIcalUrl(icalUrl.trim());
-      setMyScheduleIds(result.courseIds);
-      setIcalEvents(result.calendarEvents);
-      await updateProfile({ schedule_json: { addedCourseIds: result.courseIds } });
-      setIcalError(
-        `✓ Imported ${result.courseIds.length} courses from ${result.totalEvents} events` +
-        (result.filtered > 0 ? ` (${result.filtered} orientation/August events excluded)` : '') +
-        (result.unmatched.length > 0 ? `. ${result.unmatched.length} event(s) not matched.` : '.')
-      );
-    } catch (e) {
-      setIcalError(e.message);
-    }
-    setIcalLoading(false);
   }
 
   function handleScheduleUpload(e) {
@@ -612,60 +518,23 @@ export default function MarketplacePage({ onBack }) {
       {/* Import schedule modal */}
       {showImport && (
         <div className="hd-modal-backdrop" onClick={() => setShowImport(false)}>
-          <div className="hd-modal-card" onClick={e => e.stopPropagation()} style={{ maxWidth: 500 }}>
+          <div className="hd-modal-card" onClick={e => e.stopPropagation()} style={{ maxWidth: 440 }}>
             <div className="hd-tape hd-tape-top" />
             <span className="hd-corner hd-corner-tl"/><span className="hd-corner hd-corner-tr"/>
             <span className="hd-corner hd-corner-bl"/><span className="hd-corner hd-corner-br"/>
             <button className="hd-modal-close" onClick={() => setShowImport(false)}>✕</button>
-            <h2 className="hd-title" style={{ fontSize: 22, marginBottom: 6 }}>📂 Import your schedule</h2>
-            <p className="hd-body-text" style={{ color:'#888', fontSize:13, marginBottom:20 }}>
-              Choose one of two ways to import your courses.
+            <h2 className="hd-title" style={{ fontSize: 22, marginBottom: 6 }}>📂 Upload your schedule</h2>
+            <p className="hd-body-text" style={{ color:'#888', fontSize:13, marginBottom:16 }}>
+              Use the <strong>💾 Save</strong> button in the Course Planner to download your schedule as a .json file, then upload it here. This lets the marketplace know which courses you have for quick posting.
             </p>
-
-            <div className="hd-import-option">
-              <div className="hd-import-option-title">🔗 Sciences Po calendar URL</div>
-              <p className="hd-body-text" style={{ fontSize:12, color:'#888', marginBottom:8 }}>
-                Paste your personal calendar link from ScPo (starts with scolarite-en.sciences-po.fr…)
-              </p>
-              <input className="hd-input" placeholder="https://scolarite-en.sciences-po.fr/…"
-                value={icalUrl} onChange={e => setIcalUrl(e.target.value)}
-                style={{ fontSize: 12, marginBottom: 8 }} />
-              <button className="hd-btn hd-btn-primary" style={{ width:'100%' }}
-                onClick={handleIcalImport} disabled={icalLoading || !icalUrl.trim()}>
-                {icalLoading ? 'Importing…' : 'Import from URL →'}
-              </button>
-            </div>
-
-            <div className="hd-import-divider">— or —</div>
-
-            <div className="hd-import-option">
-              <div className="hd-import-option-title">📄 JSON file from Course Planner</div>
-              <p className="hd-body-text" style={{ fontSize:12, color:'#888', marginBottom:8 }}>
-                Use the 💾 Save button in the Course Planner to download your schedule as a .json file, then upload it here.
-              </p>
-              <button className="hd-btn hd-btn-secondary" style={{ width:'100%' }}
-                onClick={() => fileRef.current?.click()}>
-                Choose .json file
-              </button>
-            </div>
-
-            {icalError && (
-              <p className="hd-body-text" style={{ color: icalError.startsWith('✓') ? '#2a7a4b' : '#ff4d4d', fontSize:12, marginTop:12 }}>
-                {icalError}
-              </p>
-            )}
-
-            {/* Calendar preview after import */}
-            {icalEvents && (
-              <div style={{ marginTop: 16 }}>
-                <div className="hd-import-option-title" style={{ marginBottom: 8 }}>📅 Your imported calendar</div>
-                <IcalCalendarView calendarEvents={icalEvents} />
-                <button className="hd-btn hd-btn-primary" style={{ width:'100%', marginTop:10 }}
-                  onClick={() => setShowImport(false)}>
-                  Done ✓
-                </button>
-              </div>
-            )}
+            <input ref={fileRef} type="file" accept=".json" style={{display:'none'}} onChange={handleScheduleUpload} />
+            <button className="hd-btn hd-btn-primary" style={{ width:'100%' }}
+              onClick={() => fileRef.current?.click()}>
+              Choose .json file →
+            </button>
+            <p className="hd-body-text" style={{ color:'#aaa', fontSize:11, marginTop:12, textAlign:'center' }}>
+              You can also just search for your course directly when creating a posting — no upload needed.
+            </p>
           </div>
         </div>
       )}
