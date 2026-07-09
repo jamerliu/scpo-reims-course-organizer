@@ -246,7 +246,10 @@ export function generateSchedules({
       }
 
       const ranked = pickBest(slot, chosen, avoidDays, avoidSlots, qg);
-      if (ranked.length === 0) { valid = false; break; }
+      if (ranked.length === 0) {
+        // No candidates for this slot (e.g. all filtered out) — skip rather than invalidating
+        continue;
+      }
 
       const best = ranked[0];
       totalScore += best.score;
@@ -299,7 +302,7 @@ export function generateSchedules({
         }
         const usedInThisRun = new Set(picked.map((p) => p.courseId));
         const ranked = pickBest(slot, chosen, avoidDays, avoidSlots, null, usedInThisRun);
-        if (ranked.length === 0) { valid = false; break; }
+        if (ranked.length === 0) { continue; }  // skip empty slots, don't invalidate
         const best   = ranked[0];
         const backup = ranked.find((r, i) => i > 0 && !r.hasConflict) || ranked[1] || null;
         totalScore  += best.score + (best.hasConflict ? 200 : 0);

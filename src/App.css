@@ -1112,6 +1112,7 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 /* Mini calendar */
 .mini-cal { background: var(--surface); border-radius: var(--radius-sm); box-shadow: var(--shadow-md); padding: 10px; }
 .mini-cal-header { display: grid; grid-template-columns: 24px repeat(5, 1fr); margin-bottom: 4px; }
+.mini-gutter-placeholder { width: 24px; }
 .mini-day-head { text-align: center; font-size: 0.65rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding-bottom: 4px; }
 .mini-cal-grid { display: grid; grid-template-columns: 24px repeat(5, 1fr); position: relative; height: 420px; }
 .mini-time-col { position: relative; }
@@ -1653,8 +1654,10 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 
 /* Result card */
 .opt-result-card {
-  background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-md); overflow: hidden;
+  background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-md);
+  overflow: hidden; display: flex; flex-direction: column; max-height: 620px;
 }
+.opt-result-card > *:not(.opt-result-header) { overflow-y: auto; }
 .opt-result-card.gold   { border-top: 3px solid #e0a020; }
 .opt-result-card.silver { border-top: 3px solid #9CA3AF; }
 .opt-result-card.bronze { border-top: 3px solid #B45309; }
@@ -1687,8 +1690,8 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 }
 
 /* Mini calendar in optimizer */
-.opt-mini-cal { padding: 10px 14px; }
-.opt-mini-header { display: grid; grid-template-columns: repeat(5,1fr); margin-bottom: 4px; }
+.opt-mini-cal { padding: 10px 14px; overflow-y: auto; max-height: 380px; }
+.opt-mini-header { display: grid; grid-template-columns: 22px repeat(5,1fr); margin-bottom: 4px; }
 .opt-mini-day-head {
   text-align: center; font-size: 0.62rem; font-weight: 700; color: var(--muted);
   text-transform: uppercase; letter-spacing: 0.06em; padding-bottom: 3px;

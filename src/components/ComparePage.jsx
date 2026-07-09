@@ -85,6 +85,7 @@ function MiniCalendar({ stack, color, droppedIds = new Set(), onToggleDrop }) {
   return (
     <div className="mini-cal">
       <div className="mini-cal-header">
+        <div className="mini-gutter-placeholder"></div>
         {DAYS.map((d) => (
           <div key={d} className="mini-day-head">{d}</div>
         ))}

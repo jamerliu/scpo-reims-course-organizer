@@ -39,6 +39,7 @@ function MiniCalPreview({ courseIds, avoidDays, avoidSlots }) {
   return (
     <div className="opt-mini-cal">
       <div className="opt-mini-header">
+        <div style={{ width: 22 }} />
         {DAYS.map((d) => <div key={d} className={`opt-mini-day-head ${avoidDays?.has(d) ? 'avoided' : ''}`}>{d}</div>)}
       </div>
       <div className="opt-mini-grid">
