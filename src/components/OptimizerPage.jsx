@@ -235,11 +235,11 @@ export default function OptimizerPage({
               <div className="opt-setting-title">{s('Language preference','Préférence de langue')}</div>
               <p className="opt-setting-desc">{s('Applies to Digital Culture & Capstone groups, in both the optimizer and the course browser.','Appliqué aux groupes Culture du Numérique et Grand Écrit, dans l\'optimiseur et le navigateur de cours.')}</p>
               <div className="opt-enfr-row">
-                {['EN', 'FR', null].map((pref) => (
+                {[['EN', '🇬🇧 English only (ANG groups)'], ['FR', '🇫🇷 French only (FR groups)'], [null, 'Both']].map(([pref, label]) => (
                   <button key={String(pref)}
                     className={enFrPreference === pref ? 'opt-enfr-btn active' : 'opt-enfr-btn'}
                     onClick={() => setEnFrPreference(pref)}>
-                    {pref === 'EN' ? '🇬🇧 English only' : pref === 'FR' ? '🇫🇷 French only' : 'Both'}
+                    {label}
                   </button>
                 ))}
               </div>

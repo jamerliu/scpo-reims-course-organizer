@@ -48,12 +48,25 @@ function withDisplayFields(c) {
 function applyEnFrFilter(courses, catId, enFrPref) {
   if (!enFrPref) return courses;
   if (catId === 'digital-culture') {
-    if (enFrPref === 'EN') return courses.filter((c) => (c.title||'').includes('ANG'));
-    if (enFrPref === 'FR') return courses.filter((c) => !(c.title||'').includes('ANG'));
+    // ANG = English (Anglais)
+    if (enFrPref === 'EN') {
+      const f = courses.filter((c) => (c.title||'').includes('ANG'));
+      return f.length > 0 ? f : courses;
+    }
+    if (enFrPref === 'FR') {
+      const f = courses.filter((c) => !(c.title||'').includes('ANG'));
+      return f.length > 0 ? f : courses;
+    }
   }
   if (catId === 'capstone') {
-    if (enFrPref === 'EN') return courses.filter((c) => c.codeMatiere === 'ECEF 27A00');
-    if (enFrPref === 'FR') return courses.filter((c) => c.codeMatiere === 'ECEF 27F00');
+    if (enFrPref === 'EN') {
+      const f = courses.filter((c) => c.codeMatiere === 'ECEF 27A00');
+      return f.length > 0 ? f : courses;
+    }
+    if (enFrPref === 'FR') {
+      const f = courses.filter((c) => c.codeMatiere === 'ECEF 27F00');
+      return f.length > 0 ? f : courses;
+    }
   }
   return courses;
 }

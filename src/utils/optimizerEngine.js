@@ -124,15 +124,26 @@ function buildSlots({ profile, programPool, lockedIds, majeureMineure, enFrPrefe
 
 function applyEnFrFilter(candidates, catId, enFrPref) {
   if (!enFrPref) return candidates;
-  // Digital Culture
   if (catId === 'digital-culture') {
-    if (enFrPref === 'EN') return candidates.filter((c) => (c.title || '').includes('ANG')) || candidates;
-    if (enFrPref === 'FR') return candidates.filter((c) => !(c.title || '').includes('ANG')) || candidates;
+    // ANG = English (Anglais), no suffix = French
+    if (enFrPref === 'EN') {
+      const filtered = candidates.filter((c) => (c.title || '').includes('ANG'));
+      return filtered.length > 0 ? filtered : candidates;
+    }
+    if (enFrPref === 'FR') {
+      const filtered = candidates.filter((c) => !(c.title || '').includes('ANG'));
+      return filtered.length > 0 ? filtered : candidates;
+    }
   }
-  // Capstone
   if (catId === 'capstone') {
-    if (enFrPref === 'EN') return candidates.filter((c) => c.codeMatiere === 'ECEF 27A00') || candidates;
-    if (enFrPref === 'FR') return candidates.filter((c) => c.codeMatiere === 'ECEF 27F00') || candidates;
+    if (enFrPref === 'EN') {
+      const filtered = candidates.filter((c) => c.codeMatiere === 'ECEF 27A00');
+      return filtered.length > 0 ? filtered : candidates;
+    }
+    if (enFrPref === 'FR') {
+      const filtered = candidates.filter((c) => c.codeMatiere === 'ECEF 27F00');
+      return filtered.length > 0 ? filtered : candidates;
+    }
   }
   return candidates;
 }
