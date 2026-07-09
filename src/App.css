@@ -1704,9 +1704,9 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
 .opt-mini-day-col.avoided-col { background: rgba(224,82,82,0.03); }
 .opt-mini-hour-line { position: absolute; left:0; right:0; border-top: 1px solid rgba(163,177,198,0.12); }
 .opt-avoid-shade { position: absolute; left:0; right:0; background: rgba(224,82,82,0.08); pointer-events: none; }
-.opt-mini-block { position: absolute; left:1px; right:1px; border-radius:3px; color:white; padding:2px 3px; overflow:hidden; font-size:0.52rem; }
-.opt-mini-block.lecture-block { opacity: 0.6; }
-.opt-block-text { font-weight: 700; line-height: 1.2; overflow: hidden; }
+.opt-mini-block { position: absolute; left:1px; right:1px; border-radius:3px; color:white; padding:2px 3px; overflow:hidden; font-size:0.52rem; cursor:default; }
+.opt-mini-block.lecture-block { opacity: 0.5; }
+.opt-block-text { font-weight: 700; line-height: 1.2; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 /* Slot list in expanded view */
 .opt-slot-list { padding: 12px 16px; border-top: 1px solid rgba(163,177,198,0.2); }
@@ -1742,3 +1742,26 @@ tr.starred-row.added-row { background: rgba(56,178,172,0.09); }
   transition: box-shadow var(--transition), transform var(--transition);
 }
 .opt-load-compare-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+/* optimizer course chip list */
+.opt-course-chips {
+  display: flex; flex-wrap: wrap; gap: 5px;
+  padding: 8px 14px 12px; border-top: 1px solid rgba(163,177,198,0.15);
+}
+.opt-chip {
+  background: var(--surface); box-shadow: var(--shadow-in-sm);
+  border-radius: var(--radius-pill); padding: 3px 9px;
+  font-size: 0.68rem; font-weight: 600; color: var(--text);
+  font-family: 'DM Sans', sans-serif; white-space: nowrap;
+  cursor: default;
+}
+.opt-chip-lecture { color: var(--muted); opacity: 0.7; font-weight: 400; }
+
+/* marketplace button */
+.marketplace-btn {
+  background: var(--surface); border: none; box-shadow: var(--shadow-sm);
+  color: #2d5da1; padding: 7px 14px; border-radius: var(--radius-btn);
+  font-size: 0.8rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.marketplace-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }

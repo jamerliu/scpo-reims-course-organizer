@@ -3,6 +3,7 @@ import coursesData from './data/courses.json';
 import { REQUIREMENTS, MAJEURE_OPTIONS, MINEURE_OPTIONS } from './data/requirements';
 import { PROGRAM_COURSE_GROUPS } from './data/programMap';
 import { useLang } from './i18n/LangContext';
+import { useAuth } from './auth/AuthContext';
 import ProgramGradeSelect from './components/ProgramGradeSelect';
 import MajeureMineurSelect from './components/MajeureMineurSelect';
 import LanguageStep from './components/LanguageStep';
@@ -14,9 +15,11 @@ import LoadModal from './components/LoadModal';
 import ComparePage from './components/ComparePage';
 import RegistrationTab from './components/RegistrationTab';
 import OptimizerPage from './components/OptimizerPage';
+import MarketplacePage from './components/MarketplacePage';
 import { exportReport } from './utils/exportPdf';
 import { buildSaveData, downloadSave } from './utils/saveLoad';
 import { isLecture } from './utils/lectureGuard';
+import { supabase } from './utils/supabase';
 import './App.css';
 
 const byId = new Map(coursesData.map((c) => [c.id, c]));
@@ -101,9 +104,11 @@ function Watermark() {
   );
 }
 
-export default function App() {
+export default function App({ initialStep, onGoHome }) {
   const { t, lang } = useLang();
-  const [step, setStep] = useState('select'); // select | majeure | language | build | compare | optimize
+  const [step, setStep] = useState(
+    initialStep === 'marketplace' ? 'marketplace' : 'select'
+  );
   const [buildTab, setBuildTab] = useState('planner'); // planner | registration
   const [enFrPreference, setEnFrPreference] = useState(null); // null | 'EN' | 'FR'
   const [program, setProgram] = useState(null);
@@ -320,6 +325,15 @@ export default function App() {
     );
   }
 
+  if (step === 'marketplace') {
+    return (
+      <>
+        <MarketplacePage onBack={() => onGoHome ? onGoHome() : setStep('build')} />
+        <Watermark />
+      </>
+    );
+  }
+
   if (step === 'select') {
     return (
       <>
@@ -381,6 +395,9 @@ export default function App() {
         </div>
         <div className="header-actions">
           <LangToggle />
+          {onGoHome && (
+            <button onClick={onGoHome} style={{ fontWeight: 700 }}>🏠 Home</button>
+          )}
           <button onClick={() => setStep('select')}>{t('changeProgram')}</button>
           {program?.grade === '2A' && (
             <button onClick={() => setStep('majeure')}>
@@ -399,6 +416,9 @@ export default function App() {
           </button>
           <button className="optimize-btn" onClick={() => setStep('optimize')}>
             {lang === 'fr' ? '⚡ Optimiser' : '⚡ Optimize'}
+          </button>
+          <button className="marketplace-btn" onClick={() => setStep('marketplace')}>
+            🛒 {lang === 'fr' ? 'Marché' : 'Marketplace'}
           </button>
           <button className="primary-btn" disabled={exporting} onClick={handleExport}>
             {exporting ? t('exporting') : t('exportPdf')}

@@ -126,6 +126,21 @@ function ResultCard({ result, rank, avoidDays, avoidSlots, onLoadPlanner, onLoad
       {!collapsed && (
         <>
           <MiniCalPreview courseIds={result.courseIds} avoidDays={avoidDays} avoidSlots={avoidSlots} />
+
+          {/* Compact course chip list — shows every course so nothing is hidden */}
+          <div className="opt-course-chips">
+            {result.courseIds.map((id) => {
+              const c = byId.get(id);
+              if (!c) return null;
+              const lec = isLecture(c);
+              return (
+                <span key={id} className={`opt-chip ${lec ? 'opt-chip-lecture' : ''}`}
+                  title={`${c.title} — ${formatSchedule(c)}`}>
+                  {c.title}
+                </span>
+              );
+            })}
+          </div>
           {expanded && (
             <div className="opt-slot-list">
               <div className="opt-slot-list-title">{s('Selected groups + backups','Groupes sélectionnés + sauvegardes')}</div>

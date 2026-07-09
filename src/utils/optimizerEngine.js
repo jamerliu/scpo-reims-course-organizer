@@ -248,6 +248,15 @@ export function generateSchedules({
     let totalScore = 0;
     let valid      = true;
 
+    // Pre-load ALL locked-slot courses into chosen upfront so their timeslots
+    // are visible to conflict checking for every other slot, regardless of order.
+    for (const slot of slots) {
+      if (slot.locked) {
+        const c = byId.get(slot.locked);
+        if (c && !chosen.some((ch) => ch.id === c.id)) chosen.push(c);
+      }
+    }
+
     for (const slot of slots) {
       const alreadyLocked = slot.locked;
       if (alreadyLocked) {
@@ -304,6 +313,14 @@ export function generateSchedules({
       const picked   = [];
       let totalScore = 0;
       let valid      = true;
+
+      // Pre-load all locked courses upfront
+      for (const slot of shuffledSlots) {
+        if (slot.locked) {
+          const c = byId.get(slot.locked);
+          if (c && !chosen.some((ch) => ch.id === c.id)) chosen.push(c);
+        }
+      }
 
       for (const slot of shuffledSlots) {
         if (slot.locked) {
