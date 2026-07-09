@@ -592,3 +592,46 @@ textarea.hd-input { border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px
   margin-bottom: 6px;
   color: #2d2d2d;
 }
+
+/* ── iCal Calendar Preview ── */
+.ical-cal-wrap { margin-top: 8px; }
+.ical-cal-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 8px;
+}
+.ical-week-label {
+  font-family: 'Kalam', cursive; font-size: 0.88rem; color: #2d2d2d; text-align: center;
+}
+.ical-cal-inner {
+  border: 2px solid #2d2d2d; border-radius: 10px; overflow: hidden;
+  box-shadow: 3px 3px 0 #2d2d2d;
+}
+.ical-day-headers {
+  display: grid; grid-template-columns: 32px repeat(5,1fr);
+  background: #2d2d2d;
+}
+.ical-time-gutter { width: 32px; }
+.ical-day-head {
+  text-align: center; font-family: 'Patrick Hand', cursive; font-size: 0.68rem;
+  font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 5px 0;
+}
+.ical-grid {
+  display: grid; grid-template-columns: 32px repeat(5,1fr);
+  height: 420px; position: relative; background: #fff;
+}
+.ical-time-col { position: relative; background: #fdfbf7; border-right: 1px solid #e5e0d8; }
+.ical-hour-label {
+  position: absolute; font-size: 0.52rem; color: #aaa; right: 4px;
+  transform: translateY(-5px); font-family: 'Patrick Hand', cursive;
+}
+.ical-day-col { position: relative; border-left: 1px dashed #e5e0d8; }
+.ical-hour-line { position: absolute; left:0; right:0; border-top: 1px dashed #f0ece5; }
+.ical-block {
+  position: absolute; left:2px; right:2px; border-radius:5px;
+  color: white; padding: 2px 4px; overflow: hidden; font-size: 0.52rem;
+  border: 1.5px solid rgba(0,0,0,0.15); cursor: default;
+}
+.ical-block-title { font-weight: 700; line-height: 1.2; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: 'Patrick Hand', cursive; }
+.ical-block-time  { font-size: 0.48rem; opacity: 0.9; }
+.ical-block-loc   { font-size: 0.46rem; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

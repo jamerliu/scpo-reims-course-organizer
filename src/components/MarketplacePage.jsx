@@ -13,10 +13,109 @@ const DAYS = ['Mon','Tue','Wed','Thu','Fri'];
 const DAY_LABELS = { Mon:'Monday', Tue:'Tuesday', Wed:'Wednesday', Thu:'Thursday', Fri:'Friday' };
 const GRID_START = 8 * 60, GRID_END = 21 * 60, GRID_SPAN = GRID_END - GRID_START;
 
-function toMin(hhmm) { const [h,m] = hhmm.split(':').map(Number); return h*60+m; }
+function toMin(hhmm) {
+  if (!hhmm || !hhmm.includes(':')) return 0;
+  const [h,m] = hhmm.split(':').map(Number);
+  return h*60+m;
+}
 function fmtSchedule(schedule) {
   if (!schedule?.length) return '—';
   return schedule.map(s => `${DAY_LABELS[s.day]||s.day} ${s.start}–${s.end}`).join(' · ');
+}
+
+// ── iCal Calendar View ───────────────────────────────────────────────────────
+const WEEK_DAYS = ['Mon','Tue','Wed','Thu','Fri'];
+const CAL_PALETTE = ['#6C63FF','#38B2AC','#E07A5F','#81B29A','#F2CC8F','#9B5DE5','#00BBF9','#F15BB5'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function IcalCalendarView({ calendarEvents }) {
+  const weeks = useMemo(() => {
+    const weekMap = new Map();
+    calendarEvents.forEach(ev => {
+      if (!ev.startDate || !ev.dayOfWeek || ev.dayOfWeek === 0 || ev.dayOfWeek === 6) return;
+      const d = new Date(ev.startDate);
+      d.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1));
+      const weekKey = d.toISOString().slice(0,10);
+      if (!weekMap.has(weekKey)) weekMap.set(weekKey, { weekStart: new Date(d), events: [] });
+      weekMap.get(weekKey).events.push(ev);
+    });
+    return [...weekMap.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([,v]) => v);
+  }, [calendarEvents]);
+
+  const [weekIdx, setWeekIdx] = useState(0);
+  if (!weeks.length) return null;
+
+  const colorMap = new Map();
+  let ci = 0;
+  calendarEvents.forEach(ev => {
+    const key = ev.courseTitle || ev.summary;
+    if (key && !colorMap.has(key)) colorMap.set(key, CAL_PALETTE[ci++ % CAL_PALETTE.length]);
+  });
+
+  const week = weeks[Math.min(weekIdx, weeks.length-1)];
+  const hours = [];
+  for (let m = GRID_START; m <= GRID_END; m += 60) hours.push(m);
+
+  function weekLabel(d) {
+    const end = new Date(d); end.setDate(end.getDate()+4);
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} – ${end.getDate()} ${MONTHS[end.getMonth()]}`;
+  }
+
+  return (
+    <div className="ical-cal-wrap">
+      <div className="ical-cal-nav">
+        <button className="hd-btn hd-btn-secondary" style={{padding:'4px 12px',fontSize:12}}
+          disabled={weekIdx===0} onClick={()=>setWeekIdx(i=>Math.max(0,i-1))}>← Prev</button>
+        <span className="ical-week-label">Week of {weekLabel(week.weekStart)}</span>
+        <button className="hd-btn hd-btn-secondary" style={{padding:'4px 12px',fontSize:12}}
+          disabled={weekIdx>=weeks.length-1} onClick={()=>setWeekIdx(i=>Math.min(weeks.length-1,i+1))}>Next →</button>
+      </div>
+      <div className="ical-cal-inner">
+        <div className="ical-day-headers">
+          <div className="ical-time-gutter"/>
+          {WEEK_DAYS.map(d => <div key={d} className="ical-day-head">{d}</div>)}
+        </div>
+        <div className="ical-grid">
+          <div className="ical-time-col">
+            {hours.map(m => (
+              <div key={m} className="ical-hour-label" style={{top:`${((m-GRID_START)/GRID_SPAN)*100}%`}}>
+                {String(Math.floor(m/60)).padStart(2,'0')}
+              </div>
+            ))}
+          </div>
+          {WEEK_DAYS.map((day, di) => {
+            const dayNum = di+1;
+            const dayEvs = week.events.filter(ev => ev.dayOfWeek === dayNum);
+            return (
+              <div key={day} className="ical-day-col">
+                {hours.map(m => <div key={m} className="ical-hour-line" style={{top:`${((m-GRID_START)/GRID_SPAN)*100}%`}}/>)}
+                {dayEvs.map((ev, i) => {
+                  const parts  = (ev.timeStr||'').split('–');
+                  const sm = toMin(parts[0]); const em = toMin(parts[1]);
+                  if (!sm && !em) return null;
+                  const top = ((Math.max(sm,GRID_START)-GRID_START)/GRID_SPAN)*100;
+                  const ht  = Math.max(((Math.min(em,GRID_END)-Math.max(sm,GRID_START))/GRID_SPAN)*100, 2);
+                  const key = ev.courseTitle || ev.summary;
+                  const color = colorMap.get(key) || '#888';
+                  return (
+                    <div key={i} className="ical-block" style={{top:`${top}%`,height:`${ht}%`,background:color}}
+                      title={`${ev.summary}\n${ev.timeStr}\n${ev.location||''}`}>
+                      <div className="ical-block-title">{ev.courseTitle || ev.summary}</div>
+                      <div className="ical-block-time">{ev.timeStr}</div>
+                      {ev.location && <div className="ical-block-loc">{ev.location}</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <p style={{fontSize:11,color:'#aaa',marginTop:6,fontFamily:'Patrick Hand, cursive'}}>
+        {weeks.length} week{weeks.length!==1?'s':''} total · navigate to see biweekly patterns
+      </p>
+    </div>
+  );
 }
 
 // ── Mini calendar for trade preview ─────────────────────────────────────────
@@ -381,6 +480,7 @@ export default function MarketplacePage({ onBack }) {
   const [icalUrl,       setIcalUrl]       = useState('');
   const [icalLoading,   setIcalLoading]   = useState(false);
   const [icalError,     setIcalError]     = useState('');
+  const [icalEvents,    setIcalEvents]    = useState(null); // raw calendar events for preview
   const [showImport,    setShowImport]    = useState(false);
   const fileRef = useRef(null);
 
@@ -406,11 +506,13 @@ export default function MarketplacePage({ onBack }) {
     try {
       const result = await importFromIcalUrl(icalUrl.trim());
       setMyScheduleIds(result.courseIds);
+      setIcalEvents(result.calendarEvents);
       await updateProfile({ schedule_json: { addedCourseIds: result.courseIds } });
-      setShowImport(false);
-      if (result.unmatched.length > 0) {
-        setIcalError(`✓ Imported ${result.courseIds.length} courses. ${result.unmatched.length} event(s) couldn't be matched.`);
-      }
+      setIcalError(
+        `✓ Imported ${result.courseIds.length} courses from ${result.totalEvents} events` +
+        (result.filtered > 0 ? ` (${result.filtered} orientation/August events excluded)` : '') +
+        (result.unmatched.length > 0 ? `. ${result.unmatched.length} event(s) not matched.` : '.')
+      );
     } catch (e) {
       setIcalError(e.message);
     }
@@ -526,6 +628,18 @@ export default function MarketplacePage({ onBack }) {
               <p className="hd-body-text" style={{ color: icalError.startsWith('✓') ? '#2a7a4b' : '#ff4d4d', fontSize:12, marginTop:12 }}>
                 {icalError}
               </p>
+            )}
+
+            {/* Calendar preview after import */}
+            {icalEvents && (
+              <div style={{ marginTop: 16 }}>
+                <div className="hd-import-option-title" style={{ marginBottom: 8 }}>📅 Your imported calendar</div>
+                <IcalCalendarView calendarEvents={icalEvents} />
+                <button className="hd-btn hd-btn-primary" style={{ width:'100%', marginTop:10 }}
+                  onClick={() => setShowImport(false)}>
+                  Done ✓
+                </button>
+              </div>
             )}
           </div>
         </div>
