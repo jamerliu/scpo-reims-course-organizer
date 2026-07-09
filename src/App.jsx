@@ -12,6 +12,7 @@ import RequirementSidebar from './components/RequirementSidebar';
 import AddedList from './components/AddedList';
 import LoadModal from './components/LoadModal';
 import ComparePage from './components/ComparePage';
+import RegistrationTab from './components/RegistrationTab';
 import { exportReport } from './utils/exportPdf';
 import { buildSaveData, downloadSave } from './utils/saveLoad';
 import './App.css';
@@ -101,6 +102,7 @@ function Watermark() {
 export default function App() {
   const { t, lang } = useLang();
   const [step, setStep] = useState('select'); // select | majeure | language | build | compare
+  const [buildTab, setBuildTab] = useState('planner'); // planner | registration
   const [program, setProgram] = useState(null);
   const [majeureMineure, setMajeureMineure] = useState(null);
   const [languageProfile, setLanguageProfile] = useState(null);
@@ -272,8 +274,23 @@ export default function App() {
   return (
     <div className="build-screen">
       <header className="build-header">
-        <div>
+        <div className="build-header-left">
           <h1>{program.grade} — {program.programLabel}</h1>
+          <div className="build-tabs">
+            <button
+              className={buildTab === 'planner' ? 'build-tab active' : 'build-tab'}
+              onClick={() => setBuildTab('planner')}
+            >
+              {lang === 'fr' ? '📅 Planificateur' : '📅 Planner'}
+            </button>
+            <button
+              className={buildTab === 'registration' ? 'build-tab active' : 'build-tab'}
+              onClick={() => setBuildTab('registration')}
+            >
+              {lang === 'fr' ? '📝 Inscription' : '📝 Registration'}
+              {addedCourses.length > 0 && <span className="build-tab-badge">{addedCourses.length}</span>}
+            </button>
+          </div>
         </div>
         <div className="header-actions">
           <LangToggle />
@@ -302,35 +319,47 @@ export default function App() {
       {showLoad && <LoadModal onClose={() => setShowLoad(false)} onRestore={handleRestore} />}
 
       <div className="build-layout">
-        <div className="left-col">
-          <CourseBrowser
-            courses={courses}
-            profile={REQUIREMENTS[program.programKey]}
-            languageProfile={languageProfile}
-            addedIds={addedIdSet}
-            starredIds={starredIdSet}
-            onAdd={addCourse}
-            onRemove={removeCourse}
-            onStar={toggleStar}
-          />
-        </div>
+        {buildTab === 'planner' ? (
+          <>
+            <div className="left-col">
+              <CourseBrowser
+                courses={courses}
+                profile={REQUIREMENTS[program.programKey]}
+                languageProfile={languageProfile}
+                addedIds={addedIdSet}
+                starredIds={starredIdSet}
+                onAdd={addCourse}
+                onRemove={removeCourse}
+                onStar={toggleStar}
+              />
+            </div>
 
-        <div className="mid-col">
-          <div ref={calendarRef}>
-            <CalendarView addedCourses={addedCourses} onDrop={addCourse} onRemove={removeCourse} />
-          </div>
-          <div ref={listRef}>
-            <AddedList addedCourses={addedCourses} onRemove={removeCourse} />
-          </div>
-        </div>
+            <div className="mid-col">
+              <div ref={calendarRef}>
+                <CalendarView addedCourses={addedCourses} onDrop={addCourse} onRemove={removeCourse} />
+              </div>
+              <div ref={listRef}>
+                <AddedList addedCourses={addedCourses} onRemove={removeCourse} />
+              </div>
+            </div>
 
-        <div className="right-col" ref={requirementsRef}>
-          <RequirementSidebar
-            profile={REQUIREMENTS[program.programKey]}
-            addedCourses={addedCourses}
-            languageProfile={languageProfile}
-          />
-        </div>
+            <div className="right-col" ref={requirementsRef}>
+              <RequirementSidebar
+                profile={REQUIREMENTS[program.programKey]}
+                addedCourses={addedCourses}
+                languageProfile={languageProfile}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="reg-full-col">
+            <RegistrationTab
+              addedCourses={addedCourses}
+              allProgramCourses={courses}
+              onUpdateIds={(newIds) => setAddedIds(newIds)}
+            />
+          </div>
+        )}
       </div>
       <Watermark />
     </div>
