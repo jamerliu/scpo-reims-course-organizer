@@ -540,3 +540,12 @@ textarea.hd-input { border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px
   border-top: 2px dashed #2d2d2d;
 }
 .hd-home-card-cta-market { color: #7c5700; border-top-color: #e0a020; }
+
+/* ── text link button ── */
+.hd-text-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Patrick Hand', cursive; font-size: 0.85rem;
+  color: #2d5da1; text-decoration: underline; padding: 0;
+  transition: color 0.1s;
+}
+.hd-text-btn:hover { color: #ff4d4d; }
