@@ -549,3 +549,46 @@ textarea.hd-input { border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px
   transition: color 0.1s;
 }
 .hd-text-btn:hover { color: #ff4d4d; }
+
+/* ── Google sign-in button ── */
+.hd-btn-google {
+  background: #fff;
+  color: #2d2d2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  border: 2px solid #2d2d2d;
+  width: 100%;
+}
+.hd-btn-google:hover:not(:disabled) {
+  background: #f5f5f5;
+  color: #2d2d2d;
+}
+
+/* ── Import divider ── */
+.hd-import-divider {
+  text-align: center;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.82rem;
+  color: #aaa;
+  margin: 8px 0;
+  position: relative;
+}
+
+/* ── Import option block ── */
+.hd-import-option {
+  border: 2px solid #e5e0d8;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fdfbf7;
+  margin-bottom: 4px;
+}
+.hd-import-option-title {
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #2d2d2d;
+}

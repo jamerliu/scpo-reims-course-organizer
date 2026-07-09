@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '../utils/supabase';
 import { useAuth } from '../auth/AuthContext';
 import { parseSaveFile } from '../utils/saveLoad';
+import { importFromIcalUrl } from '../utils/parseIcal';
+import { isLecture } from '../utils/lectureGuard';
 import coursesData from '../data/courses.json';
 import '../auth/handdrawn.css';
 
@@ -82,9 +84,9 @@ function NewPostingForm({ profile, scheduleIds, onDone, onClose }) {
   const [saving,       setSaving]       = useState(false);
   const [error,        setError]        = useState('');
 
-  // Courses in the user's schedule (non-lecture) = things they can offer
+  // Courses in the user's schedule (non-lecture only) = things they can offer
   const offerableCourses = useMemo(() =>
-    scheduleIds.map(id => byId.get(id)).filter(Boolean),
+    scheduleIds.map(id => byId.get(id)).filter(c => c && !isLecture(c)),
     [scheduleIds]
   );
 
@@ -376,6 +378,10 @@ export default function MarketplacePage({ onBack }) {
   const [showNewForm, setShowNewForm] = useState(false);
   const [tradePosting,setTradePosting]= useState(null);
   const [myScheduleIds, setMyScheduleIds] = useState(profile?.schedule_json?.addedCourseIds || []);
+  const [icalUrl,       setIcalUrl]       = useState('');
+  const [icalLoading,   setIcalLoading]   = useState(false);
+  const [icalError,     setIcalError]     = useState('');
+  const [showImport,    setShowImport]    = useState(false);
   const fileRef = useRef(null);
 
   useEffect(() => { fetchPostings(); }, [profile?.grade]);
@@ -393,6 +399,24 @@ export default function MarketplacePage({ onBack }) {
     setLoading(false);
   }
 
+  async function handleIcalImport() {
+    if (!icalUrl.trim()) return;
+    setIcalLoading(true);
+    setIcalError('');
+    try {
+      const result = await importFromIcalUrl(icalUrl.trim());
+      setMyScheduleIds(result.courseIds);
+      await updateProfile({ schedule_json: { addedCourseIds: result.courseIds } });
+      setShowImport(false);
+      if (result.unmatched.length > 0) {
+        setIcalError(`✓ Imported ${result.courseIds.length} courses. ${result.unmatched.length} event(s) couldn't be matched.`);
+      }
+    } catch (e) {
+      setIcalError(e.message);
+    }
+    setIcalLoading(false);
+  }
+
   function handleScheduleUpload(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -402,8 +426,8 @@ export default function MarketplacePage({ onBack }) {
       if (!raw) return;
       const ids = raw.addedCourseIds || [];
       setMyScheduleIds(ids);
-      // Sync to profile
       await updateProfile({ schedule_json: raw });
+      setShowImport(false);
     };
     reader.readAsText(file);
   }
@@ -442,12 +466,12 @@ export default function MarketplacePage({ onBack }) {
     <div className="hd-root hd-marketplace">
       {/* Header */}
       <div className="hd-market-header">
-        <button className="hd-btn hd-btn-secondary hd-back-btn" onClick={onBack}>← Planner</button>
+        <button className="hd-btn hd-btn-secondary hd-back-btn" onClick={onBack}>← Home</button>
         <h1 className="hd-title hd-market-title">📋 Course Marketplace</h1>
         <div className="hd-market-header-right">
           <input ref={fileRef} type="file" accept=".json" style={{display:'none'}} onChange={handleScheduleUpload} />
-          <button className="hd-btn hd-btn-secondary" onClick={() => fileRef.current?.click()}>
-            📂 {myScheduleIds.length > 0 ? `Schedule loaded (${myScheduleIds.length})` : 'Load my schedule'}
+          <button className="hd-btn hd-btn-secondary" onClick={() => setShowImport(true)}>
+            📂 {myScheduleIds.length > 0 ? `Schedule loaded (${myScheduleIds.length} courses)` : 'Import my schedule'}
           </button>
           <button className="hd-btn hd-btn-secondary" onClick={signOut} style={{ fontSize: 13 }}>
             ↩ Sign out
@@ -457,6 +481,55 @@ export default function MarketplacePage({ onBack }) {
           </button>
         </div>
       </div>
+
+      {/* Import schedule modal */}
+      {showImport && (
+        <div className="hd-modal-backdrop" onClick={() => setShowImport(false)}>
+          <div className="hd-modal-card" onClick={e => e.stopPropagation()} style={{ maxWidth: 500 }}>
+            <div className="hd-tape hd-tape-top" />
+            <span className="hd-corner hd-corner-tl"/><span className="hd-corner hd-corner-tr"/>
+            <span className="hd-corner hd-corner-bl"/><span className="hd-corner hd-corner-br"/>
+            <button className="hd-modal-close" onClick={() => setShowImport(false)}>✕</button>
+            <h2 className="hd-title" style={{ fontSize: 22, marginBottom: 6 }}>📂 Import your schedule</h2>
+            <p className="hd-body-text" style={{ color:'#888', fontSize:13, marginBottom:20 }}>
+              Choose one of two ways to import your courses.
+            </p>
+
+            <div className="hd-import-option">
+              <div className="hd-import-option-title">🔗 Sciences Po calendar URL</div>
+              <p className="hd-body-text" style={{ fontSize:12, color:'#888', marginBottom:8 }}>
+                Paste your personal calendar link from ScPo (starts with scolarite-en.sciences-po.fr…)
+              </p>
+              <input className="hd-input" placeholder="https://scolarite-en.sciences-po.fr/…"
+                value={icalUrl} onChange={e => setIcalUrl(e.target.value)}
+                style={{ fontSize: 12, marginBottom: 8 }} />
+              <button className="hd-btn hd-btn-primary" style={{ width:'100%' }}
+                onClick={handleIcalImport} disabled={icalLoading || !icalUrl.trim()}>
+                {icalLoading ? 'Importing…' : 'Import from URL →'}
+              </button>
+            </div>
+
+            <div className="hd-import-divider">— or —</div>
+
+            <div className="hd-import-option">
+              <div className="hd-import-option-title">📄 JSON file from Course Planner</div>
+              <p className="hd-body-text" style={{ fontSize:12, color:'#888', marginBottom:8 }}>
+                Use the 💾 Save button in the Course Planner to download your schedule as a .json file, then upload it here.
+              </p>
+              <button className="hd-btn hd-btn-secondary" style={{ width:'100%' }}
+                onClick={() => fileRef.current?.click()}>
+                Choose .json file
+              </button>
+            </div>
+
+            {icalError && (
+              <p className="hd-body-text" style={{ color: icalError.startsWith('✓') ? '#2a7a4b' : '#ff4d4d', fontSize:12, marginTop:12 }}>
+                {icalError}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* My postings strip */}
       {myPostings.length > 0 && (
