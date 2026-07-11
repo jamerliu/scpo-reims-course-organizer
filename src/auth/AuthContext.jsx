@@ -27,12 +27,32 @@ export function AuthProvider({ children }) {
 
   async function fetchProfile(userId) {
     setLoadingProfile(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
-      .single();
-    setProfile(data);
+      .maybeSingle(); // returns null instead of error if no row found
+    
+    if (!data && !error) {
+      // No profile row yet (trigger may not have run) — create it
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase.from('profiles').upsert({
+          id: userId,
+          email: user.email || '',
+          full_name: '',
+          grade: '',
+          program_key: '',
+          program_label: '',
+        }, { onConflict: 'id' });
+        // Fetch again after creating
+        const { data: newData } = await supabase
+          .from('profiles').select('*').eq('id', userId).maybeSingle();
+        setProfile(newData);
+      }
+    } else {
+      setProfile(data);
+    }
     setLoadingProfile(false);
     return data;
   }
@@ -41,11 +61,10 @@ export function AuthProvider({ children }) {
     if (!session) return;
     const { data, error } = await supabase
       .from('profiles')
-      .update(updates)
-      .eq('id', session.user.id)
+      .upsert({ id: session.user.id, email: session.user.email, ...updates }, { onConflict: 'id' })
       .select()
-      .single();
-    if (!error) setProfile(data);
+      .maybeSingle();
+    if (!error && data) setProfile(data);
     return { data, error };
   }
 
